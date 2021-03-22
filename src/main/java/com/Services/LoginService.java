@@ -27,6 +27,8 @@ public class LoginService {
         } catch (Exception exception) {
             session.getTransaction().rollback();
             throw new Exception(exception);
+        } finally {
+            factory.close();
         }
     }
 }

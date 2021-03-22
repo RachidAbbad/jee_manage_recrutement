@@ -94,6 +94,24 @@
         <url-pattern>/dashboard</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>AjouterOffreServlet</servlet-name>
+        <servlet-class>com.Controllers.AjouterOffreServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AjouterOffreServlet</servlet-name>
+        <url-pattern>/ajouter-offre</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>BrowseOffresServlet</servlet-name>
+        <servlet-class>com.Controllers.BrowseOffresServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BrowseOffresServlet</servlet-name>
+        <url-pattern>/voir-offres</url-pattern>
+    </servlet-mapping>
+
     <!-- FILTERS -->
     <filter>
         <filter-name>UserFilter</filter-name>
@@ -112,6 +130,7 @@
     <filter-mapping>
         <filter-name>NotUserFilter</filter-name>
         <url-pattern>/dashboard</url-pattern>
+        <url-pattern>/ajouter-offre</url-pattern>
     </filter-mapping>
 
     <!-- ERRORS -->

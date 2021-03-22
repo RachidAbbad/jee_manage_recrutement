@@ -15,9 +15,10 @@ public class LogoutServlet extends HttpServlet {
             if (cookie.getName().equals("user")) {
                 cookie.setMaxAge(0);
                 response.addCookie(cookie);
-                response.sendRedirect("/");
+                break;
             }
         }
+        response.sendRedirect("/login");
     }
 
     @Override

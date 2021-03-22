@@ -27,6 +27,7 @@
         <mapping class="com.models.Candidat"/>
         <mapping class="com.models.Recruteur"/>
         <mapping class="com.models.Cv"/>
+        <mapping class="com.models.Offre"/>
     </session-factory>
 
 </hibernate-configuration>

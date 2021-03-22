@@ -1,3 +1,7 @@
+<%@ page import="com.models.Offre" %><%
+    Offre offre = (Offre) request.getAttribute("offre");
+%>
+
 <!-- Content -->
 <div class="page-content bg-white">
     <!-- inner page banner -->
@@ -5,7 +9,9 @@
          style="background-image:url(<%=request.getContextPath()%>/WEB-INF/Assets/images/banner/bnr1.jpg);">
         <div class="container">
             <div class="dez-bnr-inr-entry">
-                <h1 class="text-white">Job Detail</h1>
+                <h1 class="text-white">
+                    <%= offre.getTitre() %>
+                </h1>
                 <!-- Breadcrumb row -->
                 <div class="breadcrumb-row">
                     <ul class="list-inline">
