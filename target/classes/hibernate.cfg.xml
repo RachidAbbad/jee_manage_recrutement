@@ -26,8 +26,14 @@
         <mapping class="com.models.Compte"/>
         <mapping class="com.models.Candidat"/>
         <mapping class="com.models.Recruteur"/>
-        <mapping class="com.models.Cv"/>
         <mapping class="com.models.Offre"/>
+        <mapping class="com.models.Postulation"/>
+        <mapping class="com.models.Recrutement"/>
+        <mapping class="com.models.Cv"/>
+        <mapping class="com.models.Experience"/>
+        <mapping class="com.models.Formation"/>
+        <mapping class="com.models.Competence"/>
+        <mapping class="com.models.Projet"/>
     </session-factory>
 
 </hibernate-configuration>

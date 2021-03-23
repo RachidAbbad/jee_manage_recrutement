@@ -1,10 +1,9 @@
 package com.Controllers;
 
+import com.Services.PostulationService;
+import com.Services.RecruteurService;
 import com.Utils.AppHibernate;
-import com.models.Candidat;
-import com.models.Compte;
-import com.models.Cv;
-import com.models.Recruteur;
+import com.models.*;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -14,6 +13,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "DashboardServlet", value = "/DashboardServlet")
 public class DashboardServlet extends HttpServlet {
@@ -37,6 +37,7 @@ public class DashboardServlet extends HttpServlet {
                     .add(Restrictions.eq("email", userEmail));
             compte = (Compte) criteria.uniqueResult();
 
+            // CANDIDAT
             if (compte.getTypeCompte().equals("Candidat")) {
                 Criteria criteria2 = session.createCriteria(Candidat.class)
                         .add(Restrictions.eq("idCompte", compte.getId()));
@@ -49,13 +50,19 @@ public class DashboardServlet extends HttpServlet {
                 request.setAttribute("component", "dashboardCandidat");
                 request.setAttribute("candidat", candidat);
                 request.setAttribute("cv", cv);
+
+            // RECRUTEUR
             } else {
                 Criteria criteria2 = session.createCriteria(Recruteur.class)
                         .add(Restrictions.eq("idCompte", compte.getId()));
                 Recruteur recruteur = (Recruteur) criteria2.uniqueResult();
 
+                // get offres of recruteur
+                List<Offre> myOffres = RecruteurService.getOffresOfRecruteur(recruteur.getId());
+
                 request.setAttribute("component", "dashboardRecruteur");
                 request.setAttribute("recruteur", recruteur);
+                request.setAttribute("listOffres", myOffres);
             }
 
             session.getTransaction().commit();

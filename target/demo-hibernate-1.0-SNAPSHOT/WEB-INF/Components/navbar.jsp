@@ -36,8 +36,8 @@
                             <a href="/register" class="site-button"><i class="fa fa-user"></i> Sign Up</a>
                             <a href="/login" class="site-button"><i class="fa fa-lock"></i> Login</a>
                         <% } else { %>
-                            <a href="/dashboard" class="site-button"><i class="fa fa-lock"></i> Dashboard</a>
-                        <a href="/logout" class="site-button"><i class="fa fa-lock"></i> Logout</a>
+                            <a href="/dashboard" class="site-button"><i class="fa fa-tachometer"></i> Dashboard</a>
+                        <a href="/logout" class="site-button"><i class="fa fa-sign-out"></i> Logout</a>
                         <% } %>
                     </div>
                 </div>

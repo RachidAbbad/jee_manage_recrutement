@@ -41,7 +41,8 @@
           href="<%=request.getContextPath()%>Assets/plugins/revolution/revolution/css/settings.css">
     <link rel="stylesheet" type="text/css"
           href="<%=request.getContextPath()%>Assets/plugins/revolution/revolution/css/navigation.css">
-    <!-- Revolution Navigation Style -->
+
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>Assets/css/myStyle.css">
 </head>
 <body id="bg">
 <div id="loading-area"></div>

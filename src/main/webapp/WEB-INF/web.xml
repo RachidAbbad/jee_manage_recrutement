@@ -32,6 +32,33 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>PostulationServlet</servlet-name>
+        <servlet-class>com.Controllers.PostulationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PostulationServlet</servlet-name>
+        <url-pattern>/postulation</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RecrutementServlet</servlet-name>
+        <servlet-class>com.Controllers.RecrutementServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RecrutementServlet</servlet-name>
+        <url-pattern>/recrutement</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AjouterCvServlet</servlet-name>
+        <servlet-class>com.Controllers.AjouterCvServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AjouterCvServlet</servlet-name>
+        <url-pattern>/ajouter-cv</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>com.Controllers.LoginServlet</servlet-class>
     </servlet>
@@ -104,6 +131,24 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>ProfileCandidatServlet</servlet-name>
+        <servlet-class>com.Controllers.ProfileCandidatServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProfileCandidatServlet</servlet-name>
+        <url-pattern>/candidat</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ProfileRecruteurServlet</servlet-name>
+        <servlet-class>com.Controllers.ProfileRecruteurServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProfileRecruteurServlet</servlet-name>
+        <url-pattern>/recruteur</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>BrowseOffresServlet</servlet-name>
         <servlet-class>com.Controllers.BrowseOffresServlet</servlet-class>
     </servlet>
@@ -131,6 +176,7 @@
         <filter-name>NotUserFilter</filter-name>
         <url-pattern>/dashboard</url-pattern>
         <url-pattern>/ajouter-offre</url-pattern>
+        <url-pattern>/ajouter-cv</url-pattern>
     </filter-mapping>
 
     <!-- ERRORS -->

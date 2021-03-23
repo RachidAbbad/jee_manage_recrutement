@@ -25,8 +25,6 @@ public class BrowseOffresServlet extends HttpServlet {
 
             // redirect to 500
         }
-
-
     }
 
     @Override

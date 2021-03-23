@@ -52,6 +52,13 @@
                                             <div class="d-flex">
                                                 <div class="job-time mr-auto">
                                                     <span><%= offre.getMetier() %></span>
+                                                    <span>
+                                                        <% if (offre.getEtat() == 0) { %>
+                                                            Closed
+                                                        <% } else { %>
+                                                            Opened
+                                                        <% } %>
+                                                    </span>
                                                 </div>
                                                 <div class="salary-bx">
                                                     <span><%= offre.getSalairePrimes() %></span>

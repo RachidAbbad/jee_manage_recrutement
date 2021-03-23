@@ -1,3 +1,8 @@
+<%@ page import="java.util.List" %>
+<%@ page import="com.models.Offre" %><%
+    List<Offre> offreList = (List<Offre>) request.getAttribute("listOffres");
+%>
+
 <!-- Content -->
 <div class="page-content">
     <!-- Section Banner -->
@@ -270,163 +275,46 @@
             <div class="row">
                 <div class="col-lg-9">
                     <ul class="post-job-bx">
+                        <% if (offreList != null && offreList.size() > 0) { %>
+                        <% for (Offre offre:offreList) { %>
                         <li>
-                            <a href="#">
+                            <a href="/offre-details?id=<%=offre.getId()%>">
                                 <div class="d-flex m-b30">
                                     <div class="job-post-company">
                                         <span><img src="images/logo/icon1.png"/></span>
                                     </div>
                                     <div class="job-post-info">
-                                        <h4>Digital Marketing Executive</h4>
+                                        <h4><%= offre.getTitre() %></h4>
                                         <ul>
-                                            <li><i class="fa fa-map-marker"></i> Sacramento, California</li>
-                                            <li><i class="fa fa-bookmark-o"></i> Full Time</li>
-                                            <li><i class="fa fa-clock-o"></i> Published 11 months ago</li>
+                                            <li><i class="fa fa-map-marker"></i> <%= offre.getEmplacement() %></li>
+                                            <li><i class="fa fa-bookmark-o"></i> <%= offre.getTypeContrat() %></li>
+                                            <li><i class="fa fa-clock-o"></i> Published <%= offre.getDateCreation() %></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="d-flex">
                                     <div class="job-time mr-auto">
-                                        <span>Full Time</span>
+                                        <span><%= offre.getMetier() %></span>
+                                        <span>
+                                            <% if (offre.getEtat() == 0) { %>
+                                                Closed
+                                            <% } else { %>
+                                                Opened
+                                            <% } %>
+                                        </span>
                                     </div>
                                     <div class="salary-bx">
-                                        <span>$1200 - $ 2500</span>
+                                        <span><%= offre.getSalairePrimes() %></span>
                                     </div>
                                 </div>
-                                <span class="post-like fa fa-heart-o"></span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <div class="d-flex m-b30">
-                                    <div class="job-post-company">
-                                        <span><img src="images/logo/icon1.png"/></span>
-                                    </div>
-                                    <div class="job-post-info">
-                                        <h4>Digital Marketing Executive</h4>
-                                        <ul>
-                                            <li><i class="fa fa-map-marker"></i> Sacramento, California</li>
-                                            <li><i class="fa fa-bookmark-o"></i> Full Time</li>
-                                            <li><i class="fa fa-clock-o"></i> Published 11 months ago</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="job-time mr-auto">
-                                        <span>Full Time</span>
-                                    </div>
-                                    <div class="salary-bx">
-                                        <span>$1200 - $ 2500</span>
-                                    </div>
-                                </div>
-                                <span class="post-like fa fa-heart-o"></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="d-flex m-b30">
-                                    <div class="job-post-company">
-                                        <span><img src="images/logo/icon1.png"/></span>
-                                    </div>
-                                    <div class="job-post-info">
-                                        <h4>Digital Marketing Executive</h4>
-                                        <ul>
-                                            <li><i class="fa fa-map-marker"></i> Sacramento, California</li>
-                                            <li><i class="fa fa-bookmark-o"></i> Full Time</li>
-                                            <li><i class="fa fa-clock-o"></i> Published 11 months ago</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="job-time mr-auto">
-                                        <span>Full Time</span>
-                                    </div>
-                                    <div class="salary-bx">
-                                        <span>$1200 - $ 2500</span>
-                                    </div>
-                                </div>
-                                <span class="post-like fa fa-heart-o"></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="d-flex m-b30">
-                                    <div class="job-post-company">
-                                        <span><img src="images/logo/icon1.png"/></span>
-                                    </div>
-                                    <div class="job-post-info">
-                                        <h4>Digital Marketing Executive</h4>
-                                        <ul>
-                                            <li><i class="fa fa-map-marker"></i> Sacramento, California</li>
-                                            <li><i class="fa fa-bookmark-o"></i> Full Time</li>
-                                            <li><i class="fa fa-clock-o"></i> Published 11 months ago</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="job-time mr-auto">
-                                        <span>Full Time</span>
-                                    </div>
-                                    <div class="salary-bx">
-                                        <span>$1200 - $ 2500</span>
-                                    </div>
-                                </div>
-                                <span class="post-like fa fa-heart-o"></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="d-flex m-b30">
-                                    <div class="job-post-company">
-                                        <span><img src="images/logo/icon1.png"/></span>
-                                    </div>
-                                    <div class="job-post-info">
-                                        <h4>Digital Marketing Executive</h4>
-                                        <ul>
-                                            <li><i class="fa fa-map-marker"></i> Sacramento, California</li>
-                                            <li><i class="fa fa-bookmark-o"></i> Full Time</li>
-                                            <li><i class="fa fa-clock-o"></i> Published 11 months ago</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="job-time mr-auto">
-                                        <span>Full Time</span>
-                                    </div>
-                                    <div class="salary-bx">
-                                        <span>$1200 - $ 2500</span>
-                                    </div>
-                                </div>
-                                <span class="post-like fa fa-heart-o"></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="d-flex m-b30">
-                                    <div class="job-post-company">
-                                        <span><img src="images/logo/icon1.png"/></span>
-                                    </div>
-                                    <div class="job-post-info">
-                                        <h4>Digital Marketing Executive</h4>
-                                        <ul>
-                                            <li><i class="fa fa-map-marker"></i> Sacramento, California</li>
-                                            <li><i class="fa fa-bookmark-o"></i> Full Time</li>
-                                            <li><i class="fa fa-clock-o"></i> Published 11 months ago</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="job-time mr-auto">
-                                        <span>Full Time</span>
-                                    </div>
-                                    <div class="salary-bx">
-                                        <span>$1200 - $ 2500</span>
-                                    </div>
-                                </div>
-                                <span class="post-like fa fa-heart-o"></span>
-                            </a>
-                        </li>
+                        <% } %>
+                        <% } else { %>
+                        <li>No offres found</li>
+                        <% } %>
                     </ul>
+
                     <div class="m-t30">
                         <div class="d-flex">
                             <a class="site-button button-sm mr-auto" href="#"><i class="ti-arrow-left"></i> Prev</a>

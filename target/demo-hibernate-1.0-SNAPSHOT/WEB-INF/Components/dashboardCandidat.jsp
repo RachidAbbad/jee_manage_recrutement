@@ -9,48 +9,58 @@
 
 <!-- Content -->
 <div class="page-content bg-white">
+    <!-- inner page banner -->
+    <div class="dez-bnr-inr overlay-black-middle"
+         style="background-image:url(<%=request.getContextPath()%>/WEB-INF/Assets/images/banner/bnr1.jpg);">
+        <div class="container">
+            <div class="dez-bnr-inr-entry">
+                <h1 class="text-white">Mon Compte</h1>
+            </div>
+        </div>
+    </div>
+    <!-- inner page banner END -->
+
     <div class="section-full content-inner overlay-white-middle">
         <div class="container">
         <div class="row">
-            <div class="col-md-10">
-                <div class="row">
-                    <!-- Information -->
-                    <div class="col-md-4">
-                        <img class="img-fluid" src="https://via.placeholder.com/250x250" />
+            <!-- Information -->
+            <div class="col-md-4">
+                <img class="img-fluid rounded-circle d-block mx-auto mb-4" src="https://via.placeholder.com/250x250" />
 
-                        <ul>
-                            <li>
-                                <% if (compte.getVerified() == 1) { %>
-                                <span class="badge badge-primary">Verified</span>
-                                <% } else { %>
-                                <span class="badge badge-light">Not verified</span>
-                                <% } %>
-                            </li>
-                            <li><%= compte.getVille() %></li>
-                            <li><%= compte.getNumTel() %></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-8">
-                        <h1><%= candidat.getCivilite() + " " + candidat.getNomComplet() %></h1>
-                        <h3><%= candidat.getTitreEmploi() %></h3>
-                    </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <% if (compte.getVerified() == 1) { %>
+                        <span class="badge badge-primary"><i class="fa fa-check-circle-o" aria-hidden="true"></i> Verified</span>
+                        <% } else { %>
+                        <span class="badge badge-light"><i class="fa fa-times-circle-o" aria-hidden="true"></i> Not verified</span>
+                        <% } %>
+                    </li>
+                    <li class="list-group-item" style="text-transform: capitalize;"><i class="fa fa-building-o" aria-hidden="true"></i> <%= compte.getVille() %></li>
+                    <li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i> <%= compte.getNumTel() %></li>
+                </ul>
 
-                    <!-- CV -->
-                    <% if (cv == null) { %>
-                        <div class="text-center">
-                            No cv found
-                            <a href="/dashboard" class="site-button"><i class="fa fa-lock"></i> Ajouter CV</a>
-                        </div>
-                    <% } else { %>
-                        <div>
-                            CV info :
-                        </div>
-                    <% } %>
+                <div class="text-center mt-4 d-flex justify-content-center">
+                    <a href="/voir-offres" class="site-button mr-2">Changer mon compte</a>
+                    <a href="/voir-offres" class="site-button ml-2">Voir offres</a>
                 </div>
             </div>
-            <div class="col-md-2">
-                <div>
-                    <a href="/dashboard" class="site-button"><i class="fa fa-lock"></i> Voir offres</a>
+            <div class="col-md-8">
+                <h1 class="mb-1" style="text-transform: capitalize;"><%= candidat.getCivilite() + " " + candidat.getNomComplet() %></h1>
+                <p style="opacity: 0.5;"><%= candidat.getTitreEmploi() %></p>
+
+                <!-- CV -->
+                <div class="border p-5">
+                    <% if (cv == null) { %>
+                    <div class="text-center">
+                        <h3 class="mb-2 display-4" style="opacity: 0.5;"><i class="fa fa-file-text-o" aria-hidden="true"></i></h3>
+                        <h4 class="mb-4">No cv found</h4>
+                        <a href="/ajouter-cv" class="site-button"><i class="fa fa-plus"></i> Ajouter CV</a>
+                    </div>
+                    <% } else { %>
+                    <div>
+                        CV info :
+                    </div>
+                    <% } %>
                 </div>
             </div>
         </div>

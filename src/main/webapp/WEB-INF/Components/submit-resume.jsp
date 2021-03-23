@@ -4,12 +4,12 @@
     <div class="dez-bnr-inr overlay-black-dark" style="background-image:url(images/banner/bnr1.jpg);">
         <div class="container">
             <div class="dez-bnr-inr-entry">
-                <h1 class="text-white">Submit Resume</h1>
+                <h1 class="text-white">Ajouter cv</h1>
                 <!-- Breadcrumb row -->
                 <div class="breadcrumb-row">
                     <ul class="list-inline">
                         <li><a href="#">Home</a></li>
-                        <li>Submit Resume</li>
+                        <li>Ajouter cv</li>
                     </ul>
                 </div>
                 <!-- Breadcrumb row END -->
@@ -22,7 +22,7 @@
         <!-- Submit Resume -->
         <div class="section-full bg-white submit-resume content-inner-2">
             <div class="container">
-                <form>
+                <form action="/ajouter-cv" method="post">
                     <div class="form-group">
                         <label>Your name</label>
                         <input type="text" class="form-control" placeholder="Your Full Name">

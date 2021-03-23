@@ -1,5 +1,18 @@
-<%@ page import="com.models.Offre" %><%
+<%@ page import="com.models.Offre" %>
+<%@ page import="com.models.Postulation" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Arrays" %><%
     Offre offre = (Offre) request.getAttribute("offre");
+
+    String errorMessage = (String) request.getAttribute("errorMessage");
+    String successMessage = (String) request.getAttribute("successMessage");
+
+    List<Postulation> listPostulations = (List<Postulation>) request.getAttribute("listPostulations");
+
+    List<String> competences = Arrays.asList(offre.getCompetencesRequises().split("\\s*,\\s*"));
+
+    String departement = "departement";
+
 %>
 
 <!-- Content -->
@@ -10,22 +23,27 @@
         <div class="container">
             <div class="dez-bnr-inr-entry">
                 <h1 class="text-white">
-                    <%= offre.getTitre() %>
+                    Offre
                 </h1>
-                <!-- Breadcrumb row -->
-                <div class="breadcrumb-row">
-                    <ul class="list-inline">
-                        <li><a href="#">Home</a></li>
-                        <li>Job Detail</li>
-                    </ul>
-                </div>
-                <!-- Breadcrumb row END -->
             </div>
         </div>
     </div>
     <!-- inner page banner END -->
     <!-- contact area -->
     <div class="content-block">
+        <% if (successMessage != null) { %>
+        <div class="alert alert-success" role="alert">
+            ${successMessage}
+        </div>
+        <%}%>
+
+        <!-- Error Message -->
+        <% if (errorMessage != null) { %>
+        <div class="alert alert-danger" role="alert">
+            ${errorMessage}
+        </div>
+        <%}%>
+
         <!-- Job Detail -->
         <div class="section-full content-inner-1">
             <div class="container">
@@ -42,15 +60,22 @@
                                     <div class="widget bg-white p-lr20 p-t20  widget_getintuch radius-sm">
                                         <h4 class="text-black font-weight-700 p-t10 m-b15">Job Details</h4>
                                         <ul>
+                                            <li>
+                                                <a href="/recruteur?id=<%=offre.getIdRecruteur()%>">
+                                                    <i class="ti-location-pin"></i><strong
+                                                        class="font-weight-700 text-black">Recruteur</strong>
+                                                    <span class="text-black-light">Voir recruteur</span>
+                                                </a>
+                                            </li>
+
                                             <li><i class="ti-location-pin"></i><strong
-                                                    class="font-weight-700 text-black">Address</strong><span
-                                                    class="text-black-light"> Demo Address #8901 Marmora Road Chi Minh City, Vietnam </span>
+                                                    class="font-weight-700 text-black">Emplacement</strong><span
+                                                    class="text-black-light">
+                                                <%= offre.getEmplacement() %>
+                                            </span>
                                             </li>
-                                            <li><i class="ti-money"></i><strong class="font-weight-700 text-black">Salary</strong>
-                                                $800 Monthy
-                                            </li>
-                                            <li><i class="ti-shield"></i><strong class="font-weight-700 text-black">Experience</strong>6
-                                                Year Experience
+                                            <li><i class="ti-money"></i><strong class="font-weight-700 text-black">Salaire et primes</strong>
+                                                <%= offre.getSalairePrimes() %>
                                             </li>
                                         </ul>
                                     </div>
@@ -61,53 +86,62 @@
                     <div class="col-lg-8">
                         <div class="job-info-box">
                             <h3 class="m-t0 m-b10 font-weight-700 title-head">
-                                <a href="#" class="text-secondry m-r30">Digital Marketing Executive</a>
+                                <%= offre.getTitre() %>
                             </h3>
                             <ul class="job-info">
-                                <li><strong>Education</strong> Web Designer</li>
-                                <li><strong>Deadline:</strong> 25th January 2018</li>
-                                <li><i class="ti-location-pin text-black m-r5"></i> NewYark</li>
+                                <li><strong><%=departement%></strong> <%=offre.getMetier()%></li>
+                                <li><strong>Date de creation:</strong> <%= offre.getDateCreation() %></li>
+                                <li><i class="ti-location-pin text-black m-r5"></i> <%= offre.getEmplacement() %></li>
                             </ul>
-                            <p class="p-t20">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                                unknown printer took a galley of type and scrambled it to make a type specimen book. It
-                                has survived not only five centuries, but also the leap into electronic typesetting,
-                                remaining essentially unchanged. It was popularised in the 1960s with the release of
-                                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-                                publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                            <h5 class="font-weight-600">Job Description</h5>
+
                             <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has been the industry's standard dummy text ever since the 1500s, when an unknown
-                                printer took a galley of type and scrambled it to make a type specimen book. It has
-                                survived not only five centuries, but also the leap into electronic typesetting,
-                                remaining essentially unchanged. It was popularised in the 1960s with the release of
-                                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-                                publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                            <h5 class="font-weight-600">How to Apply</h5>
-                            <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has been the industry's standard dummy text ever since the 1500s, when an unknown
-                                printer took a galley of type and scrambled it to make a type specimen book. It has
-                                survived not only five centuries, but also the leap into electronic typesetting,
-                                remaining essentially unchanged. It was popularised in the 1960s with the release of
-                                Letraset sheets containing Lorem Ipsum passages.</p>
-                            <h5 class="font-weight-600">Job Requirements</h5>
+
+                            <p><%=offre.getDescription()%></p>
+
+                            <h5 class="font-weight-600">Competences requises</h5>
                             <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
                             <ul class="list-num-count no-round">
-                                <li>The DexignLab Privacy Policy was updated on 25 June 2018.</li>
-                                <li>Who We Are and What This Policy Covers</li>
-                                <li>Remaining essentially unchanged It was popularised in the 1960s</li>
-                                <li>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</li>
-                                <li>DexignLab standard dummy text ever since</li>
+                                <%
+                                    for (String c:competences) { %>
+                                        <li><%=c%></li>
+                                    <% } %>
                             </ul>
-                            <a href="#" class="site-button">Apply This Job</a>
+
+                            <h5 class="font-weight-600">Postuler</h5>
+                            <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
+
+                            <form action="/postulation" method="post">
+                                <input type="hidden" value="<%=offre.getId()%>" name="offreId">
+                                <textarea class="form-control mb-3" name="body" placeholder="Body"></textarea>
+                                <button type="submit" class="site-button">Apply This Job</button>
+                            </form>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Job Detail -->
+
+
+        <!-- Postulations -->
+        <div class="section-full content-inner-1">
+            <div class="container">
+                <%
+                    for (Postulation p:listPostulations) { %>
+                    <div class="border p-4 mb-3">
+                        <a href="/candidat?id=<%=p.getIdCandidat()%>"><i class="ti-user"></i> Candidat</a>
+                        <p>
+                            <%= p.getBody() %>
+                        </p>
+                        <a href="/recrutement?idRecruteur=<%=offre.getIdRecruteur()%>&idCandidat=<%=p.getIdCandidat()%>&offreId=<%=p.getIdOffre()%>" class="site-button">Recruter ce candidat</a>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+        <!-- Postulations -->
+
+
         <!-- Our Jobs -->
         <div class="section-full content-inner">
             <div class="container">

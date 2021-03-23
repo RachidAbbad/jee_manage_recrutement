@@ -41,6 +41,9 @@ public class Offre {
     @Column(name = "id_departement")
     private int idDepartement;
 
+    @Column(name = "etat")
+    private int etat;
+
     public Offre(String titre, String description, String emplacement, String typeContrat, String metier, String salairePrimes, Date dateCreation, String competencesRequises, int idRecruteur, int idDepartement) {
         this.titre = titre;
         this.description = description;
@@ -52,6 +55,7 @@ public class Offre {
         this.competencesRequises = competencesRequises;
         this.idRecruteur = idRecruteur;
         this.idDepartement = idDepartement;
+        this.etat = 1; // offre opened
     }
 
     public Offre() {
@@ -143,5 +147,13 @@ public class Offre {
 
     public void setIdDepartement(int idDepartement) {
         this.idDepartement = idDepartement;
+    }
+
+    public int getEtat() {
+        return etat;
+    }
+
+    public void setEtat(int etat) {
+        this.etat = etat;
     }
 }

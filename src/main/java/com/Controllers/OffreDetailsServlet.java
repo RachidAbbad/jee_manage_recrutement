@@ -1,13 +1,16 @@
 package com.Controllers;
 
 import com.Services.OffreService;
+import com.Services.PostulationService;
 import com.models.Offre;
+import com.models.Postulation;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 public class OffreDetailsServlet extends HttpServlet {
     @Override
@@ -28,9 +31,13 @@ public class OffreDetailsServlet extends HttpServlet {
                 return;
             }
 
+            List<Postulation> mesPostulations = PostulationService.getPostulationsByOffreId(offre.getId());
+
             request.setAttribute("title", "Home");
             request.setAttribute("component", "job-detail");
             request.setAttribute("offre", offre);
+            request.setAttribute("listPostulations", mesPostulations);
+
             getServletContext().getRequestDispatcher("/App.jsp").forward(request, response);
         } catch (Exception exception) {
             exception.printStackTrace();
