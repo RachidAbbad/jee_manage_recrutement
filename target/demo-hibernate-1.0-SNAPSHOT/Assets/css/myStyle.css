@@ -1,0 +1,12 @@
+/* Progress bar */
+.niveauCompetence {
+    width: 400px;
+}
+.niveauCompetence .progress-container {
+    background-color: #EEEEEE;
+    height: 8px;
+}
+.niveauCompetence .progress-bar {
+    background-color: #EFBB20;
+    height: 100%;
+}

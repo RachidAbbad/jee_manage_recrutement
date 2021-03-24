@@ -67,6 +67,102 @@
                 <div class="col-md-8">
                     <h1 class="mb-1" style="text-transform: capitalize;"><%= candidat.getCivilite() + " " + candidat.getNomComplet() %></h1>
                     <p style="opacity: 0.5;"><%= candidat.getTitreEmploi() %></p>
+
+                    <!-- CV -->
+                    <div class="border p-4 mt-5">
+                        <% if (cv == null) { %>
+                        <div class="text-center">
+                            <h3 class="mb-2 display-4" style="opacity: 0.5;"><i class="fa fa-file-text-o" aria-hidden="true"></i></h3>
+                            <h4 class="mb-4">No cv found</h4>
+                            <a href="/ajouter-cv" class="site-button"><i class="fa fa-plus"></i> Ajouter CV</a>
+                        </div>
+                        <% } else { %>
+                        <div>
+                            <!-- description -->
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="font-weight-600 mb-0">Description</h5>
+                            </div>
+                            <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
+
+                            <p><%=cv.getDescription()%></p>
+
+                            <!-- formations -->
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="font-weight-600 mb-0">Formations</h5>
+                            </div>
+                            <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
+
+                            <%
+                                for (Formation f:formations) { %>
+                            <div class="border p-3 pl-4 pr-4 mb-3">
+                                <h5 class="mb-2">Etablissement: <%=f.getNomEtablissement()%></h5>
+                                <p>Diplome: <%=f.getNomDiplome()%></p>
+                                <p class="mb-0">
+                                    <span class="mr-3"><i class="fa fa-clock-o"></i> De: <%=f.getStartDate()%></span>
+                                    <span><i class="fa fa-clock-o"></i> A: <%=f.getEndDate()%></span>
+                                </p>
+                            </div>
+                            <%}%>
+
+                            <!-- experiences -->
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="font-weight-600 mb-0">Experiences</h5>
+                            </div>
+                            <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
+
+                            <%
+                                for (Experience e:experiences) { %>
+                            <div class="border p-3 pl-4 pr-4 mb-3">
+                                <h5 class="mb-2">Entreprise: <%=e.getNomEntreprise()%></h5>
+                                <p>Sujet: <%=e.getSujet()%></p>
+                                <p class="mb-0">
+                                    <span class="mr-3"><i class="fa fa-clock-o"></i> De: <%=e.getStartDate()%></span>
+                                    <span><i class="fa fa-clock-o"></i> A: <%=e.getEndDate()%></span>
+                                </p>
+                            </div>
+                            <%}%>
+
+                            <!-- projets -->
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="font-weight-600 mb-0">Projets</h5>
+                            </div>
+                            <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
+
+                            <%
+                                for (Projet p:projets) { %>
+                            <div class="border p-3 pl-4 pr-4 mb-3">
+                                <h5 class="mb-2"><%=p.getTitre()%></h5>
+                                <p class="mb-0"><%=p.getType()%></p>
+                            </div>
+                            <%}%>
+
+                            <!-- competences -->
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="font-weight-600 mb-0">Competences</h5>
+                            </div>
+                            <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
+
+                            <%
+                                for (Competence c:competences) { %>
+                            <div class="border p-3 pl-4 pr-4 mb-3 d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0 mt-0"><%=c.getNom()%></h6>
+                                <div class="niveauCompetence">
+                                    <span class="percentage"><%=c.getNiveau()%>%</span>
+                                    <div class="progress-container">
+                                        <div style="width: <%=c.getNiveau()%>%" class="progress-bar"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <%}%>
+
+                            <div class="text-center d-flex justify-content-center">
+                                <a href="/ajouter-cv" class="site-button m-2">Changer mon cv</a>
+                                <a href="/ajouter-cv?delete=delete" class="site-button m-2">Supprimer mon cv</a>
+                            </div>
+
+                        </div>
+                        <% } %>
+                    </div>
                 </div>
             </div>
 
@@ -104,53 +200,104 @@
                     </div>
 
                     <input style="opacity: 0.5;" name="titre_emploi" class="form-control text-capitalize mb-3" type="text" value="<%= candidat.getTitreEmploi() %>" />
+
+                    <!-- CV -->
+                    <div class="border p-4 mt-5">
+                        <% if (cv == null) { %>
+                        <div class="text-center">
+                            <h3 class="mb-2 display-4" style="opacity: 0.5;"><i class="fa fa-file-text-o" aria-hidden="true"></i></h3>
+                            <h4 class="mb-4">No cv found</h4>
+                            <a href="/ajouter-cv" class="site-button"><i class="fa fa-plus"></i> Ajouter CV</a>
+                        </div>
+                        <% } else { %>
+                        <div>
+                            <!-- description -->
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="font-weight-600 mb-0">Description</h5>
+                            </div>
+                            <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
+
+                            <p><%=cv.getDescription()%></p>
+
+                            <!-- formations -->
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="font-weight-600 mb-0">Formations</h5>
+                            </div>
+                            <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
+
+                            <%
+                                for (Formation f:formations) { %>
+                            <div class="border p-3 pl-4 pr-4 mb-3">
+                                <h5 class="mb-2">Etablissement: <%=f.getNomEtablissement()%></h5>
+                                <p>Diplome: <%=f.getNomDiplome()%></p>
+                                <p class="mb-0">
+                                    <span class="mr-3"><i class="fa fa-clock-o"></i> De: <%=f.getStartDate()%></span>
+                                    <span><i class="fa fa-clock-o"></i> A: <%=f.getEndDate()%></span>
+                                </p>
+                            </div>
+                            <%}%>
+
+                            <!-- experiences -->
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="font-weight-600 mb-0">Experiences</h5>
+                            </div>
+                            <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
+
+                            <%
+                                for (Experience e:experiences) { %>
+                            <div class="border p-3 pl-4 pr-4 mb-3">
+                                <h5 class="mb-2">Entreprise: <%=e.getNomEntreprise()%></h5>
+                                <p>Sujet: <%=e.getSujet()%></p>
+                                <p class="mb-0">
+                                    <span class="mr-3"><i class="fa fa-clock-o"></i> De: <%=e.getStartDate()%></span>
+                                    <span><i class="fa fa-clock-o"></i> A: <%=e.getEndDate()%></span>
+                                </p>
+                            </div>
+                            <%}%>
+
+                            <!-- projets -->
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="font-weight-600 mb-0">Projets</h5>
+                            </div>
+                            <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
+
+                            <%
+                                for (Projet p:projets) { %>
+                            <div class="border p-3 pl-4 pr-4 mb-3">
+                                <h5 class="mb-2"><%=p.getTitre()%></h5>
+                                <p class="mb-0"><%=p.getType()%></p>
+                            </div>
+                            <%}%>
+
+                            <!-- competences -->
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="font-weight-600 mb-0">Competences</h5>
+                            </div>
+                            <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
+
+                            <%
+                                for (Competence c:competences) { %>
+                            <div class="border p-3 pl-4 pr-4 mb-3 d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0 mt-0"><%=c.getNom()%></h6>
+                                <div class="niveauCompetence">
+                                    <span class="percentage"><%=c.getNiveau()%>%</span>
+                                    <div class="progress-container">
+                                        <div style="width: <%=c.getNiveau()%>%" class="progress-bar"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <%}%>
+
+                            <div class="text-center d-flex justify-content-center">
+                                <a href="/ajouter-cv" class="site-button m-2">Changer mon cv</a>
+                                <a href="/ajouter-cv?delete=delete" class="site-button m-2">Supprimer mon cv</a>
+                            </div>
+
+                        </div>
+                        <% } %>
+                    </div>
                 </div>
             </form>
-
-            <!-- CV -->
-            <div class="border p-5 mt-5">
-                <% if (cv == null) { %>
-                <div class="text-center">
-                    <h3 class="mb-2 display-4" style="opacity: 0.5;"><i class="fa fa-file-text-o" aria-hidden="true"></i></h3>
-                    <h4 class="mb-4">No cv found</h4>
-                    <a href="/ajouter-cv" class="site-button"><i class="fa fa-plus"></i> Ajouter CV</a>
-                </div>
-                <% } else { %>
-                <div>
-                    <!-- description -->
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="font-weight-600 mb-0">Description</h5>
-                    </div>
-                    <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
-
-                    <p><%=cv.getDescription()%></p>
-
-                    <!-- formations -->
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="font-weight-600 mb-0">Formations</h5>
-                    </div>
-                    <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
-
-                    <!-- experiences -->
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="font-weight-600 mb-0">Experiences</h5>
-                    </div>
-                    <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
-
-                    <!-- projets -->
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="font-weight-600 mb-0">Projets</h5>
-                    </div>
-                    <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
-
-                    <!-- competences -->
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="font-weight-600 mb-0">Competences</h5>
-                    </div>
-                    <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
-                </div>
-                <% } %>
-            </div>
         </div>
     </div>
 </div>

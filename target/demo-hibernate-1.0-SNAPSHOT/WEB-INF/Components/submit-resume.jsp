@@ -1,3 +1,12 @@
+<%@ page import="java.util.List" %>
+<%@ page import="com.models.*" %><%
+    Cv cv = (Cv) request.getAttribute("cv");
+    List<Formation> formations = (List<Formation>) request.getAttribute("formations");
+    List<Experience> experiences = (List<Experience>) request.getAttribute("experiences");
+    List<Projet> projets = (List<Projet>) request.getAttribute("projets");
+    List<Competence> competences = (List<Competence>) request.getAttribute("competences");
+%>
+
 <!-- Content -->
 <div class="page-content bg-white">
     <!-- inner page banner -->
@@ -25,7 +34,7 @@
                 <form action="/ajouter-cv" method="post" id="ajouterCvForm">
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea name="desc" class="form-control" placeholder="Description"></textarea>
+                        <textarea name="desc" class="form-control" placeholder="Description"><% if (cv != null) { %><%=cv.getDescription()%><% } %></textarea>
                     </div>
 
                     <!-- formations -->
@@ -36,6 +45,38 @@
                     <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
 
                     <div id="formationsList">
+                        <% if (formations != null) { %>
+                                <% for (Formation f:formations) { %>
+                                    <div class="item">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Etablissement</label>
+                                                    <input type="text" name="nom_etablissement" class="form-control" value="<%=f.getNomEtablissement()%>" placeholder="Etablissement">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Diplome</label>
+                                                    <input type="text" name="nom_diplome" class="form-control" value="<%=f.getNomDiplome()%>" placeholder="Diplome">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Start date</label>
+                                                    <input type="date" name="start_date" class="form-control" value="<%=f.getStartDate()%>" placeholder="Start date">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>End date</label>
+                                                    <input type="date" name="end_date" class="form-control" value="<%=f.getEndDate()%>" placeholder="End date">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% } %>
+                        <% } else { %>
                         <div class="item">
                             <div class="row">
                                 <div class="col-md-6">
@@ -64,6 +105,7 @@
                                 </div>
                             </div>
                         </div>
+                        <% } %>
                     </div>
 
                     <!-- experiences -->
@@ -74,6 +116,38 @@
                     <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
 
                     <div id="experiencesList">
+                        <% if (experiences != null) { %>
+                        <% for (Experience e:experiences) { %>
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Entreprise</label>
+                                        <input type="text" name="nom_entreprise" value="<%=e.getNomEntreprise()%>" class="form-control" placeholder="Entreprise">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Sujet</label>
+                                        <input type="text" name="sujet" value="<%=e.getSujet()%>" class="form-control" placeholder="Sujet">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Start date</label>
+                                        <input type="date" name="start_date" value="<%=e.getStartDate()%>" class="form-control" placeholder="Start date">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>End date</label>
+                                        <input type="date" name="end_date" value="<%=e.getEndDate()%>" class="form-control" placeholder="End date">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                        <% } else { %>
                         <div class="item">
                             <div class="row">
                                 <div class="col-md-6">
@@ -102,6 +176,7 @@
                                 </div>
                             </div>
                         </div>
+                        <% } %>
                     </div>
 
 
@@ -113,6 +188,26 @@
                     <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
 
                     <div id="projetsList">
+                        <% if (projets != null) { %>
+                        <% for (Projet p:projets) { %>
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Titre</label>
+                                        <input type="text" name="titre_projet" value="<%=p.getTitre()%>" class="form-control" placeholder="Titre">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Type</label>
+                                        <input type="text" name="type_projet" value="<%=p.getType()%>" class="form-control" placeholder="Type">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                        <% } else { %>
                         <div class="item">
                             <div class="row">
                                 <div class="col-md-6">
@@ -129,6 +224,7 @@
                                 </div>
                             </div>
                         </div>
+                        <% } %>
                     </div>
 
                     <!-- competences -->
@@ -139,6 +235,26 @@
                     <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
 
                     <div id="competencesList">
+                        <% if (competences != null) { %>
+                        <% for (Competence c:competences) { %>
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Nom</label>
+                                        <input type="text" name="nom_competence" value="<%=c.getNom()%>" class="form-control" placeholder="Nom">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Niveau</label>
+                                        <input type="number" name="niveau_competence" value="<%=c.getNiveau()%>" class="form-control" placeholder="Niveau">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                        <% } else { %>
                         <div class="item">
                             <div class="row">
                                 <div class="col-md-6">
@@ -155,6 +271,7 @@
                                 </div>
                             </div>
                         </div>
+                        <% } %>
                     </div>
 
                     <!-- final inputs -->

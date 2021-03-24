@@ -4,6 +4,7 @@ import com.Utils.AppHibernate;
 import com.google.gson.Gson;
 import com.models.*;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -43,6 +44,73 @@ public class CandidatService {
 
         try {
             session.beginTransaction();
+
+            // create cv
+            Cv cv = new Cv(description, candidatId);
+            session.save(cv);
+
+            // create formations
+            Properties[] formations = gson.fromJson(formationsInput, Properties[].class);
+
+            for (Properties f:formations) {
+                Formation formation = new Formation(f.get("etablissement").toString(), f.get("diplome").toString(), f.get("startDate").toString(), f.get("endDate").toString(), cv.getId());
+                session.save(formation);
+            }
+
+            // create experiences
+            Properties[] experiences = gson.fromJson(experiencesInput, Properties[].class);
+
+            for (Properties e:experiences) {
+                Experience experience = new Experience(e.get("entreprise").toString(), e.get("sujet").toString(), e.get("startDate").toString(), e.get("endDate").toString(), cv.getId());
+                session.save(experience);
+            }
+
+            // create projets
+            Properties[] projets = gson.fromJson(projetsInput, Properties[].class);
+
+            for (Properties p:projets) {
+                Projet projet = new Projet(p.get("titre").toString(), p.get("type").toString(), cv.getId());
+                session.save(projet);
+            }
+
+            // create competences
+            Properties[] competences = gson.fromJson(competencesInput, Properties[].class);
+
+            for (Properties c:competences) {
+                Competence competence = new Competence(c.get("nom").toString(), c.get("niveau").toString(), cv.getId());
+                session.save(competence);
+            }
+
+            session.getTransaction().commit();
+        } catch (Exception exception) {
+            session.getTransaction().rollback();
+            throw new Exception(exception);
+        } finally {
+            factory.close();
+        }
+    }
+
+    public static void updateCv(int candidatId, String description, String formationsInput, String experiencesInput, String projetsInput, String competencesInput) throws Exception {
+        SessionFactory factory = AppHibernate.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        Gson gson = new Gson();
+
+        try {
+            session.beginTransaction();
+
+            Cv oldCv = CvService.getCvByCandidatId(candidatId);
+
+            // delete old cv
+            Query query1 = session.createQuery("delete from Formation where id_cv = :oid").setParameter("oid", oldCv.getId());
+            query1.executeUpdate();
+            Query query2 = session.createQuery("delete from Experience where id_cv = :oid").setParameter("oid", oldCv.getId());
+            query2.executeUpdate();
+            Query query3 = session.createQuery("delete from Competence where id_cv = :oid").setParameter("oid", oldCv.getId());
+            query3.executeUpdate();
+            Query query4 = session.createQuery("delete from Projet where id_cv = :oid").setParameter("oid", oldCv.getId());
+            query4.executeUpdate();
+            Query query5 = session.createQuery("delete from Cv where id_candidat = :oid").setParameter("oid", candidatId);
+            query5.executeUpdate();
 
             // create cv
             Cv cv = new Cv(description, candidatId);
@@ -149,7 +217,7 @@ public class CandidatService {
         }
     }
 
-    public static boolean hasCv(int candidatId) throws Exception {
+    public static Cv hasCv(int candidatId) throws Exception {
         SessionFactory factory = AppHibernate.getSessionFactory();
         Session session = factory.getCurrentSession();
 
@@ -161,9 +229,7 @@ public class CandidatService {
             Cv cv = (Cv) criteria.uniqueResult();
             session.getTransaction().commit();
 
-            if (cv == null) return false;
-            return true;
-
+            return cv;
         } catch (Exception exception) {
             session.getTransaction().rollback();
             throw new Exception(exception);
