@@ -44,8 +44,8 @@
             </div>
             <%}%>
 
-            <div class="row">
-                <!-- Information -->
+            <!-- Information -->
+            <div id="dashboard-voir-info" class="row">
                 <div class="col-md-4">
                     <img class="img-fluid rounded-circle d-block mx-auto mb-4" src="https://via.placeholder.com/250x250" />
 
@@ -63,62 +63,102 @@
                     </ul>
 
                     <div class="text-center mt-4 d-flex justify-content-center">
-                        <a href="/voir-offres" class="site-button mr-2">Changer mon compte</a>
-                        <a href="/ajouter-offre" class="site-button ml-2">Nouveau offre</a>
+                        <button id="dashboard-change-compte-action" class="site-button mr-2">Changer mon compte</button>
                     </div>
 
                 </div>
                 <div class="col-md-8">
                     <h1 class="mb-1"><%= recruteur.getNom() %></h1>
                     <p style="opacity: 0.7;"><%= recruteur.getDescription() %></p>
+                </div>
+            </div>
 
-                    <hr>
+            <!-- Change Information -->
+            <form id="dashboard-change-info" action="/dashboard" method="post" class="row mb-5">
+                <input type="hidden" name="type_compte" value="<%= compte.getTypeCompte() %>" />
 
+                <div class="col-md-4">
+                    <img class="img-fluid rounded-circle d-block mx-auto mb-4" src="https://via.placeholder.com/250x250" />
 
-                    <h3>Mes offres</h3>
-                    <ul class="post-job-bx">
-                        <% if (mesOffres != null && mesOffres.size() > 0) { %>
-                        <% for (Offre offre:mesOffres) { %>
-                        <li>
-                            <a href="/offre-details?id=<%=offre.getId()%>">
-                                <div class="d-flex m-b30">
-                                    <div class="job-post-company">
-                                        <span><img src="images/logo/icon1.png"/></span>
-                                    </div>
-                                    <div class="job-post-info">
-                                        <h4><%= offre.getTitre() %></h4>
-                                        <ul>
-                                            <li><i class="fa fa-map-marker"></i> <%= offre.getEmplacement() %></li>
-                                            <li><i class="fa fa-bookmark-o"></i> <%= offre.getTypeContrat() %></li>
-                                            <li><i class="fa fa-clock-o"></i> Published <%= offre.getDateCreation() %></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="job-time mr-auto">
-                                        <span><%= offre.getMetier() %></span>
-                                        <span>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <input style="text-transform: capitalize;" name="ville" class="form-control" type="text" value="<%= compte.getVille() %>" />
+                        </li>
+                        <li class="list-group-item">
+                            <input name="num_tel" class="form-control" type="text" value="<%= compte.getNumTel() %>" />
+                        </li>
+                        <li class="list-group-item">
+                            <input name="password" class="form-control" type="password" placeholder="New Password" />
+                        </li>
+
+                        <li class="list-group-item">
+                            <input name="siteweb" class="form-control" type="text" value="<%= recruteur.getSiteweb() %>" />
+                        </li>
+                    </ul>
+
+                    <div class="text-center mt-4 d-flex justify-content-center">
+                        <button id="dashboard-voir-compte-action" class="site-button mr-2" type="button">Voir mon compte</button>
+                        <button class="site-button mr-2" type="submit">Save</button>
+                    </div>
+
+                </div>
+                <div class="col-md-8">
+                    <div class="mb-2">
+                        <input name="nom" class="form-control text-capitalize" type="text" value="<%= recruteur.getNom() %>" />
+                    </div>
+
+                    <div style="opacity: 0.7;">
+                        <textarea name="desc" style="min-height: 150px;" class="form-control"><%= recruteur.getDescription() %></textarea>
+                    </div>
+
+                </div>
+            </form>
+
+            <div class="d-flex justify-content-between align-items-center mb-4 mt-5">
+                <h3 class="mb-0">Mes offres</h3>
+                <a href="/ajouter-offre" class="site-button ml-2">Nouveau offre</a>
+            </div>
+
+            <ul class="post-job-bx">
+                <% if (mesOffres != null && mesOffres.size() > 0) { %>
+                <% for (Offre offre:mesOffres) { %>
+                <li>
+                    <a href="/offre-details?id=<%=offre.getId()%>">
+                        <div class="d-flex m-b30">
+                            <div class="job-post-company">
+                                <span><img src="images/logo/icon1.png"/></span>
+                            </div>
+                            <div class="job-post-info">
+                                <h4><%= offre.getTitre() %></h4>
+                                <ul>
+                                    <li><i class="fa fa-map-marker"></i> <%= offre.getEmplacement() %></li>
+                                    <li><i class="fa fa-bookmark-o"></i> <%= offre.getTypeContrat() %></li>
+                                    <li><i class="fa fa-clock-o"></i> Published <%= offre.getDateCreation() %></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="job-time mr-auto">
+                                <span><%= offre.getMetier() %></span>
+                                <span>
                                                         <% if (offre.getEtat() == 0) { %>
                                                             Closed
                                                         <% } else { %>
                                                             Opened
                                                         <% } %>
                                                     </span>
-                                    </div>
-                                    <div class="salary-bx">
-                                        <span><%= offre.getSalairePrimes() %></span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <% } %>
-                        <% } else { %>
-                        <li>No offres found</li>
-                        <% } %>
-                    </ul>
-
-                </div>
-            </div>
+                            </div>
+                            <div class="salary-bx">
+                                <span><%= offre.getSalairePrimes() %></span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <% } %>
+                <% } else { %>
+                <li>No offres found</li>
+                <% } %>
+            </ul>
         </div>
     </div>
 </div>

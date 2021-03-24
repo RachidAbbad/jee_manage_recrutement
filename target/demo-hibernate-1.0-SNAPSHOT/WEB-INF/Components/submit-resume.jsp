@@ -22,61 +22,147 @@
         <!-- Submit Resume -->
         <div class="section-full bg-white submit-resume content-inner-2">
             <div class="container">
-                <form action="/ajouter-cv" method="post">
+                <form action="/ajouter-cv" method="post" id="ajouterCvForm">
                     <div class="form-group">
-                        <label>Your name</label>
-                        <input type="text" class="form-control" placeholder="Your Full Name">
+                        <label>Description</label>
+                        <textarea name="desc" class="form-control" placeholder="Description"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label>Your email</label>
-                        <input type="email" class="form-control" placeholder="info@gmail.com">
+
+                    <!-- formations -->
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="font-weight-600 mb-0">Les formations</h5>
+                        <button id="addFormation" type="button" class="site-button">Ajouter</button>
                     </div>
-                    <div class="form-group">
-                        <label>Region</label>
-                        <select>
-                            <option>New York</option>
-                            <option>London</option>
-                            <option>Los Angeles</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Professional title</label>
-                        <input type="text" class="form-control" placeholder="Web Designer">
-                    </div>
-                    <div class="form-group">
-                        <label>Location</label>
-                        <input type="text" class="form-control" placeholder="London">
-                    </div>
-                    <div class="form-group">
-                        <label>Photo (optional)</label>
-                        <div class="custom-file">
-                            <input type="file" class="site-button" id="customFile">
+                    <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
+
+                    <div id="formationsList">
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Etablissement</label>
+                                        <input type="text" name="nom_etablissement" class="form-control" placeholder="Etablissement">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Diplome</label>
+                                        <input type="text" name="nom_diplome" class="form-control" placeholder="Diplome">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Start date</label>
+                                        <input type="date" name="start_date" class="form-control" placeholder="Start date">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>End date</label>
+                                        <input type="date" name="end_date" class="form-control" placeholder="End date">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label>Video (optional)</label>
-                        <input type="text" class="form-control" placeholder="Video Link">
+
+                    <!-- experiences -->
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="font-weight-600 mb-0">Les experiences</h5>
+                        <button id="addExperience" type="button" class="site-button">Ajouter</button>
                     </div>
-                    <div class="form-group">
-                        <label>Minimum rate/h ($) (optional)</label>
-                        <input type="text" class="form-control" placeholder="50 ($)">
+                    <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
+
+                    <div id="experiencesList">
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Entreprise</label>
+                                        <input type="text" name="nom_entreprise" class="form-control" placeholder="Entreprise">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Sujet</label>
+                                        <input type="text" name="sujet" class="form-control" placeholder="Sujet">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Start date</label>
+                                        <input type="date" name="start_date" class="form-control" placeholder="Start date">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>End date</label>
+                                        <input type="date" name="end_date" class="form-control" placeholder="End date">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Resume category</label>
-                        <select>
-                            <option>Designe</option>
-                            <option>Construct</option>
-                            <option>Food Service</option>
-                        </select>
+
+
+                    <!-- projets -->
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="font-weight-600 mb-0">Les projets</h5>
+                        <button id="addProjet" type="button" class="site-button">Ajouter</button>
                     </div>
-                    <div class="form-group">
-                        <label>Resume Content</label>
-                        <textarea class="form-control" placeholder="Your Content"></textarea>
+                    <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
+
+                    <div id="projetsList">
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Titre</label>
+                                        <input type="text" name="titre_projet" class="form-control" placeholder="Titre">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Type</label>
+                                        <input type="text" name="type_projet" class="form-control" placeholder="Type">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Skills (optional)</label>
-                        <input type="text" class="form-control" placeholder="Your Skills">
+
+                    <!-- competences -->
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="font-weight-600 mb-0">Les competences</h5>
+                        <button id="addCompetence" type="button" class="site-button">Ajouter</button>
                     </div>
+                    <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
+
+                    <div id="competencesList">
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Nom</label>
+                                        <input type="text" name="nom_competence" class="form-control" placeholder="Nom">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Niveau</label>
+                                        <input type="number" name="niveau_competence" class="form-control" placeholder="Niveau">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- final inputs -->
+                    <input type="hidden" name="formationsInput" id="formationsInput">
+                    <input type="hidden" name="experiencesInput" id="experiencesInput">
+                    <input type="hidden" name="projetsInput" id="projetsInput">
+                    <input type="hidden" name="competencesInput" id="competencesInput">
+
                     <button type="submit" class="site-button">Submit</button>
                 </form>
             </div>
@@ -87,31 +173,3 @@
 <!-- Content END-->
 <button class="scroltop fa fa-chevron-up"></button>
 </div>
-
-<script type="text/javascript">
-
-    $("#exp-slider-range").slider({
-        range: true,
-        min: 0,
-        max: 10,
-        //values: [0, 10],
-        slide: function (event, ui) {
-            var min = ui.values[0],
-                max = ui.values[1];
-            $('#' + this.id).prev().val(min + " year - " + max + " year");
-        }
-    });
-
-    $("#salary-slider-range").slider({
-        range: true,
-        min: 10,
-        max: 100,
-        //values: [10, 1000],
-        slide: function (event, ui) {
-            var min = ui.values[0],
-                max = ui.values[1];
-            $('#' + this.id).prev().val(min + "K - " + max + "K");
-        }
-    });
-
-</script>

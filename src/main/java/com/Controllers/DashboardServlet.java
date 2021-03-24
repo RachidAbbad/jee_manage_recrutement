@@ -1,10 +1,14 @@
 package com.Controllers;
 
+import com.Services.CandidatService;
+import com.Services.CompteService;
 import com.Services.PostulationService;
 import com.Services.RecruteurService;
+import com.Utils.AppContext;
 import com.Utils.AppHibernate;
 import com.models.*;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -43,9 +47,32 @@ public class DashboardServlet extends HttpServlet {
                         .add(Restrictions.eq("idCompte", compte.getId()));
                 Candidat candidat = (Candidat) criteria2.uniqueResult();
 
+                // cv
                 Criteria criteria3 = session.createCriteria(Cv.class)
                         .add(Restrictions.eq("idCandidat", candidat.getId()));
                 Cv cv = (Cv) criteria3.uniqueResult();
+
+                if (cv != null) {
+                    // formations
+                    Query query = session.createQuery("from Formation where id_cv = :cvid").setParameter("cvid", cv.getId());
+                    List<Formation> formations = query.list();
+                    request.setAttribute("formations", formations);
+
+                    // experiences
+                    Query query2 = session.createQuery("from Experience where id_cv = :cvid").setParameter("cvid", cv.getId());
+                    List<Experience> experiences = query2.list();
+                    request.setAttribute("experiences", experiences);
+
+                    // projets
+                    Query query3 = session.createQuery("from Projet where id_cv = :cvid").setParameter("cvid", cv.getId());
+                    List<Projet> projets = query3.list();
+                    request.setAttribute("projets", projets);
+
+                    // competences
+                    Query query4 = session.createQuery("from Competence where id_cv = :cvid").setParameter("cvid", cv.getId());
+                    List<Competence> competences = query4.list();
+                    request.setAttribute("competences", competences);
+                }
 
                 request.setAttribute("component", "dashboardCandidat");
                 request.setAttribute("candidat", candidat);
@@ -78,6 +105,59 @@ public class DashboardServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int compteId = AppContext.isAthorized(request);
 
+        if (compteId == -1) {
+            return;
+        }
+
+        String typeCompte = request.getParameter("type_compte");
+        String ville = request.getParameter("ville");
+        String numTel = request.getParameter("num_tel");
+        String password = request.getParameter("password");
+
+        if (typeCompte.equals("Candidat")) {
+            int candidatId = CandidatService.isCandidat(compteId);
+
+            if (candidatId == -1) {
+                return;
+            }
+
+            String civilite = request.getParameter("civilite");
+            String nomComplet = request.getParameter("nom_complet");
+            String titreEmploi = request.getParameter("titre_emploi");
+
+            try {
+                CandidatService.updateCandidat(compteId, candidatId, password, ville, numTel, civilite, nomComplet, titreEmploi);
+
+                response.sendRedirect("/dashboard");
+            } catch (Exception exception) {
+                exception.printStackTrace();
+
+                request.setAttribute("errorMessage", exception.getMessage());
+                getServletContext().getRequestDispatcher("/dashboard").forward(request, response);
+            }
+        } else {
+            int recruteurId = RecruteurService.isRecruteur(compteId);
+
+            if (recruteurId == -1) {
+                return;
+            }
+
+            String siteweb = request.getParameter("siteweb");
+            String nomRecr = request.getParameter("nom");
+            String descRecr = request.getParameter("desc");
+
+            try {
+                RecruteurService.updateRecruteur(compteId, recruteurId, password, ville, numTel, siteweb, nomRecr, descRecr);
+
+                response.sendRedirect("/dashboard");
+            } catch (Exception exception) {
+                exception.printStackTrace();
+
+                request.setAttribute("errorMessage", exception.getMessage());
+                getServletContext().getRequestDispatcher("/dashboard").forward(request, response);
+            }
+        }
     }
 }

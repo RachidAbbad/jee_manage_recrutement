@@ -17,16 +17,20 @@ public class Formation {
     @Column(name = "nom_diplome")
     private String nomDiplome;
 
-    @Column(name = "duree")
-    private Date duree;
+    @Column(name = "start_date")
+    private String startDate;
+
+    @Column(name = "end_date")
+    private String endDate;
 
     @Column(name = "id_cv")
     private int idCv;
 
-    public Formation(String nomEtablissement, String nomDiplome, Date duree, int idCv) {
+    public Formation(String nomEtablissement, String nomDiplome, String startDate, String endDate, int idCv) {
         this.nomEtablissement = nomEtablissement;
         this.nomDiplome = nomDiplome;
-        this.duree = duree;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.idCv = idCv;
     }
 
@@ -58,12 +62,20 @@ public class Formation {
         this.nomDiplome = nomDiplome;
     }
 
-    public Date getDuree() {
-        return duree;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setDuree(Date duree) {
-        this.duree = duree;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
     public int getIdCv() {

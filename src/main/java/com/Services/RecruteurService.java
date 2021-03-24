@@ -1,6 +1,7 @@
 package com.Services;
 
 import com.Utils.AppHibernate;
+import com.models.Candidat;
 import com.models.Compte;
 import com.models.Offre;
 import com.models.Recruteur;
@@ -13,6 +14,30 @@ import org.hibernate.criterion.Restrictions;
 import java.util.List;
 
 public class RecruteurService {
+    public static int isRecruteur(int compteId) {
+        SessionFactory factory = AppHibernate.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.beginTransaction();
+
+            Criteria criteria = session.createCriteria(Recruteur.class)
+                    .add(Restrictions.eq("idCompte", compteId));
+            Recruteur recruteur = (Recruteur) criteria.uniqueResult();
+            session.getTransaction().commit();
+
+            if (recruteur == null) return -1;
+            return recruteur.getId();
+
+        } catch (Exception exception) {
+            session.getTransaction().rollback();
+            exception.printStackTrace();
+            return -1;
+        } finally {
+            factory.close();
+        }
+    }
+
     public static List<Offre> getOffresOfRecruteur(int recruteurId) throws Exception {
         SessionFactory factory = AppHibernate.getSessionFactory();
         Session session = factory.getCurrentSession();
@@ -44,6 +69,45 @@ public class RecruteurService {
             session.getTransaction().commit();
 
             return recruteur;
+        } catch (Exception exception) {
+            session.getTransaction().rollback();
+            throw new Exception(exception);
+        } finally {
+            factory.close();
+        }
+    }
+
+    public static void updateRecruteur(int compteId, int recruteurId, String password, String ville, String numTel, String siteweb, String nomRecr, String descRecr) throws Exception {
+        SessionFactory factory = AppHibernate.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.beginTransaction();
+
+            // compte
+            Criteria criteria = session.createCriteria(Compte.class)
+                    .add(Restrictions.eq("id", compteId));
+            Compte compte = (Compte) criteria.uniqueResult();
+
+            compte.setVille(ville);
+            compte.setNumTel(numTel);
+            if (!password.isEmpty())
+                compte.setMoteDePasse(password);
+
+            // candidat
+            Criteria criteria2 = session.createCriteria(Recruteur.class)
+                    .add(Restrictions.eq("id", recruteurId));
+            Recruteur recruteur = (Recruteur) criteria2.uniqueResult();
+
+            recruteur.setSiteweb(siteweb);
+            recruteur.setNom(nomRecr);
+            recruteur.setDescription(descRecr);
+
+            // save
+            session.save(compte);
+            session.save(recruteur);
+
+            session.getTransaction().commit();
         } catch (Exception exception) {
             session.getTransaction().rollback();
             throw new Exception(exception);

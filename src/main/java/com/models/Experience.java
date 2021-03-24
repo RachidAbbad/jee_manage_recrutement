@@ -17,20 +17,20 @@ public class Experience {
     @Column(name = "sujet")
     private String sujet;
 
-    @Column(name = "type")
-    private String type;
+    @Column(name = "start_date")
+    private String startDate;
 
-    @Column(name = "duree")
-    private Date duree;
+    @Column(name = "end_date")
+    private String endDate;
 
     @Column(name = "id_cv")
     private int idCv;
 
-    public Experience(String nomEntreprise, String sujet, String type, Date duree, int idCv) {
+    public Experience(String nomEntreprise, String sujet, String startDate, String endDate, int idCv) {
         this.nomEntreprise = nomEntreprise;
         this.sujet = sujet;
-        this.type = type;
-        this.duree = duree;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.idCv = idCv;
     }
 
@@ -62,20 +62,20 @@ public class Experience {
         this.sujet = sujet;
     }
 
-    public String getType() {
-        return type;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
-    public Date getDuree() {
-        return duree;
+    public String getEndDate() {
+        return endDate;
     }
 
-    public void setDuree(Date duree) {
-        this.duree = duree;
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
     public int getIdCv() {

@@ -28,17 +28,31 @@ public class AjouterCvServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int compteId = AppContext.isAthorized(request);
+        int candidatId = CandidatService.isCandidat(compteId);
+
+        if (compteId == -1 || candidatId == -1) {
+            return;
+        }
+
         // get information
+        String description = request.getParameter("desc");
+        String formationsInput = request.getParameter("formationsInput");
+        String experiencesInput = request.getParameter("experiencesInput");
+        String projetsInput = request.getParameter("projetsInput");
+        String competencesInput = request.getParameter("competencesInput");
 
         try {
-            CandidatService.ajouterCv();
+            if (CandidatService.hasCv(candidatId)) return;
 
-            request.setAttribute("successMessage", "CV is created successfully");
-            getServletContext().getRequestDispatcher("/dashboard").forward(request, response);
+            CandidatService.ajouterCv(candidatId, description, formationsInput, experiencesInput, projetsInput, competencesInput);
+            return;
+            // request.setAttribute("successMessage", "CV is created successfully");
+            // getServletContext().getRequestDispatcher("/dashboard").forward(request, response);
         } catch (Exception exception) {
             exception.printStackTrace();
-            request.setAttribute("errorMessage", exception.getMessage());
-            getServletContext().getRequestDispatcher("/ajouter-cv").forward(request, response);
+            // request.setAttribute("errorMessage", exception.getMessage());
+            // getServletContext().getRequestDispatcher("/ajouter-cv").forward(request, response);
         }
     }
 }
