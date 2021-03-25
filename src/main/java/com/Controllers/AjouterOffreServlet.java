@@ -4,13 +4,11 @@ import com.Services.DepartementService;
 import com.Services.OffreService;
 import com.Utils.AppContext;
 import com.models.Departement;
-import com.models.Offre;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 @WebServlet(name = "AjouterOffreServlet", value = "/AjouterOffreServlet")
@@ -18,17 +16,21 @@ public class AjouterOffreServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            // List<Departement> departements = DepartementService.getListDepartement();
+            List<Departement> departements = DepartementService.getListDepartement();
 
             request.setAttribute("title", "Ajouter offre");
             request.setAttribute("component", "ajouter-offre");
-            // request.setAttribute("listDepartements", departements);
+            request.setAttribute("listDepartements", departements);
             getServletContext().getRequestDispatcher("/App.jsp").forward(request, response);
 
         } catch (Exception exception) {
             exception.printStackTrace();
 
             // redirect to 500
+            request.setAttribute("title", "Ajouter offre");
+            request.setAttribute("component", "ajouter-offre");
+            request.setAttribute("errorMessage", exception.getMessage());
+            getServletContext().getRequestDispatcher("/App.jsp").forward(request, response);
         }
     }
 

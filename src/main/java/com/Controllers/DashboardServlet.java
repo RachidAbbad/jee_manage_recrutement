@@ -2,7 +2,6 @@ package com.Controllers;
 
 import com.Services.CandidatService;
 import com.Services.CompteService;
-import com.Services.PostulationService;
 import com.Services.RecruteurService;
 import com.Utils.AppContext;
 import com.Utils.AppHibernate;
@@ -16,12 +15,16 @@ import org.hibernate.criterion.Restrictions;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+
 @WebServlet(name = "DashboardServlet", value = "/DashboardServlet")
+@MultipartConfig
 public class DashboardServlet extends HttpServlet {
     Compte compte;
+    private File file;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -128,14 +131,20 @@ public class DashboardServlet extends HttpServlet {
             String titreEmploi = request.getParameter("titre_emploi");
 
             try {
-                CandidatService.updateCandidat(compteId, candidatId, password, ville, numTel, civilite, nomComplet, titreEmploi);
+                // upload photo
+                String photoUrl = CompteService.uploadPhoto(compteId, request);
+
+                // update
+                CandidatService.updateCandidat(compteId, candidatId, password, ville, numTel, civilite, nomComplet, titreEmploi, photoUrl);
 
                 response.sendRedirect("/dashboard");
             } catch (Exception exception) {
                 exception.printStackTrace();
 
-                request.setAttribute("errorMessage", exception.getMessage());
-                getServletContext().getRequestDispatcher("/dashboard").forward(request, response);
+                return;
+                // request.setAttribute("errorMessage", exception.getMessage());
+                // request.setAttribute("component", "dashboard");
+                // getServletContext().getRequestDispatcher("/App.jsp").forward(request, response);
             }
         } else {
             int recruteurId = RecruteurService.isRecruteur(compteId);
@@ -149,7 +158,10 @@ public class DashboardServlet extends HttpServlet {
             String descRecr = request.getParameter("desc");
 
             try {
-                RecruteurService.updateRecruteur(compteId, recruteurId, password, ville, numTel, siteweb, nomRecr, descRecr);
+                // upload logo
+                String logoUrl = CompteService.uploadPhoto(compteId, request);
+
+                RecruteurService.updateRecruteur(compteId, recruteurId, password, ville, numTel, siteweb, nomRecr, descRecr, logoUrl);
 
                 response.sendRedirect("/dashboard");
             } catch (Exception exception) {

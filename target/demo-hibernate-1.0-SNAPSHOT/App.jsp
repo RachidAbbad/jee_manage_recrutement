@@ -1,4 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%
+    String errorMessage = (String) request.getAttribute("errorMessage");
+    String successMessage = (String) request.getAttribute("successMessage");
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,6 +52,25 @@
 <body id="bg">
 <div id="loading-area"></div>
 <div class="page-wraper">
+    <!-- Success Message -->
+    <% if (successMessage != null) { %>
+    <div class="app-alert alert alert-success alert-dismissible fade show" role="alert">
+        ${successMessage}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <%}%>
+    <!-- Error Message -->
+    <% if (errorMessage != null) { %>
+    <div class="app-alert alert alert-danger alert-dismissible fade show" role="alert">
+        ${errorMessage}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <%}%>
+
     <!-- NavBar -->
     <jsp:include page="/WEB-INF/Components/navbar.jsp"/>
     <!-- Content -->

@@ -1,3 +1,4 @@
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!-- Content -->
 <div class="page-content bg-white">
     <!-- inner page banner -->
@@ -27,180 +28,23 @@
                             <input type="text" class="form-control" placeholder="Search freelancer services">
                         </div>
                         <ul class="post-job-bx">
-                            <li>
-                                <a href="#">
-                                    <div class="d-flex m-b30">
-                                        <div class="job-post-company">
-                                            <span><img src="images/testimonials/pic1.jpg"/></span>
+                            <c:forEach items="${candidats}" var="candidat">
+                                <li>
+                                    <a href="/candidat?id=${candidat.getId()}">
+                                        <div class="d-flex m-b30">
+                                            <div class="job-post-company">
+                                                <span><img src="images/testimonials/pic1.jpg"/></span>
+                                            </div>
+                                            <div class="job-post-info">
+                                                <h4>${candidat.getNomComplet()}</h4>
+                                                <ul>
+                                                    <li>${candidat.getTitreEmploi()}</li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                        <div class="job-post-info">
-                                            <h4>Digital Marketing Executive</h4>
-                                            <ul>
-                                                <li><i class="fa fa-map-marker"></i> New York</li>
-                                                <li><i class="fa fa-usd"></i> Full Time</li>
-                                                <li><i class="fa fa-clock-o"></i> Published 11 months ago</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex">
-                                        <div class="job-time mr-auto">
-                                            <span>Javascript</span>
-                                            <span>CSS</span>
-                                            <span>HTML</span>
-                                            <span>Bootstrap</span>
-                                        </div>
-                                        <div class="salary-bx">
-                                            <span>$45 Per Hour</span>
-                                        </div>
-                                    </div>
-                                    <span class="post-like fa fa-heart-o"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div class="d-flex m-b30">
-                                        <div class="job-post-company">
-                                            <span><img src="images/testimonials/pic2.jpg"/></span>
-                                        </div>
-                                        <div class="job-post-info">
-                                            <h4>Digital Marketing Executive</h4>
-                                            <ul>
-                                                <li><i class="fa fa-map-marker"></i> New York</li>
-                                                <li><i class="fa fa-usd"></i> Full Time</li>
-                                                <li><i class="fa fa-clock-o"></i> Published 11 months ago</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex">
-                                        <div class="job-time mr-auto">
-                                            <span>Javascript</span>
-                                            <span>CSS</span>
-                                            <span>HTML</span>
-                                            <span>Bootstrap</span>
-                                        </div>
-                                        <div class="salary-bx">
-                                            <span>$45 Per Hour</span>
-                                        </div>
-                                    </div>
-                                    <span class="post-like fa fa-heart-o"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div class="d-flex m-b30">
-                                        <div class="job-post-company">
-                                            <span><img src="images/testimonials/pic3.jpg"/></span>
-                                        </div>
-                                        <div class="job-post-info">
-                                            <h4>Digital Marketing Executive</h4>
-                                            <ul>
-                                                <li><i class="fa fa-map-marker"></i> New York</li>
-                                                <li><i class="fa fa-usd"></i> Full Time</li>
-                                                <li><i class="fa fa-clock-o"></i> Published 11 months ago</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex">
-                                        <div class="job-time mr-auto">
-                                            <span>Javascript</span>
-                                            <span>CSS</span>
-                                            <span>HTML</span>
-                                            <span>Bootstrap</span>
-                                        </div>
-                                        <div class="salary-bx">
-                                            <span>$45 Per Hour</span>
-                                        </div>
-                                    </div>
-                                    <span class="post-like fa fa-heart-o"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div class="d-flex m-b30">
-                                        <div class="job-post-company">
-                                            <span><img src="images/testimonials/pic1.jpg"/></span>
-                                        </div>
-                                        <div class="job-post-info">
-                                            <h4>Digital Marketing Executive</h4>
-                                            <ul>
-                                                <li><i class="fa fa-map-marker"></i> New York</li>
-                                                <li><i class="fa fa-usd"></i> Full Time</li>
-                                                <li><i class="fa fa-clock-o"></i> Published 11 months ago</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex">
-                                        <div class="job-time mr-auto">
-                                            <span>Javascript</span>
-                                            <span>CSS</span>
-                                            <span>HTML</span>
-                                            <span>Bootstrap</span>
-                                        </div>
-                                        <div class="salary-bx">
-                                            <span>$45 Per Hour</span>
-                                        </div>
-                                    </div>
-                                    <span class="post-like fa fa-heart-o"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div class="d-flex m-b30">
-                                        <div class="job-post-company">
-                                            <span><img src="images/testimonials/pic2.jpg"/></span>
-                                        </div>
-                                        <div class="job-post-info">
-                                            <h4>Digital Marketing Executive</h4>
-                                            <ul>
-                                                <li><i class="fa fa-map-marker"></i> New York</li>
-                                                <li><i class="fa fa-usd"></i> Full Time</li>
-                                                <li><i class="fa fa-clock-o"></i> Published 11 months ago</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex">
-                                        <div class="job-time mr-auto">
-                                            <span>Javascript</span>
-                                            <span>CSS</span>
-                                            <span>HTML</span>
-                                            <span>Bootstrap</span>
-                                        </div>
-                                        <div class="salary-bx">
-                                            <span>$45 Per Hour</span>
-                                        </div>
-                                    </div>
-                                    <span class="post-like fa fa-heart-o"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div class="d-flex m-b30">
-                                        <div class="job-post-company">
-                                            <span><img src="images/testimonials/pic3.jpg"/></span>
-                                        </div>
-                                        <div class="job-post-info">
-                                            <h4>Digital Marketing Executive</h4>
-                                            <ul>
-                                                <li><i class="fa fa-map-marker"></i> New York</li>
-                                                <li><i class="fa fa-usd"></i> Full Time</li>
-                                                <li><i class="fa fa-clock-o"></i> Published 11 months ago</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex">
-                                        <div class="job-time mr-auto">
-                                            <span>Javascript</span>
-                                            <span>CSS</span>
-                                            <span>HTML</span>
-                                            <span>Bootstrap</span>
-                                        </div>
-                                        <div class="salary-bx">
-                                            <span>$45 Per Hour</span>
-                                        </div>
-                                    </div>
-                                    <span class="post-like fa fa-heart-o"></span>
-                                </a>
-                            </li>
+                                    </a>
+                                </li>
+                            </c:forEach>
                         </ul>
                         <div class="pagination-bx m-t30">
                             <ul class="pagination">

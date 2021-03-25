@@ -130,12 +130,6 @@
                                             <option value="mademoiselle">Mademoiselle</option>
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Photo de profile *</label>
-                                        <div class="custom-file">
-                                            <input type="file" class="site-button" name="register_photo">
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
 

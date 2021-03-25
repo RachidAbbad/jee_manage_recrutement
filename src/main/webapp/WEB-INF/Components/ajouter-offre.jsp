@@ -73,20 +73,12 @@
             </div>
             <div class="form-group">
                 <label>Departement</label>
-                <%--
                 <select name="departement_id">
                     <% for (Departement departement:departements) { %>
                     <option value="<%= departement.getId() %>">
                         <%= departement.getNom() %>
                     </option>
                     <% } %>
-                </select>
-                --%>
-
-                <select name="departement_id">
-                    <option value="1">New York</option>
-                    <option value="2">London</option>
-                    <option value="3">Los Angeles</option>
                 </select>
             </div>
             <button type="submit" class="site-button">Ajouter offre</button>

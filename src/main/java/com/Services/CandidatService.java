@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 
+import java.util.List;
 import java.util.Properties;
 
 
@@ -178,7 +179,7 @@ public class CandidatService {
         }
     }
 
-    public static void updateCandidat(int compteId, int candidatId, String password, String ville, String numTel, String civilite, String nomComplet, String titreEmploi) throws Exception {
+    public static void updateCandidat(int compteId, int candidatId, String password, String ville, String numTel, String civilite, String nomComplet, String titreEmploi, String photoUrl) throws Exception {
         SessionFactory factory = AppHibernate.getSessionFactory();
         Session session = factory.getCurrentSession();
 
@@ -203,6 +204,7 @@ public class CandidatService {
             candidat.setCivilite(civilite);
             candidat.setNomComplet(nomComplet);
             candidat.setTitreEmploi(titreEmploi);
+            candidat.setPhotoUrl(photoUrl);
 
             // save
             session.save(compte);
@@ -232,6 +234,24 @@ public class CandidatService {
             return cv;
         } catch (Exception exception) {
             session.getTransaction().rollback();
+            throw new Exception(exception);
+        } finally {
+            factory.close();
+        }
+    }
+
+    public static List<Candidat> getListCandidat() throws Exception {
+        SessionFactory factory = AppHibernate.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("from Candidat");
+            List<Candidat> candidats = query.list();
+
+            session.getTransaction().commit();
+            return candidats;
+        } catch (Exception exception) {
             throw new Exception(exception);
         } finally {
             factory.close();

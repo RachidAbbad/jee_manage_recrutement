@@ -15,12 +15,13 @@ import java.util.List;
 public class OffreDetailsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Integer offreId = Integer.parseInt(request.getParameter("id"));
 
-        if (offreId == null) {
+        if (request.getParameter("id") == null) {
             response.sendRedirect("/");
             return;
         }
+
+        Integer offreId = Integer.parseInt(request.getParameter("id"));
 
         try {
             // get offre
@@ -28,6 +29,7 @@ public class OffreDetailsServlet extends HttpServlet {
 
             if (offre == null) {
                 // redirect to 404
+                response.sendRedirect("/");
                 return;
             }
 
@@ -43,6 +45,10 @@ public class OffreDetailsServlet extends HttpServlet {
             exception.printStackTrace();
 
             // redirect to 500
+            request.setAttribute("title", "Home");
+            request.setAttribute("component", "job-detail");
+            request.setAttribute("errorMessage", exception.getMessage());
+            getServletContext().getRequestDispatcher("/App.jsp").forward(request, response);
         }
 
 

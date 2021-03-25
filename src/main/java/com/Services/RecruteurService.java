@@ -1,7 +1,6 @@
 package com.Services;
 
 import com.Utils.AppHibernate;
-import com.models.Candidat;
 import com.models.Compte;
 import com.models.Offre;
 import com.models.Recruteur;
@@ -77,7 +76,7 @@ public class RecruteurService {
         }
     }
 
-    public static void updateRecruteur(int compteId, int recruteurId, String password, String ville, String numTel, String siteweb, String nomRecr, String descRecr) throws Exception {
+    public static void updateRecruteur(int compteId, int recruteurId, String password, String ville, String numTel, String siteweb, String nomRecr, String descRecr, String logoUrl) throws Exception {
         SessionFactory factory = AppHibernate.getSessionFactory();
         Session session = factory.getCurrentSession();
 
@@ -94,7 +93,7 @@ public class RecruteurService {
             if (!password.isEmpty())
                 compte.setMoteDePasse(password);
 
-            // candidat
+            // recruteur
             Criteria criteria2 = session.createCriteria(Recruteur.class)
                     .add(Restrictions.eq("id", recruteurId));
             Recruteur recruteur = (Recruteur) criteria2.uniqueResult();
@@ -102,6 +101,7 @@ public class RecruteurService {
             recruteur.setSiteweb(siteweb);
             recruteur.setNom(nomRecr);
             recruteur.setDescription(descRecr);
+            recruteur.setLogoUrl(logoUrl);
 
             // save
             session.save(compte);
@@ -110,6 +110,24 @@ public class RecruteurService {
             session.getTransaction().commit();
         } catch (Exception exception) {
             session.getTransaction().rollback();
+            throw new Exception(exception);
+        } finally {
+            factory.close();
+        }
+    }
+
+    public static List<Recruteur> getListRecruteurs() throws Exception {
+        SessionFactory factory = AppHibernate.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("from Recruteur");
+            List<Recruteur> recruteurs = query.list();
+
+            session.getTransaction().commit();
+            return recruteurs;
+        } catch (Exception exception) {
             throw new Exception(exception);
         } finally {
             factory.close();

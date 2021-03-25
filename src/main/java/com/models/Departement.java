@@ -13,8 +13,12 @@ public class Departement {
     @Column(name = "nom")
     private String nom;
 
-    public Departement(String nom) {
+    @Column(name = "icon")
+    private String icon;
+
+    public Departement(String nom, String icon) {
         this.nom = nom;
+        this.icon = icon;
     }
 
     public Departement() {
@@ -35,5 +39,13 @@ public class Departement {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 }

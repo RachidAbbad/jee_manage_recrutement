@@ -33,11 +33,11 @@ public class PostulationServlet extends HttpServlet {
             PostulationService.ajouterPostulation(candidatId, offreId, body);
 
             request.setAttribute("successMessage", "Postulation added successfully");
-            getServletContext().getRequestDispatcher("/offre-details?id="+offreId).forward(request, response);
+            response.sendRedirect(request.getHeader("referer"));
         } catch (Exception exception) {
             exception.printStackTrace();
             request.setAttribute("errorMessage", exception.getMessage());
-            getServletContext().getRequestDispatcher("/offre-details?id="+offreId).forward(request, response);
+            response.sendRedirect(request.getHeader("referer"));
         }
     }
 }

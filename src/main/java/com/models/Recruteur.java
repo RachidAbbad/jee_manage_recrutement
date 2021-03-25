@@ -22,11 +22,15 @@ public class Recruteur {
     @Column(name = "siteweb")
     private String siteweb;
 
-    public Recruteur(int idCompte, String nom, String description, String siteweb) {
+    @Column(name = "logo_url")
+    private String logoUrl;
+
+    public Recruteur(int idCompte, String nom, String description, String siteweb, String logoUrl) {
         this.idCompte = idCompte;
         this.nom = nom;
         this.description = description;
         this.siteweb = siteweb;
+        this.logoUrl = logoUrl;
     }
 
     public Recruteur() {
@@ -71,5 +75,13 @@ public class Recruteur {
 
     public void setSiteweb(String siteweb) {
         this.siteweb = siteweb;
+    }
+
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
     }
 }

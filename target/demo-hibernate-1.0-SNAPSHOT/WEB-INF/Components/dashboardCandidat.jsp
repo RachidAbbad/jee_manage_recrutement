@@ -46,7 +46,14 @@
             <!-- Information -->
             <div id="dashboard-voir-info" class="row">
                 <div class="col-md-4">
-                    <img class="img-fluid rounded-circle d-block mx-auto mb-4" src="https://via.placeholder.com/250x250" />
+
+                    <div class="photo-profile-box mb-3">
+                        <% if (candidat.getPhotoUrl().isEmpty() || candidat.getPhotoUrl() == null) { %>
+                        <img class="img-fluid d-block mx-auto mb-4" src="https://via.placeholder.com/250x250" />
+                        <% } else { %>
+                        <img class="img-fluid d-block mx-auto mb-4" src="<%=request.getContextPath()%>Assets/photos/<%=candidat.getPhotoUrl()%>" />
+                        <% } %>
+                    </div>
 
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
@@ -167,12 +174,23 @@
             </div>
 
             <!-- Change Information -->
-            <form id="dashboard-change-info" action="/dashboard" method="post" class="row">
+            <form id="dashboard-change-info" action="/dashboard" method="post" enctype="multipart/form-data" class="row">
 
                 <input type="hidden" name="type_compte" value="<%= compte.getTypeCompte() %>" />
 
                 <div class="col-md-4">
-                    <img class="img-fluid rounded-circle d-block mx-auto mb-4" src="https://via.placeholder.com/250x250" />
+                    <div class="photo-profile-box mb-3">
+                        <label for="uploadPhoto" class="edit-layer">
+                            <i class="ti-image"></i>
+                        </label>
+
+                        <input type="file" id="uploadPhoto" name="photo">
+                        <% if (candidat.getPhotoUrl().isEmpty() || candidat.getPhotoUrl() == null) { %>
+                        <img class="img-fluid d-block mx-auto mb-4" src="https://via.placeholder.com/250x250" />
+                        <% } else { %>
+                        <img class="img-fluid d-block mx-auto mb-4" src="<%=request.getContextPath()%>Assets/photos/<%=candidat.getPhotoUrl()%>" />
+                        <% } %>
+                    </div>
 
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">

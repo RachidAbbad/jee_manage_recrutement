@@ -16,6 +16,10 @@ public class RecrutementServlet extends HttpServlet {
         Integer offreId = Integer.parseInt(request.getParameter("offreId"));
 
         if (recruteurId == null || candidatId == null) {
+            request.setAttribute("title", "Home");
+            request.setAttribute("component", "index");
+            request.setAttribute("errorMessage", "You are not logged in!");
+            getServletContext().getRequestDispatcher("/App.jsp").forward(request, response);
             return;
         }
 
@@ -23,12 +27,16 @@ public class RecrutementServlet extends HttpServlet {
             // recrutement
             RecrutementService.addRecrutement(recruteurId, candidatId, offreId);
 
+            request.setAttribute("title", "Dashboard");
+            request.setAttribute("component", "dashboardRecruteur");
             request.setAttribute("successMessage", "Recrutement added successfully");
-            getServletContext().getRequestDispatcher("/dashboard").forward(request, response);
+            getServletContext().getRequestDispatcher("/App.jsp").forward(request, response);
         } catch (Exception exception) {
             exception.printStackTrace();
+            request.setAttribute("title", "Dashboard");
+            request.setAttribute("component", "dashboardRecruteur");
             request.setAttribute("errorMessage", exception.getMessage());
-            getServletContext().getRequestDispatcher("/dashboard").forward(request, response);
+            getServletContext().getRequestDispatcher("/App.jsp").forward(request, response);
         }
     }
 

@@ -23,7 +23,7 @@ public class NotUserFilter implements Filter {
             }
         }
 
-        if (!isUser) response.sendRedirect("/");
+        if (!isUser) response.sendRedirect("/login");
         else filterChain.doFilter(request, response);
     }
 }

@@ -1,13 +1,8 @@
 package com.Controllers;
 
-import com.Services.CandidatService;
 import com.Services.CompteService;
-import com.Services.CvService;
 import com.Services.RecruteurService;
-import com.Utils.AppHibernate;
 import com.models.*;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -26,15 +21,16 @@ public class ProfileRecruteurServlet extends HttpServlet {
 
         Integer recruteurId = Integer.parseInt(request.getParameter("id"));
 
-        SessionFactory factory = AppHibernate.getSessionFactory();
-        Session session = factory.getCurrentSession();
-
         try {
             // get recruteur
             Recruteur recruteur = RecruteurService.getRecruteurById(recruteurId);
 
             if (recruteur == null) {
                 // redirect to 404
+                request.setAttribute("title", "Home");
+                request.setAttribute("component", "index");
+                request.setAttribute("errorMessage", "No recruteur found");
+                getServletContext().getRequestDispatcher("/App.jsp").forward(request, response);
                 return;
             }
 
@@ -54,6 +50,10 @@ public class ProfileRecruteurServlet extends HttpServlet {
             exception.printStackTrace();
 
             // redirect to 500
+            request.setAttribute("title", "Home");
+            request.setAttribute("component", "index");
+            request.setAttribute("errorMessage", exception.getMessage());
+            getServletContext().getRequestDispatcher("/App.jsp").forward(request, response);
         }
     }
 

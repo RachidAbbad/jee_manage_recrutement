@@ -32,7 +32,7 @@ public class RegisterRecruService {
             Compte compte = new Compte(ville, email, mot_de_passe, telephone, verified, type_compte);
             session.save(compte);
 
-            Recruteur recruteur = new Recruteur(compte.getId(), nom, registerDescRec, registerSiteweb);
+            Recruteur recruteur = new Recruteur(compte.getId(), nom, registerDescRec, registerSiteweb, "");
             session.save(recruteur);
 
             session.getTransaction().commit();

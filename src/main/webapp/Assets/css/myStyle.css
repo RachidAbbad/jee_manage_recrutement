@@ -10,3 +10,53 @@
     background-color: #EFBB20;
     height: 100%;
 }
+
+/* Alert of success or error */
+.app-alert {
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+    border: 0;
+    border-radius: 0;
+}
+.app-alert button {
+    font-size: 52px;
+    height: 100%;
+    outline: none;
+}
+
+/* Image */
+.photo-profile-box {
+    border-radius: 100%;
+    overflow: hidden;
+    position: relative;
+    max-height: 360px;
+    margin-bottom: 20px;
+}
+.photo-profile-box .edit-layer {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    color: white;
+    font-size: 90px;
+}
+.photo-profile-box .edit-layer:hover {
+    opacity: 1;
+}
+.photo-profile-box input[type=file] {
+    display: none;
+}
+.photo-profile-box img {
+    max-width: 100%;
+    margin: 0!important;
+}

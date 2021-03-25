@@ -1,18 +1,12 @@
 package com.Controllers;
 
 import com.Services.*;
-import com.Utils.AppHibernate;
 import com.models.*;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "ProfileCandidatServlet", value = "/ProfileCandidatServlet")
 public class ProfileCandidatServlet extends HttpServlet {
@@ -25,15 +19,16 @@ public class ProfileCandidatServlet extends HttpServlet {
 
         Integer candidatId = Integer.parseInt(request.getParameter("id"));
 
-        SessionFactory factory = AppHibernate.getSessionFactory();
-        Session session = factory.getCurrentSession();
-
         try {
             // get candidat
             Candidat candidat = CandidatService.getCandidatById(candidatId);
 
             if (candidat == null) {
                 // redirect to 404
+                request.setAttribute("title", "Home");
+                request.setAttribute("component", "index");
+                request.setAttribute("errorMessage", "No candidat found");
+                getServletContext().getRequestDispatcher("/App.jsp").forward(request, response);
                 return;
             }
 
@@ -51,6 +46,10 @@ public class ProfileCandidatServlet extends HttpServlet {
             exception.printStackTrace();
 
             // redirect to 500
+            request.setAttribute("title", "Home");
+            request.setAttribute("component", "index");
+            request.setAttribute("errorMessage", exception.getMessage());
+            getServletContext().getRequestDispatcher("/App.jsp").forward(request, response);
         }
     }
 

@@ -2,7 +2,6 @@ package com.Services;
 
 import com.Utils.AppHibernate;
 import com.models.Departement;
-import com.models.Offre;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,6 +17,7 @@ public class DepartementService {
             session.beginTransaction();
             Query query = session.createQuery("from Departement");
             List<Departement> departements = query.list();
+
             session.getTransaction().commit();
             return departements;
         } catch (Exception exception) {

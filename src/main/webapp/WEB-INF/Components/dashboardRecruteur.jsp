@@ -47,7 +47,13 @@
             <!-- Information -->
             <div id="dashboard-voir-info" class="row">
                 <div class="col-md-4">
-                    <img class="img-fluid rounded-circle d-block mx-auto mb-4" src="https://via.placeholder.com/250x250" />
+                    <div class="photo-profile-box">
+                        <% if (recruteur.getLogoUrl().isEmpty() || recruteur.getLogoUrl() == null) { %>
+                        <img class="img-fluid d-block mx-auto mb-4" src="https://via.placeholder.com/250x250" />
+                        <% } else { %>
+                        <img class="img-fluid d-block mx-auto mb-4" src="<%=request.getContextPath()%>Assets/photos/<%=recruteur.getLogoUrl()%>" />
+                        <% } %>
+                    </div>
 
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
@@ -74,11 +80,22 @@
             </div>
 
             <!-- Change Information -->
-            <form id="dashboard-change-info" action="/dashboard" method="post" class="row mb-5">
+            <form id="dashboard-change-info" action="/dashboard" method="post" enctype="multipart/form-data" class="row mb-5">
                 <input type="hidden" name="type_compte" value="<%= compte.getTypeCompte() %>" />
 
                 <div class="col-md-4">
-                    <img class="img-fluid rounded-circle d-block mx-auto mb-4" src="https://via.placeholder.com/250x250" />
+                    <div class="photo-profile-box mb-3">
+                        <label for="uploadPhoto" class="edit-layer">
+                            <i class="ti-image"></i>
+                        </label>
+
+                        <input type="file" id="uploadPhoto" name="photo">
+                        <% if (recruteur.getLogoUrl().isEmpty() || recruteur.getLogoUrl() == null) { %>
+                        <img class="img-fluid d-block mx-auto mb-4" src="https://via.placeholder.com/250x250" />
+                        <% } else { %>
+                        <img class="img-fluid d-block mx-auto mb-4" src="<%=request.getContextPath()%>Assets/photos/<%=recruteur.getLogoUrl()%>" />
+                        <% } %>
+                    </div>
 
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
@@ -126,7 +143,13 @@
                     <a href="/offre-details?id=<%=offre.getId()%>">
                         <div class="d-flex m-b30">
                             <div class="job-post-company">
-                                <span><img src="images/logo/icon1.png"/></span>
+                                <span>
+                                    <% if (recruteur.getLogoUrl().isEmpty() || recruteur.getLogoUrl() == null) { %>
+                                    <img src="https://via.placeholder.com/250x250" />
+                                    <% } else { %>
+                                    <img src="<%=request.getContextPath()%>Assets/photos/<%=recruteur.getLogoUrl()%>" />
+                                    <% } %>
+                                </span>
                             </div>
                             <div class="job-post-info">
                                 <h4><%= offre.getTitre() %></h4>

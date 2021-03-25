@@ -1,5 +1,7 @@
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.models.Offre" %><%
+<%@ page import="com.models.Offre" %>
+<%
     List<Offre> offreList = (List<Offre>) request.getAttribute("listOffres");
 %>
 
@@ -70,103 +72,36 @@
         <div class="container">
             <div class="section-head d-flex head-counter clearfix">
                 <div class="mr-auto">
-                    <h2 class="m-b5">Popular Categories</h2>
+                    <h2 class="m-b5">Departements</h2>
                     <h6 class="fw3">20+ Catetories work wating for you</h6>
                 </div>
                 <div class="head-counter-bx">
-                    <h2 class="m-b5 counter">1800</h2>
-                    <h6 class="fw3">Jobs Posted</h6>
+                    <h2 class="m-b5 counter"><%=offreList.size()%></h2>
+                    <h6 class="fw3">Offre publies</h6>
                 </div>
                 <div class="head-counter-bx">
                     <h2 class="m-b5 counter">4500</h2>
-                    <h6 class="fw3">Tasks Posted</h6>
+                    <h6 class="fw3">Entreprises</h6>
                 </div>
                 <div class="head-counter-bx">
                     <h2 class="m-b5 counter">1500</h2>
-                    <h6 class="fw3">Freelancers</h6>
+                    <h6 class="fw3">Candidats</h6>
                 </div>
             </div>
             <div class="row sp20">
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="icon-bx-wraper">
-                        <div class="icon-content">
-                            <div class="icon-md text-primary m-b20"><i class="ti-location-pin"></i></div>
-                            <a href="#" class="dez-tilte">Design, Art & Multimedia</a>
-                            <p class="m-a0">198 Open Positions</p>
-                            <div class="rotate-icon"><i class="ti-location-pin"></i></div>
+                <c:forEach items="${listDepartements}" var="departement">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="icon-bx-wraper">
+                            <div class="icon-content">
+                                <div class="icon-md text-primary m-b20"><i class="${departement.getIcon()}"></i></div>
+                                <a href="#" class="dez-tilte">${departement.getNom()}</a>
+                                <p class="m-a0"></p>
+                                <div class="rotate-icon"><i class="ti-location-pin"></i></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="icon-bx-wraper">
-                        <div class="icon-content">
-                            <div class="icon-md text-primary m-b20"><i class="ti-wand"></i></div>
-                            <a href="#" class="dez-tilte">Education Training</a>
-                            <p class="m-a0">198 Open Positions</p>
-                            <div class="rotate-icon"><i class="ti-wand"></i></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="icon-bx-wraper">
-                        <div class="icon-content">
-                            <div class="icon-md text-primary m-b20"><i class="ti-wallet"></i></div>
-                            <a href="#" class="dez-tilte">Accounting / Finance</a>
-                            <p class="m-a0">198 Open Positions</p>
-                            <div class="rotate-icon"><i class="ti-wallet"></i></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="icon-bx-wraper">
-                        <div class="icon-content">
-                            <div class="icon-md text-primary m-b20"><i class="ti-cloud-up"></i></div>
-                            <a href="#" class="dez-tilte">Human Resource</a>
-                            <p class="m-a0">198 Open Positions</p>
-                            <div class="rotate-icon"><i class="ti-cloud-up"></i></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="icon-bx-wraper">
-                        <div class="icon-content">
-                            <div class="icon-md text-primary m-b20"><i class="ti-bar-chart"></i></div>
-                            <a href="#" class="dez-tilte">Telecommunications</a>
-                            <p class="m-a0">198 Open Positions</p>
-                            <div class="rotate-icon"><i class="ti-bar-chart"></i></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="icon-bx-wraper">
-                        <div class="icon-content">
-                            <div class="icon-md text-primary m-b20"><i class="ti-tablet"></i></div>
-                            <a href="#" class="dez-tilte">Restaurant / Food Service</a>
-                            <p class="m-a0">198 Open Positions</p>
-                            <div class="rotate-icon"><i class="ti-tablet"></i></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="icon-bx-wraper">
-                        <div class="icon-content">
-                            <div class="icon-md text-primary m-b20"><i class="ti-camera"></i></div>
-                            <a href="#" class="dez-tilte">Construction / Facilities</a>
-                            <p class="m-a0">198 Open Positions</p>
-                            <div class="rotate-icon"><i class="ti-camera"></i></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="icon-bx-wraper">
-                        <div class="icon-content">
-                            <div class="icon-md text-primary m-b20"><i class="ti-panel"></i></div>
-                            <a href="#" class="dez-tilte">Health</a>
-                            <p class="m-a0">198 Open Positions</p>
-                            <div class="rotate-icon"><i class="ti-panel"></i></div>
-                        </div>
-                    </div>
-                </div>
+                </c:forEach>
+
                 <div class="col-lg-12 text-center m-t30">
                     <button class="site-button radius-xl">All Categories</button>
                 </div>
@@ -179,83 +114,22 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 section-head text-center">
-                    <h2 class="m-b5">Featured Cities</h2>
+                    <h2 class="m-b5">Candidats Récents</h2>
                     <h5 class="fw4 m-b0">20+ Featured Cities Added Jobs</h5>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3 col-sm-6 col-md-6 m-b30">
-                    <div class="city-bx align-items-end  d-flex"
-                         style="background-image:url(<%=request.getContextPath()%>/WEB-INF/Assets/images/city/pic1.jpg)">
-                        <div class="city-info">
-                            <h5>Iraq</h5>
-                            <span>765 Jobs</span>
+                <c:forEach items="${listCandidats}" var="candidat">
+                    <div class="col-lg-3 col-sm-6 col-md-6 m-b30">
+                        <div class="city-bx align-items-end  d-flex"
+                             style="background-image:url(<%=request.getContextPath()%>Assets/photos/${candidat.getPhotoUrl()})">
+                            <div class="city-info">
+                                <h5>${candidat.getNomComplet()}</h5>
+                                <span>${candidat.getTitreEmploi()}</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 col-md-6 m-b30">
-                    <div class="city-bx align-items-end  d-flex"
-                         style="background-image:url(<%=request.getContextPath()%>/WEB-INF/Assets/images/city/pic2.jpg)">
-                        <div class="city-info">
-                            <h5>Argentina</h5>
-                            <span>352 Jobs</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 col-md-6 m-b30">
-                    <div class="city-bx align-items-end  d-flex"
-                         style="background-image:url(<%=request.getContextPath()%>/WEB-INF/Assets/images/city/pic3.jpg)">
-                        <div class="city-info">
-                            <h5>Indonesia</h5>
-                            <span>893 Jobs</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 col-md-6 m-b30">
-                    <div class="city-bx align-items-end  d-flex"
-                         style="background-image:url(<%=request.getContextPath()%>/WEB-INF/Assets/images/city/pic4.jpg)">
-                        <div class="city-info">
-                            <h5>Gambia</h5>
-                            <span>502 Jobs</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 col-md-6 m-b30">
-                    <div class="city-bx align-items-end  d-flex"
-                         style="background-image:url(<%=request.getContextPath()%>/WEB-INF/Assets/images/city/pic5.jpg)">
-                        <div class="city-info">
-                            <h5>India</h5>
-                            <span>765 Jobs</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 col-md-6 m-b30">
-                    <div class="city-bx align-items-end  d-flex"
-                         style="background-image:url(<%=request.getContextPath()%>/WEB-INF/Assets/images/city/pic6.jpg)">
-                        <div class="city-info">
-                            <h5>Thailand</h5>
-                            <span>352 Jobs</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 col-md-6 m-b30">
-                    <div class="city-bx align-items-end  d-flex"
-                         style="background-image:url(<%=request.getContextPath()%>/WEB-INF/Assets/images/city/pic7.jpg)">
-                        <div class="city-info">
-                            <h5>Banjul</h5>
-                            <span>893 Jobs</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 col-md-6 m-b30">
-                    <div class="city-bx align-items-end  d-flex"
-                         style="background-image:url(<%=request.getContextPath()%>/WEB-INF/Assets/images/city/pic8.jpg)">
-                        <div class="city-info">
-                            <h5>Spain</h5>
-                            <span>502 Jobs</span>
-                        </div>
-                    </div>
-                </div>
+                </c:forEach>
             </div>
         </div>
     </div>
@@ -272,78 +146,50 @@
                     <a href="#" class="site-button button-sm">Browse All Jobs <i class="fa fa-long-arrow-right"></i></a>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-9">
-                    <ul class="post-job-bx">
-                        <% if (offreList != null && offreList.size() > 0) { %>
-                        <% for (Offre offre:offreList) { %>
-                        <li>
-                            <a href="/offre-details?id=<%=offre.getId()%>">
-                                <div class="d-flex m-b30">
-                                    <div class="job-post-company">
-                                        <span><img src="images/logo/icon1.png"/></span>
-                                    </div>
-                                    <div class="job-post-info">
-                                        <h4><%= offre.getTitre() %></h4>
-                                        <ul>
-                                            <li><i class="fa fa-map-marker"></i> <%= offre.getEmplacement() %></li>
-                                            <li><i class="fa fa-bookmark-o"></i> <%= offre.getTypeContrat() %></li>
-                                            <li><i class="fa fa-clock-o"></i> Published <%= offre.getDateCreation() %></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="job-time mr-auto">
-                                        <span><%= offre.getMetier() %></span>
-                                        <span>
-                                            <% if (offre.getEtat() == 0) { %>
-                                                Closed
-                                            <% } else { %>
-                                                Opened
-                                            <% } %>
-                                        </span>
-                                    </div>
-                                    <div class="salary-bx">
-                                        <span><%= offre.getSalairePrimes() %></span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <% } %>
-                        <% } else { %>
-                        <li>No offres found</li>
-                        <% } %>
-                    </ul>
 
-                    <div class="m-t30">
+
+            <ul class="post-job-bx">
+                <% if (offreList != null && offreList.size() > 0) { %>
+                <% for (Offre offre:offreList) { %>
+                <li>
+                    <a href="/offre-details?id=<%=offre.getId()%>">
+                        <div class="d-flex m-b30">
+                            <div class="job-post-info">
+                                <h4><%= offre.getTitre() %></h4>
+                                <ul>
+                                    <li><i class="fa fa-map-marker"></i> <%= offre.getEmplacement() %></li>
+                                    <li><i class="fa fa-bookmark-o"></i> <%= offre.getTypeContrat() %></li>
+                                    <li><i class="fa fa-clock-o"></i> Published <%= offre.getDateCreation() %></li>
+                                </ul>
+                            </div>
+                        </div>
                         <div class="d-flex">
-                            <a class="site-button button-sm mr-auto" href="#"><i class="ti-arrow-left"></i> Prev</a>
-                            <a class="site-button button-sm" href="#">Next <i class="ti-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="sticky-top">
-                        <div class="candidates-are-sys m-b30">
-                            <div class="candidates-bx">
-                                <div class="testimonial-pic radius"><img src="images/testimonials/pic3.jpg" alt=""
-                                                                         width="100" height="100"></div>
-                                <div class="testimonial-text">
-                                    <p>I just got a job that I applied for via careerfy! I used the site all the time
-                                        during my job hunt.</p>
-                                </div>
-                                <div class="testimonial-detail"><strong class="testimonial-name">Richard
-                                    Anderson</strong> <span class="testimonial-position">Nevada, USA</span></div>
+                            <div class="job-time mr-auto">
+                                <span><%= offre.getMetier() %></span>
+                                <span>
+                                    <% if (offre.getEtat() == 0) { %>
+                                        Closed
+                                    <% } else { %>
+                                        Opened
+                                    <% } %>
+                                </span>
+                            </div>
+                            <div class="salary-bx">
+                                <span><%= offre.getSalairePrimes() %></span>
                             </div>
                         </div>
-                        <div class="quote-bx">
-                            <div class="quote-info">
-                                <h4>Make a Difference with Your Online Resume!</h4>
-                                <p>Your resume in minutes with JobBoard resume assistant is ready!</p>
-                                <a href="#" class="site-button">Create an Account</a>
-                            </div>
-                        </div>
-                    </div>
+                    </a>
+                </li>
+                <% } %>
+                <% } else { %>
+                <li>No offres found</li>
+                <% } %>
+            </ul>
+
+            <div class="m-t30">
+                <div class="d-flex">
+                    <a class="site-button button-sm mr-auto" href="#"><i class="ti-arrow-left"></i> Prev</a>
+                    <a class="site-button button-sm" href="#">Next <i class="ti-arrow-right"></i></a>
                 </div>
             </div>
         </div>
@@ -407,73 +253,6 @@
         </div>
     </div>
     <!-- Call To Action END -->
-    <!-- Our Latest Blog -->
-    <div class="section-full content-inner-2 overlay-white-middle"
-         style="background-image:url(<%=request.getContextPath()%>/WEB-INF/Assets/images/lines.png); background-position:bottom; background-repeat:no-repeat; background-size: 100%;">
-        <div class="container">
-            <div class="section-head text-black text-center">
-                <h2 class="m-b0">Membership Plans</h2>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy.</p>
-            </div>
-            <!-- Pricing table-1 Columns 3 with gap -->
-            <div class="section-content box-sort-in button-example m-t80">
-                <div class="pricingtable-row">
-                    <div class="row max-w1000 m-auto">
-                        <div class="col-sm-12 col-md-4 col-lg-4 p-lr0">
-                            <div class="pricingtable-wrapper style2 bg-white">
-                                <div class="pricingtable-inner">
-                                    <div class="pricingtable-price">
-                                        <h4 class="font-weight-300 m-t10 m-b0">Basic</h4>
-                                        <div class="pricingtable-bx"><span>Free</span></div>
-                                    </div>
-                                    <p>Lorem ipsum dolor sit amet adipiscing elit sed do eiusmod tempors labore et
-                                        dolore magna siad enim aliqua</p>
-                                    <div class="m-t20">
-                                        <a href="#" class="site-button radius-xl"><span
-                                                class="p-lr30">Sign Up</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-4 col-lg-4 p-lr0">
-                            <div class="pricingtable-wrapper style2 bg-primary text-white active">
-                                <div class="pricingtable-inner">
-                                    <div class="pricingtable-price">
-                                        <h4 class="font-weight-300 m-t10 m-b0">Professional</h4>
-                                        <div class="pricingtable-bx"> $ <span>29</span> / Per Installation</div>
-                                    </div>
-                                    <p>Lorem ipsum dolor sit amet adipiscing elit sed do eiusmod tempors labore et
-                                        dolore magna siad enim aliqua</p>
-                                    <div class="m-t20">
-                                        <a href="#" class="site-button white radius-xl"><span
-                                                class="p-lr30">Sign Up</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-4 col-lg-4 p-lr0">
-                            <div class="pricingtable-wrapper style2 bg-white">
-                                <div class="pricingtable-inner">
-                                    <div class="pricingtable-price">
-                                        <h4 class="font-weight-300 m-t10 m-b0">Extended</h4>
-                                        <div class="pricingtable-bx"> $ <span>29</span> / Per Installation</div>
-                                    </div>
-                                    <p>Lorem ipsum dolor sit amet adipiscing elit sed do eiusmod tempors labore et
-                                        dolore magna siad enim aliqua</p>
-                                    <div class="m-t20">
-                                        <a href="#" class="site-button radius-xl"><span
-                                                class="p-lr30">Sign Up</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Our Latest Blog -->
 </div>
 
 <!-- scroll top button -->

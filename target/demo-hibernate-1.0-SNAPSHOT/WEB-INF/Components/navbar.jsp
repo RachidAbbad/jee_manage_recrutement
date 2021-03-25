@@ -52,21 +52,20 @@
                 <div class="header-nav navbar-collapse collapse justify-content-start" id="navbarNavDropdown">
                     <ul class="nav navbar-nav">
                         <li class="active">
-                            <a href="/">Home <i class="fa fa-chevron-down"></i></a>
+                            <a href="/">Home</a>
                         </li>
                         <li>
-                            <a href="#">For Candidates <i class="fa fa-chevron-down"></i></a>
+                            <a href="#">Pour les candidats <i class="fa fa-chevron-down"></i></a>
                             <ul class="sub-menu">
-                                <li><a href="browse-job.html" class="dez-page">Browse Job</a></li>
-                                <li><a href="companies.html" class="dez-page">companies</a></li>
-                                <li><a href="job-detail.html" class="dez-page">Job Detail</a></li>
+                                <li><a href="/voir-offres" class="dez-page">Voir les offres</a></li>
+                                <li><a href="/liste-entreprises" class="dez-page">Voir les entreprises</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#">For Employers <i class="fa fa-chevron-down"></i></a>
+                            <a href="#">Pour les recruteurs <i class="fa fa-chevron-down"></i></a>
                             <ul class="sub-menu">
-                                <li><a href="browse-candidates.html" class="dez-page">Browse Candidates</a></li>
-                                <li><a href="submit-resume.html" class="dez-page">Submit Resume</a></li>
+                                <li><a href="/liste-candidats" class="dez-page">Voir les candidats</a></li>
+                                <li><a href="/ajouter-offre" class="dez-page">Ajouter un offre</a></li>
                             </ul>
                         </li>
                     </ul>

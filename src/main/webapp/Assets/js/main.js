@@ -16,6 +16,19 @@ $(document).ready(function(){
         $("#dashboard-voir-info").show();
     });
 
+    // dashboard upload image view
+    $("#uploadPhoto").change(function() {
+        if (this.files && this.files[0]) {
+            const reader = new FileReader();
+            reader.onload = imageIsLoaded;
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+
+    function imageIsLoaded(e) {
+        $(".photo-profile-box img").attr("src", e.target.result);
+    }
+
     ////////////////////////// cv inputs
 
     // form submit

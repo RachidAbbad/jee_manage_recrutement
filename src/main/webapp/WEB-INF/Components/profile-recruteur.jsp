@@ -48,7 +48,13 @@
             <div class="row">
                 <!-- Information -->
                 <div class="col-md-4">
-                    <img class="img-fluid rounded-circle d-block mx-auto mb-4" src="https://via.placeholder.com/250x250" />
+                    <div class="photo-profile-box">
+                        <% if (recruteur.getLogoUrl().isEmpty() || recruteur.getLogoUrl() == null) { %>
+                        <img class="img-fluid d-block mx-auto mb-4" src="https://via.placeholder.com/250x250" />
+                        <% } else { %>
+                        <img class="img-fluid d-block mx-auto mb-4" src="<%=request.getContextPath()%>Assets/photos/<%=recruteur.getLogoUrl()%>" />
+                        <% } %>
+                    </div>
 
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
@@ -78,7 +84,13 @@
                             <a href="/offre-details?id=<%=offre.getId()%>">
                                 <div class="d-flex m-b30">
                                     <div class="job-post-company">
-                                        <span><img src="images/logo/icon1.png"/></span>
+                                        <span>
+                                            <% if (recruteur.getLogoUrl().isEmpty() || recruteur.getLogoUrl() == null) { %>
+                                            <img src="https://via.placeholder.com/250x250" />
+                                            <% } else { %>
+                                            <img src="<%=request.getContextPath()%>Assets/photos/<%=recruteur.getLogoUrl()%>" />
+                                            <% } %>
+                                        </span>
                                     </div>
                                     <div class="job-post-info">
                                         <h4><%= offre.getTitre() %></h4>

@@ -24,6 +24,7 @@
 		<property name="current_session_context_class">thread</property>
 
         <mapping class="com.models.Compte"/>
+        <mapping class="com.models.Departement"/>
         <mapping class="com.models.Candidat"/>
         <mapping class="com.models.Recruteur"/>
         <mapping class="com.models.Offre"/>

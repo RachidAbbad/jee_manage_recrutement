@@ -1,7 +1,3 @@
-<%
-    String errorMessage = (String) request.getAttribute("errorMessage");
-%>
-
 <!-- Content -->
 <div class="page-content bg-white">
     <!-- inner page banner -->
@@ -28,15 +24,6 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <h3 class="font-weight-700 m-t0 m-b20">Login Your Account</h3>
-                </div>
-
-                <div class="col-md-12">
-                    <!-- Error Message -->
-                    <% if (errorMessage != null) { %>
-                    <div class="alert alert-danger" role="alert">
-                        ${errorMessage}
-                    </div>
-                    <%}%>
                 </div>
             </div>
 

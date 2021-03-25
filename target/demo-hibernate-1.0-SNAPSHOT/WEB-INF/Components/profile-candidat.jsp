@@ -27,7 +27,13 @@
             <div class="row">
                 <!-- Information -->
                 <div class="col-md-4">
-                    <img class="img-fluid rounded-circle d-block mx-auto mb-4" src="https://via.placeholder.com/250x250" />
+                    <div class="photo-profile-box mb-3">
+                        <% if (candidat.getPhotoUrl().isEmpty() || candidat.getPhotoUrl() == null) { %>
+                        <img class="img-fluid d-block mx-auto mb-4" src="https://via.placeholder.com/250x250" />
+                        <% } else { %>
+                        <img class="img-fluid d-block mx-auto mb-4" src="<%=request.getContextPath()%>Assets/photos/<%=candidat.getPhotoUrl()%>" />
+                        <% } %>
+                    </div>
 
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">

@@ -1,3 +1,4 @@
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!-- Content -->
 <div class="page-content bg-white">
     <!-- inner page banner -->
@@ -5,12 +6,12 @@
          style="background-image:url(<%=request.getContextPath()%>/WEB-INF/Assets/images/banner/bnr1.jpg);">
         <div class="container">
             <div class="dez-bnr-inr-entry">
-                <h1 class="text-white">Companies</h1>
+                <h1 class="text-white">Browse Recruteurs</h1>
                 <!-- Breadcrumb row -->
                 <div class="breadcrumb-row">
                     <ul class="list-inline">
                         <li><a href="#">Home</a></li>
-                        <li>Companies</li>
+                        <li>Browse Candidates</li>
                     </ul>
                 </div>
                 <!-- Breadcrumb row END -->
@@ -18,275 +19,146 @@
         </div>
     </div>
     <!-- inner page banner END -->
-    <!-- contact area -->
     <div class="content-block">
-        <!-- Find Job -->
-        <div class="section-full bg-white content-inner">
+        <div class="section-full bg-white browse-job content-inner-2">
             <div class="container">
-                <div class="site-filters clearfix center  m-b40">
-                    <ul class="filters" data-toggle="buttons">
-                        <li data-filter="" class="btn active">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>A</span></a>
-                        </li>
-                        <li data-filter="web" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>B</span></a>
-                        </li>
-                        <li data-filter="advertising" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>C</span></a>
-                        </li>
-                        <li data-filter="branding" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>D</span></a>
-                        </li>
-                        <li data-filter="design" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>E</span></a>
-                        </li>
-                        <li data-filter="photography" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>F</span></a>
-                        </li>
-                        <li data-filter="" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>G</span></a>
-                        </li>
-                        <li data-filter="web" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>H</span></a>
-                        </li>
-                        <li data-filter="advertising" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>I</span></a>
-                        </li>
-                        <li data-filter="branding" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>J</span></a>
-                        </li>
-                        <li data-filter="design" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>K</span></a>
-                        </li>
-                        <li data-filter="photography" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>L</span></a>
-                        </li>
-                        <li data-filter="" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>M</span></a>
-                        </li>
-                        <li data-filter="web" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>N</span></a>
-                        </li>
-                        <li data-filter="advertising" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>O</span></a>
-                        </li>
-                        <li data-filter="branding" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>P</span></a>
-                        </li>
-                        <li data-filter="design" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>Q</span></a>
-                        </li>
-                        <li data-filter="photography" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>R</span></a>
-                        </li>
-                        <li data-filter="" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>S</span></a>
-                        </li>
-                        <li data-filter="web" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>T</span></a>
-                        </li>
-                        <li data-filter="advertising" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>U</span></a>
-                        </li>
-                        <li data-filter="branding" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>V</span></a>
-                        </li>
-                        <li data-filter="design" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>W</span></a>
-                        </li>
-                        <li data-filter="photography" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>X</span></a>
-                        </li>
-                        <li data-filter="" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>Y</span></a>
-                        </li>
-                        <li data-filter="web" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>Z</span></a>
-                        </li>
-                    </ul>
+                <div class="row">
+                    <div class="col-xl-9 col-lg-8">
+                        <div class="m-b30">
+                            <input type="text" class="form-control" placeholder="Search freelancer services">
+                        </div>
+                        <ul class="post-job-bx">
+                            <c:forEach items="${recruteurs}" var="recruteur">
+                                <li>
+                                    <a href="/recruteur?id=${recruteur.getId()}">
+                                        <div class="d-flex m-b30">
+                                            <div class="job-post-company">
+                                                <span><img src="images/testimonials/pic1.jpg"/></span>
+                                            </div>
+                                            <div class="job-post-info">
+                                                <h4>${recruteur.getNom()}</h4>
+                                                <ul>
+                                                    <li><i class="fa fa-map-marker"></i> ${recruteur.getSiteweb()}</li>
+                                                </ul>
+                                                <p>
+                                                    ${recruteur.getDescription()}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                        <div class="pagination-bx m-t30">
+                            <ul class="pagination">
+                                <li class="previous"><a href="#"><i class="ti-arrow-left"></i> Prev</a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li class="next"><a href="#">Next <i class="ti-arrow-right"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-4">
+                        <div class="sticky-top">
+                            <div class="clearfix m-b30">
+                                <h5 class="widget-title font-weight-700 text-uppercase">Keywords</h5>
+                                <div class="">
+                                    <input type="text" class="form-control" placeholder="Search">
+                                </div>
+                            </div>
+                            <div class="clearfix m-b10">
+                                <h5 class="widget-title font-weight-700 m-t0 text-uppercase">Location</h5>
+                                <input type="text" class="form-control m-b30" placeholder="Location">
+                                <div class="input-group m-b20">
+                                    <input type="text" class="form-control" placeholder="120">
+                                    <select>
+                                        <option>Km</option>
+                                        <option>miles</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="clearfix m-b30">
+                                <h5 class="widget-title font-weight-700 text-uppercase">Job type</h5>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                        <div class="product-brand">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="check1"
+                                                       name="example1">
+                                                <label class="custom-control-label" for="check1">Freelance</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="check2"
+                                                       name="example1">
+                                                <label class="custom-control-label" for="check2">Full Time</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="check3"
+                                                       name="example1">
+                                                <label class="custom-control-label" for="check3">Internship</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="check4"
+                                                       name="example1">
+                                                <label class="custom-control-label" for="check4">Part Time</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="check5"
+                                                       name="example1">
+                                                <label class="custom-control-label" for="check5">Temporary</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                        <div class="product-brand">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="check8"
+                                                       name="example1">
+                                                <label class="custom-control-label" for="check8">Internship</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="check9"
+                                                       name="example1">
+                                                <label class="custom-control-label" for="check9">Part Time</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="check10"
+                                                       name="example1">
+                                                <label class="custom-control-label" for="check10">Temporary</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="check6"
+                                                       name="example1">
+                                                <label class="custom-control-label" for="check6">Freelance</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="check7"
+                                                       name="example1">
+                                                <label class="custom-control-label" for="check7">Full Time</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                                <h5 class="widget-title font-weight-700 text-uppercase">Category</h5>
+                                <select>
+                                    <option>Any Category</option>
+                                    <option>Automotive Jobs</option>
+                                    <option>Construction Facilities</option>
+                                    <option>Design, Art & Multimedia</option>
+                                    <option>Food Services</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <ul id="masonry" class="dez-gallery-listing gallery-grid-4 gallery mfp-gallery">
-                    <li class="web card-container col-lg-3 col-md-4 col-sm-4">
-                        <div class="dez-gallery-box">
-                            <div class="dez-media overlay-black-light">
-                                <a href="javascript:void(0);"> <img src="images/gallery/pic1.jpg" alt=""> </a>
-                                <div class="overlay-icon overlay-logo">
-                                    <img src="images/logo/logo/logo1.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="advertising card-container col-lg-3 col-md-4 col-sm-4">
-                        <div class="dez-gallery-box">
-                            <div class="dez-media overlay-black-light">
-                                <a href="javascript:void(0);"> <img src="images/gallery/pic2.jpg" alt=""> </a>
-                                <div class="overlay-icon overlay-logo">
-                                    <img src="images/logo/logo/logo2.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="branding card-container col-lg-3 col-md-4 col-sm-4">
-                        <div class="dez-gallery-box">
-                            <div class="dez-media overlay-black-light">
-                                <a href="javascript:void(0);"> <img src="images/gallery/pic3.jpg" alt=""> </a>
-                                <div class="overlay-icon overlay-logo">
-                                    <img src="images/logo/logo/logo3.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="design card-container col-lg-3 col-md-4 col-sm-4">
-                        <div class="dez-gallery-box">
-                            <div class="dez-media overlay-black-light">
-                                <a href="javascript:void(0);"> <img src="images/gallery/pic4.jpg" alt=""> </a>
-                                <div class="overlay-icon overlay-logo">
-                                    <img src="images/logo/logo/logo4.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="photography card-container col-lg-3 col-md-4 col-sm-4">
-                        <div class="dez-gallery-box">
-                            <div class="dez-media overlay-black-light">
-                                <a href="javascript:void(0);"> <img src="images/gallery/pic5.jpg" alt=""> </a>
-                                <div class="overlay-icon overlay-logo">
-                                    <img src="images/logo/logo/logo1.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="web card-container col-lg-3 col-md-4 col-sm-4">
-                        <div class="dez-gallery-box">
-                            <div class="dez-media overlay-black-light">
-                                <a href="javascript:void(0);"> <img src="images/gallery/pic6.jpg" alt=""> </a>
-                                <div class="overlay-icon overlay-logo">
-                                    <img src="images/logo/logo/logo2.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="advertising card-container col-lg-3 col-md-4 col-sm-4">
-                        <div class="dez-gallery-box">
-                            <div class="dez-media overlay-black-light">
-                                <a href="javascript:void(0);"> <img src="images/gallery/pic7.jpg" alt=""> </a>
-                                <div class="overlay-icon overlay-logo">
-                                    <img src="images/logo/logo/logo3.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="web card-container col-lg-3 col-md-4 col-sm-4">
-                        <div class="dez-gallery-box">
-                            <div class="dez-media overlay-black-light">
-                                <a href="javascript:void(0);"> <img src="images/gallery/pic8.jpg" alt=""> </a>
-                                <div class="overlay-icon overlay-logo">
-                                    <img src="images/logo/logo/logo1.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="branding card-container col-lg-3 col-md-4 col-sm-4">
-                        <div class="dez-gallery-box">
-                            <div class="dez-media overlay-black-light">
-                                <a href="javascript:void(0);"> <img src="images/gallery/pic9.jpg" alt=""> </a>
-                                <div class="overlay-icon overlay-logo">
-                                    <img src="images/logo/logo/logo2.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="design card-container col-lg-3 col-md-4 col-sm-4">
-                        <div class="dez-gallery-box">
-                            <div class="dez-media overlay-black-light">
-                                <a href="javascript:void(0);"> <img src="images/gallery/pic1.jpg" alt=""> </a>
-                                <div class="overlay-icon overlay-logo">
-                                    <img src="images/logo/logo/logo3.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="web card-container col-lg-3 col-md-4 col-sm-4">
-                        <div class="dez-gallery-box">
-                            <div class="dez-media overlay-black-light">
-                                <a href="javascript:void(0);"> <img src="images/gallery/pic2.jpg" alt=""> </a>
-                                <div class="overlay-icon overlay-logo">
-                                    <img src="images/logo/logo/logo4.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="photography card-container col-lg-3 col-md-4 col-sm-4">
-                        <div class="dez-gallery-box">
-                            <div class="dez-media overlay-black-light">
-                                <a href="javascript:void(0);"> <img src="images/gallery/pic3.jpg" alt=""> </a>
-                                <div class="overlay-icon overlay-logo">
-                                    <img src="images/logo/logo/logo1.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
             </div>
         </div>
-        <!-- Find Job END -->
     </div>
 </div>
 <!-- Content END-->
 
 <button class="scroltop fa fa-chevron-up"></button>
 </div>
-
-<script type="text/javascript">
-
-    $("#exp-slider-range").slider({
-        range: true,
-        min: 0,
-        max: 10,
-        //values: [0, 10],
-        slide: function (event, ui) {
-            var min = ui.values[0],
-                max = ui.values[1];
-            $('#' + this.id).prev().val(min + " year - " + max + " year");
-        }
-    });
-
-    $("#salary-slider-range").slider({
-        range: true,
-        min: 10,
-        max: 100,
-        //values: [10, 1000],
-        slide: function (event, ui) {
-            var min = ui.values[0],
-                max = ui.values[1];
-            $('#' + this.id).prev().val(min + "K - " + max + "K");
-        }
-    });
-
-</script>
