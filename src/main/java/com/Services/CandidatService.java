@@ -179,6 +179,48 @@ public class CandidatService {
         }
     }
 
+    public static Compte getCandidatByEmail(String email) throws Exception {
+        SessionFactory factory = AppHibernate.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.beginTransaction();
+
+            Criteria criteria = session.createCriteria(Compte.class)
+                    .add(Restrictions.eq("email", email));
+            Compte acc = (Compte) criteria.uniqueResult();
+            session.getTransaction().commit();
+
+            return acc;
+        } catch (Exception exception) {
+            session.getTransaction().rollback();
+            throw new Exception(exception);
+        } finally {
+            factory.close();
+        }
+    }
+
+    public static Candidat getCandidatByIdCompte(int idCompte) throws Exception {
+        SessionFactory factory = AppHibernate.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.beginTransaction();
+
+            Criteria criteria = session.createCriteria(Candidat.class)
+                    .add(Restrictions.eq("idCompte", idCompte));
+            Candidat candidat = (Candidat) criteria.uniqueResult();
+            session.getTransaction().commit();
+
+            return candidat;
+        } catch (Exception exception) {
+            session.getTransaction().rollback();
+            throw new Exception(exception);
+        } finally {
+            factory.close();
+        }
+    }
+
     public static void updateCandidat(int compteId, int candidatId, String password, String ville, String numTel, String civilite, String nomComplet, String titreEmploi, String photoUrl) throws Exception {
         SessionFactory factory = AppHibernate.getSessionFactory();
         Session session = factory.getCurrentSession();

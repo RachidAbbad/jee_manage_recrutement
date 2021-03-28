@@ -157,7 +157,8 @@
         <url-pattern>/voir-offres</url-pattern>
     </servlet-mapping>
 
-    <!-- FILTERS -->
+        <!-- FILTERS -->
+    <!--
     <filter>
         <filter-name>UserFilter</filter-name>
         <filter-class>com.Filters.UserFilter</filter-class>
@@ -178,7 +179,7 @@
         <url-pattern>/ajouter-offre</url-pattern>
         <url-pattern>/ajouter-cv</url-pattern>
     </filter-mapping>
-
+-->
     <!-- ERRORS -->
     <error-page>
         <error-code>404</error-code>

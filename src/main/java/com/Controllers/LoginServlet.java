@@ -1,6 +1,7 @@
 package com.Controllers;
 
 import com.Services.LoginService;
+import com.Utils.Md5;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -21,7 +22,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // get login information
         String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        String password = Md5.md5crypt(request.getParameter("password"));
 
         try {
             if (LoginService.Login(email, password)) {

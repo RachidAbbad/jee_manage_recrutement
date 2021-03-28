@@ -1605,7 +1605,7 @@ dl dd {
 }
 
 .bg-primary {
-    background-color: ;
+    background-color: deepskyblue;
 }
 
 .bg-white {
@@ -4084,7 +4084,7 @@ blockquote:before {
     }
 
     .header-nav .nav > li > a {
-        padding: ;
+
     }
 
     .header-nav .nav i {
@@ -6561,7 +6561,7 @@ ol.comment-list li.comment .comment-respond .comment-form p {
     border: 1px solid #e1e6eb;
     text-align: center;
     border-radius: 4px 0 0 4px;
-    -webkit- border-radius: 4px 0 0 4px;
+    -webkit-border-radius: 4px 0 0 4px;
 }
 
 .comments-area p.comment-form-author:before {
@@ -8565,7 +8565,7 @@ a,
 .site-button-link.yellow:hover,
 .site-button-link.yellow:active,
 .site-button-link.yellow:focus {
-    color: # #d4af19;
+    color: #d4af19;
 }
 
 /* purple */
@@ -11797,7 +11797,6 @@ ul[class*="list-"] {
 .overlay-primary-middle:after,
 .overlay-primary-dark:after,
 .overlay-primary:after {
-    background: ;
 }
 
 .overlay-black-light:after {

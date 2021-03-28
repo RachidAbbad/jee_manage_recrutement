@@ -11,6 +11,11 @@
     height: 100%;
 }
 
+.img_profile{
+    border-radius: 10px;
+    border: 2px solid #EFBB20;
+}
+
 /* Alert of success or error */
 .app-alert {
     margin: 0;
@@ -27,8 +32,7 @@
 
 /* Image */
 .photo-profile-box {
-    border-radius: 100%;
-    overflow: hidden;
+    border-radius: 10px;
     position: relative;
     max-height: 360px;
     margin-bottom: 20px;

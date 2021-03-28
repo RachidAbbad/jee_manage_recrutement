@@ -1,5 +1,6 @@
 package com.Controllers;
 
+import com.Services.Mail;
 import com.Services.RegisterCandidatService;
 import com.Services.RegisterRecruService;
 
@@ -43,6 +44,7 @@ public class RegisterServlet extends HttpServlet {
             request.setAttribute("title", "Home");
             request.setAttribute("component", "register");
             request.setAttribute("successMessage", "Register has been done successfully. Please verify your email.");
+
             getServletContext().getRequestDispatcher("/App.jsp").forward(request, response);
         } catch (Exception exception) {
             exception.printStackTrace();
