@@ -1,8 +1,11 @@
 package com.Controllers;
 
-import com.Services.CandidatService;
-import com.Services.PostulationService;
+import com.Services.*;
 import com.Utils.AppContext;
+import com.models.Candidat;
+import com.models.Offre;
+import com.models.Recrutement;
+import com.models.Recruteur;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -22,19 +25,18 @@ public class PostulationServlet extends HttpServlet {
         int candidatId = CandidatService.isCandidat(compteId);
         String body = request.getParameter("body");
 
-        if (compteId == -1 || candidatId == -1 || offreId == null) {
+        if (compteId == -1 || candidatId == -1 || request.getParameter("offreId") == null) {
             request.setAttribute("errorMessage", "No permission");
             response.sendRedirect(request.getHeader("referer"));
             return;
         }
 
         try {
-            // postulation
-            PostulationService.ajouterPostulation(candidatId, offreId, body);
 
-            request.setAttribute("successMessage", "Postulation added successfully");
-            response.sendRedirect(request.getHeader("referer"));
-        } catch (Exception exception) {
+            PostulationService.ajouterPostulation(candidatId, offreId, body);
+                request.setAttribute("successMessage", "Postulation added successfully");
+                response.sendRedirect(request.getHeader("referer"));
+            } catch (Exception exception) {
             exception.printStackTrace();
             request.setAttribute("errorMessage", exception.getMessage());
             response.sendRedirect(request.getHeader("referer"));

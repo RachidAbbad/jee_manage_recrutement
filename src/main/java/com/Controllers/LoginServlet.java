@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
                 // information wrong
                 request.setAttribute("title", "Home");
                 request.setAttribute("component", "login");
-                request.setAttribute("errorMessage", "Information wrong");
+                request.setAttribute("errorMessage", "Invalid username and / or password.");
                 getServletContext().getRequestDispatcher("/App.jsp").forward(request, response);
             }
         } catch (Exception exception) {

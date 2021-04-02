@@ -1,8 +1,8 @@
 package com.Controllers;
 
-import com.Services.Mail;
 import com.Services.RegisterCandidatService;
 import com.Services.RegisterRecruService;
+import com.Utils.Md5;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -22,7 +22,7 @@ public class RegisterServlet extends HttpServlet {
         String telephone = request.getParameter("register_numtel");
         String ville = request.getParameter("register_ville");
         String email = request.getParameter("register_email");
-        String mot_de_passe = request.getParameter("register_password");
+        String mot_de_passe = Md5.md5crypt(request.getParameter("register_password"));
         String type_compte = request.getParameter("type_compte");
 
         try {
@@ -44,7 +44,6 @@ public class RegisterServlet extends HttpServlet {
             request.setAttribute("title", "Home");
             request.setAttribute("component", "register");
             request.setAttribute("successMessage", "Register has been done successfully. Please verify your email.");
-
             getServletContext().getRequestDispatcher("/App.jsp").forward(request, response);
         } catch (Exception exception) {
             exception.printStackTrace();

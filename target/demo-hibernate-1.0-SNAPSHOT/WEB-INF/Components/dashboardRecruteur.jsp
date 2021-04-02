@@ -144,11 +144,7 @@
                         <div class="d-flex m-b30">
                             <div class="job-post-company">
                                 <span>
-                                    <% if (recruteur.getLogoUrl().isEmpty() || recruteur.getLogoUrl() == null) { %>
-                                    <img src="https://via.placeholder.com/250x250" />
-                                    <% } else { %>
-                                    <img src="<%=request.getContextPath()%>Assets/photos/<%=recruteur.getLogoUrl()%>" />
-                                    <% } %>
+                                    <img src="../../Assets/images/logo/icon1.png" />
                                 </span>
                             </div>
                             <div class="job-post-info">
@@ -156,7 +152,7 @@
                                 <ul>
                                     <li><i class="fa fa-map-marker"></i> <%= offre.getEmplacement() %></li>
                                     <li><i class="fa fa-bookmark-o"></i> <%= offre.getTypeContrat() %></li>
-                                    <li><i class="fa fa-clock-o"></i> Published <%= offre.getDateCreation() %></li>
+                                    <li><i class="fa fa-clock-o"></i> Published <%= offre.getDateCreation().toString().subSequence(0,10) %></li>
                                 </ul>
                             </div>
                         </div>
@@ -172,7 +168,7 @@
                                                     </span>
                             </div>
                             <div class="salary-bx">
-                                <span><%= offre.getSalairePrimes() %></span>
+                                <span><%= offre.getSalairePrimes() %> DH</span>
                             </div>
                         </div>
                     </a>

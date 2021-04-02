@@ -80,15 +80,15 @@
                                     <option value="agadir">Agadir</option>
                                     <option value="casablanca">Casablanca</option>
                                     <option value="el-jadida">El Jadida</option>
-                                    <option value="fes">Fès</option>
-                                    <option value="kenitra">Kénitra</option>
+                                    <option value="fes">Fes</option>
+                                    <option value="kenitra">Kenitra</option>
                                     <option value="marrakech">Marrakech</option>
-                                    <option value="meknes">Meknès</option>
+                                    <option value="meknes">Meknes</option>
                                     <option value="mohammedia">Mohammedia</option>
                                     <option value="rabat">Rabat</option>
-                                    <option value="sale">Salé</option>
+                                    <option value="sale">Sale</option>
                                     <option value="tanger">Tanger</option>
-                                    <option value="temara">Témara</option>
+                                    <option value="temara">Temara</option>
                                 </select>
                             </div>
                             <div class="form-group">

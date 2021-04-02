@@ -18,14 +18,4 @@ public class Md5 {
             return "";
         }
     }
-    public static String md5decrypt(String inStr){
-
-        char[] a = inStr.toCharArray();
-        for (int i = 0; i < a.length; i++){
-            a[i] = (char) (a[i] ^ 't');
-        }
-        String s = new String(a);
-        return s;
-
-    }
 }

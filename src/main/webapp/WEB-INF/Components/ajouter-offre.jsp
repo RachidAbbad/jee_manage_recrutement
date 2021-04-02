@@ -46,17 +46,32 @@
             <div class="form-group">
                 <label>Emplacement</label>
                 <select name="offre_emplacement">
-                    <option>New York</option>
-                    <option>London</option>
-                    <option>Los Angeles</option>
+                    <option value="">Ville</option>
+                    <option value="agadir">Agadir</option>
+                    <option value="casablanca">Casablanca</option>
+                    <option value="el-jadida">El Jadida</option>
+                    <option value="fes">Fes</option>
+                    <option value="kenitra">Kenitra</option>
+                    <option value="marrakech">Marrakech</option>
+                    <option value="meknes">Meknes</option>
+                    <option value="mohammedia">Mohammedia</option>
+                    <option value="rabat">Rabat</option>
+                    <option value="sale">Sale</option>
+                    <option value="tanger">Tanger</option>
+                    <option value="temara">Temara</option>
                 </select>
             </div>
             <div class="form-group">
                 <label>Type de contrat</label>
                 <select name="offre_type_contrat">
-                    <option>New York</option>
-                    <option>London</option>
-                    <option>Los Angeles</option>
+                    <option>CDI</option>
+                    <option>CDD</option>
+                    <option>CTT</option>
+                    <option>CUI</option>
+                    <option>CAE</option>
+                    <option>CIE</option>
+                    <option>Contrat d’apprentissage</option>
+                    <option>Contrat de professionnalisation</option>
                 </select>
             </div>
             <div class="form-group">

@@ -30,7 +30,16 @@ public class AjouterCvServlet extends HttpServlet {
             if (cv != null) {
                 if (request.getParameter("delete") != null) {
                     // delete cv
-                    CvService.deleteCvById(cv.getId());
+                    if(CvService.deleteCvById(cv.getId())){
+                        request.setAttribute("successMessage", "Your CV is deleted successfully");
+                    }
+                    else{
+                        request.setAttribute("errorMessage", "Error while deleting your CV");
+                    }
+                    request.setAttribute("title", "Dashboard");
+                    request.setAttribute("component", "submit-resume");
+                    getServletContext().getRequestDispatcher("/dashboard").forward(request, response);
+                    return;
                 } else {
                     // get formations
                     List<Formation> formations = CvService.getFormationsByCvId(cv.getId());
@@ -82,17 +91,20 @@ public class AjouterCvServlet extends HttpServlet {
         try {
             if (CandidatService.hasCv(candidatId) != null) {
                 CandidatService.updateCv(candidatId, description, formationsInput, experiencesInput, projetsInput, competencesInput);
-                return;
+                request.setAttribute("cvSuccess","CV is created successfully");
             } else {
-                CandidatService.ajouterCv(candidatId, description, formationsInput, experiencesInput, projetsInput, competencesInput);
-                return;
-                // request.setAttribute("successMessage", "CV is created successfully");
-                // getServletContext().getRequestDispatcher("/dashboard").forward(request, response);
+                if(CandidatService.ajouterCv(candidatId, description, formationsInput, experiencesInput, projetsInput, competencesInput)){
+                    request.setAttribute("errorMessage", "Your Empty Cv has been saved, Please fill it later");
+
+                }
+                else{
+                    request.setAttribute("successMessage", "CV is created successfully");
+                }
             }
+
         } catch (Exception exception) {
             exception.printStackTrace();
-            // request.setAttribute("errorMessage", exception.getMessage());
-            // getServletContext().getRequestDispatcher("/ajouter-cv").forward(request, response);
         }
+        response.sendRedirect("/dashboard");
     }
 }

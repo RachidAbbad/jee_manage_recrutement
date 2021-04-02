@@ -13,6 +13,18 @@
 
     String departement = "departement";
 
+
+    // check if user logged in
+    String userEmail = null;
+    Cookie[] cookies = request.getCookies();
+    for (int i = 0; i < cookies.length; i++) {
+        if (cookies[i].getName().equals("user")) {
+            userEmail = cookies[i].getValue();
+            break;
+        }
+    }
+
+
 %>
 
 <!-- Content -->
@@ -113,7 +125,12 @@
                             <form action="/postulation" method="post">
                                 <input type="hidden" value="<%=offre.getId()%>" name="offreId">
                                 <textarea class="form-control mb-3" name="body" placeholder="Body"></textarea>
-                                <button type="submit" class="site-button">Apply This Job</button>
+                                <% if (userEmail == null) { %>
+                                    <button disabled="true" type="submit" class="site-button">Login or Sign Up to Apply</button>
+                                <%}else{%>
+                                    <button type="submit" class="site-button">Apply This Job</button>
+                                <%}%>
+
                             </form>
 
                         </div>
@@ -123,7 +140,11 @@
         </div>
         <!-- Job Detail -->
 
-
+        <% if (userEmail == null) {%>
+            <div hidden="true" class="section-full content-inner-1">
+        <%}else{%>
+            <div class="section-full content-inner-1">
+        <%}%>
         <!-- Postulations -->
         <div class="section-full content-inner-1">
             <div class="container">

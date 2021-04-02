@@ -38,7 +38,9 @@ public class CandidatService {
         }
     }
 
-    public static void ajouterCv(int candidatId, String description, String formationsInput, String experiencesInput, String projetsInput, String competencesInput) throws Exception {
+    public static boolean ajouterCv(int candidatId, String description, String formationsInput, String experiencesInput, String projetsInput, String competencesInput) throws Exception {
+        String msg = null;
+        int count=0;
         SessionFactory factory = AppHibernate.getSessionFactory();
         Session session = factory.getCurrentSession();
         Gson gson = new Gson();
@@ -54,35 +56,53 @@ public class CandidatService {
             Properties[] formations = gson.fromJson(formationsInput, Properties[].class);
 
             for (Properties f:formations) {
-                Formation formation = new Formation(f.get("etablissement").toString(), f.get("diplome").toString(), f.get("startDate").toString(), f.get("endDate").toString(), cv.getId());
-                session.save(formation);
+                if(f.get("etablissement").toString().length()!=0 && f.get("diplome").toString().length()!=0 && f.get("startDate").toString().length()!=0 && f.get("endDate").toString().length()!=0 ){
+                    Formation formation = new Formation(f.get("etablissement").toString(), f.get("diplome").toString(), f.get("startDate").toString(), f.get("endDate").toString(), cv.getId());
+                    session.save(formation);
+                }else{
+                    count++;
+                }
             }
 
             // create experiences
             Properties[] experiences = gson.fromJson(experiencesInput, Properties[].class);
 
             for (Properties e:experiences) {
-                Experience experience = new Experience(e.get("entreprise").toString(), e.get("sujet").toString(), e.get("startDate").toString(), e.get("endDate").toString(), cv.getId());
-                session.save(experience);
+                if(e.get("entreprise").toString().length()!=0 && e.get("sujet").toString().length()!=0 && e.get("startDate").toString().length()!=0 && e.get("endDate").toString().length()!=0 ){
+                    Experience experience = new Experience(e.get("entreprise").toString(), e.get("sujet").toString(), e.get("startDate").toString(), e.get("endDate").toString(), cv.getId());
+                    session.save(experience);
+                }else{
+                    count++;
+                }
             }
 
             // create projets
             Properties[] projets = gson.fromJson(projetsInput, Properties[].class);
 
             for (Properties p:projets) {
-                Projet projet = new Projet(p.get("titre").toString(), p.get("type").toString(), cv.getId());
-                session.save(projet);
+                if(p.get("titre").toString().length()!=0 && p.get("type").toString().length()!=0){
+                    Projet projet = new Projet(p.get("titre").toString(), p.get("type").toString(), cv.getId());
+                    session.save(projet);
+                }else{
+                    count++;
+                }
             }
 
             // create competences
             Properties[] competences = gson.fromJson(competencesInput, Properties[].class);
 
             for (Properties c:competences) {
-                Competence competence = new Competence(c.get("nom").toString(), c.get("niveau").toString(), cv.getId());
-                session.save(competence);
+                if(c.get("nom").toString().length()!=0 && c.get("niveau").toString().length()!=0){
+                    Competence competence = new Competence(c.get("nom").toString(), c.get("niveau").toString(), cv.getId());
+                    session.save(competence);
+                }else{
+                    count++;
+                }
             }
-
             session.getTransaction().commit();
+            if (count == 4)
+                return false;
+            return true;
         } catch (Exception exception) {
             session.getTransaction().rollback();
             throw new Exception(exception);
@@ -121,32 +141,40 @@ public class CandidatService {
             Properties[] formations = gson.fromJson(formationsInput, Properties[].class);
 
             for (Properties f:formations) {
-                Formation formation = new Formation(f.get("etablissement").toString(), f.get("diplome").toString(), f.get("startDate").toString(), f.get("endDate").toString(), cv.getId());
-                session.save(formation);
+                if(f.get("etablissement").toString().length()!=0 && f.get("diplome").toString().length()!=0 && f.get("startDate").toString().length()!=0 && f.get("endDate").toString().length()!=0 ){
+                    Formation formation = new Formation(f.get("etablissement").toString(), f.get("diplome").toString(), f.get("startDate").toString(), f.get("endDate").toString(), cv.getId());
+                    session.save(formation);
+                }
             }
 
             // create experiences
             Properties[] experiences = gson.fromJson(experiencesInput, Properties[].class);
 
             for (Properties e:experiences) {
-                Experience experience = new Experience(e.get("entreprise").toString(), e.get("sujet").toString(), e.get("startDate").toString(), e.get("endDate").toString(), cv.getId());
-                session.save(experience);
+                if(e.get("entreprise").toString().length()!=0 && e.get("sujet").toString().length()!=0 && e.get("startDate").toString().length()!=0 && e.get("endDate").toString().length()!=0 ){
+                    Experience experience = new Experience(e.get("entreprise").toString(), e.get("sujet").toString(), e.get("startDate").toString(), e.get("endDate").toString(), cv.getId());
+                    session.save(experience);
+                }
             }
 
             // create projets
             Properties[] projets = gson.fromJson(projetsInput, Properties[].class);
 
             for (Properties p:projets) {
-                Projet projet = new Projet(p.get("titre").toString(), p.get("type").toString(), cv.getId());
-                session.save(projet);
+                if(p.get("titre").toString().length()!=0 && p.get("type").toString().length()!=0){
+                    Projet projet = new Projet(p.get("titre").toString(), p.get("type").toString(), cv.getId());
+                    session.save(projet);
+                }
             }
 
             // create competences
             Properties[] competences = gson.fromJson(competencesInput, Properties[].class);
 
             for (Properties c:competences) {
-                Competence competence = new Competence(c.get("nom").toString(), c.get("niveau").toString(), cv.getId());
-                session.save(competence);
+                if(c.get("nom").toString().length()!=0 && c.get("niveau").toString().length()!=0){
+                    Competence competence = new Competence(c.get("nom").toString(), c.get("niveau").toString(), cv.getId());
+                    session.save(competence);
+                }
             }
 
             session.getTransaction().commit();

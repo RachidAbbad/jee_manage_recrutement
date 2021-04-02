@@ -1,8 +1,10 @@
 package com.Services;
 
 import com.Utils.AppHibernate;
+import com.models.Candidat;
 import com.models.Offre;
 import com.models.Postulation;
+import com.models.Recruteur;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -30,10 +32,27 @@ public class PostulationService {
                 throw new Exception("Offre is closed");
             }
 
+            Candidat c = CandidatService.getCandidatById(candidatId);
+            Offre o = OffreService.getOffreById(offreId);
+            Recruteur r = RecruteurService.getRecruteurById(o.getIdRecruteur());
+
+            System.out.printf(CompteService.getCompteById(r.getId()).getEmail());
+            System.out.printf(CompteService.getCompteById(c.getId()).getEmail());
+
+            //Confirm Applying
+            String msgCand = Mail.msgApplyJob(c.getNomComplet(),"",o.getTitre());
+            String msgRec = Mail.MsgApplyJobMsgToRecu(c.getNomComplet(),"",o.getTitre(),r.getNom(),"");
+            Mail.send(CompteService.getCompteById(r.getId()).getEmail(),"[JobBoard] "+c.getNomComplet()+" has just applied to your job offer",msgRec);
+            Mail.send(CompteService.getCompteById(c.getIdCompte()).getEmail(),"[JobBoard] You just applied to job offer : "+o.getTitre(),msgCand);
+
+
+
             Postulation postulation = new Postulation(candidatId, offreId, new Date(), body);
             session.save(postulation);
 
+
             session.getTransaction().commit();
+
         } catch (Exception exception) {
             session.getTransaction().rollback();
             throw new Exception(exception);

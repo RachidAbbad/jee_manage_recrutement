@@ -104,7 +104,7 @@ public class CvService {
         }
     }
 
-    public static void deleteCvById(int cvId) throws Exception {
+    public static boolean deleteCvById(int cvId) throws Exception {
         SessionFactory factory = AppHibernate.getSessionFactory();
         Session session = factory.getCurrentSession();
 
@@ -129,6 +129,7 @@ public class CvService {
             throw new Exception(exception);
         } finally {
             factory.close();
+            return true;
         }
     }
 }

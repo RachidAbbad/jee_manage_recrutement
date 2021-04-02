@@ -50,12 +50,12 @@
                                             class="fa fa-unlock-alt"></i> Forgot Password</a>
                                 </div>
                             </form>
-                            <form id="forgot-password" action="/forgot-password" method="post" class="tab-pane fade  col-12 p-a0">
+                            <form id="forgot-password" class="tab-pane fade  col-12 p-a0">
                                 <h4 class="font-weight-700">FORGET PASSWORD ?</h4>
                                 <p class="font-weight-600">We will send you an email to reset your password. </p>
                                 <div class="form-group">
                                     <label class="font-weight-700">E-MAIL *</label>
-                                    <input name="email" required="" class="form-control" placeholder="Your Email Id"
+                                    <input name="dzName" required="" class="form-control" placeholder="Your Email Id"
                                            type="email">
                                 </div>
                                 <div class="text-left">

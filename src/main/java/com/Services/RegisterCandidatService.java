@@ -1,7 +1,6 @@
 package com.Services;
 
 import com.Utils.AppHibernate;
-import com.Utils.Md5;
 import com.models.Candidat;
 import com.models.Compte;
 import org.hibernate.Criteria;
@@ -24,7 +23,7 @@ public class RegisterCandidatService {
                 throw new Exception("Email is already used");
 
             // save
-            Compte compte = new Compte(ville, email, Md5.md5crypt(mot_de_passe), telephone, verified, type_compte);
+            Compte compte = new Compte(ville, email, mot_de_passe, telephone, verified, type_compte);
             session.save(compte);
 
             Candidat candidat = new Candidat(compte.getId(), nomcomplet, titreemploi, photoUrl, civilite);
@@ -34,7 +33,6 @@ public class RegisterCandidatService {
 
             String msg = Mail.msgWelcome(nomcomplet,"");
             Mail.send(email,"[JobBoard] : Welcome to joining us",msg);
-
         } catch (Exception exception) {
             session.getTransaction().rollback();
             throw new Exception(exception);

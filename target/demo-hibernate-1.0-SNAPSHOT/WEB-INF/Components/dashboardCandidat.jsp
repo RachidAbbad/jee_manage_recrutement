@@ -47,7 +47,7 @@
             <div id="dashboard-voir-info" class="row">
                 <div class="col-md-4">
 
-                    <div class="img_profile mb-3">
+                    <div class="photo-profile-box mb-3">
                         <% if (candidat.getPhotoUrl().isEmpty() || candidat.getPhotoUrl() == null) { %>
                         <img class="img-fluid d-block mx-auto mb-4" src="https://via.placeholder.com/250x250" />
                         <% } else { %>
