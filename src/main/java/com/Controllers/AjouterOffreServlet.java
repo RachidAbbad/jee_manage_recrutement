@@ -17,7 +17,6 @@ public class AjouterOffreServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             List<Departement> departements = DepartementService.getListDepartement();
-            request.setAttribute("departements", departements);
             request.setAttribute("title", "Ajouter offre");
             request.setAttribute("component", "ajouter-offre");
             request.setAttribute("listDepartements", departements);

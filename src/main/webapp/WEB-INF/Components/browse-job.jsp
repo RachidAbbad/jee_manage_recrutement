@@ -38,7 +38,7 @@
                                         <a href="/offre-details?id=<%=offre.getId()%>">
                                             <div class="d-flex m-b30">
                                                 <div class="job-post-company">
-                                                    <span><img src="images/logo/icon1.png"/></span>
+                                                    <span><img src="../../Assets/images/logo/icon1.png"/></span>
                                                 </div>
                                                 <div class="job-post-info">
                                                     <h4><%= offre.getTitre() %></h4>

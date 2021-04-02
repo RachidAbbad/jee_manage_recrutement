@@ -40,6 +40,38 @@ public class PostulationServlet extends HttpServlet {
             exception.printStackTrace();
             request.setAttribute("errorMessage", exception.getMessage());
             response.sendRedirect(request.getHeader("referer"));
+            return;
+        }
+        Candidat c = null;
+        try {
+            c = CandidatService.getCandidatById(candidatId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Offre o = null;
+        try {
+            o = OffreService.getOffreById(offreId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Recruteur r = null;
+        try {
+            r = RecruteurService.getRecruteurById(o.getIdRecruteur());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //Confirm Applying
+        String msgCand = Mail.msgApplyJob(c.getNomComplet(),"",o.getTitre());
+        String msgRec = Mail.MsgApplyJobMsgToRecu(c.getNomComplet(),"",o.getTitre(),r.getNom(),"");
+        try {
+            Mail.send(CompteService.getCompteById(r.getIdCompte()).getEmail(),"[JobBoard] "+c.getNomComplet()+" has just applied to your job offer",msgRec);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            Mail.send(CompteService.getCompteById(c.getIdCompte()).getEmail(),"[JobBoard] You just applied to job offer : "+o.getTitre(),msgCand);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

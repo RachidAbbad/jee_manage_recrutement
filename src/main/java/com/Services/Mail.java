@@ -250,10 +250,10 @@ public class Mail {
                 "                                </tr>\n" +
                 "                                <tr>\n" +
                 "                                    <td style=\"padding:0 35px;\">\n" +
-                "                                        <h1 style=\"color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;\">Thank you for creating a JobBoard account</h1>\n" +
+                "                                        <h1 style=\"color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;\">Hi Mr/Mme."+nom+" "+prenom+"</h1>\n" +
                 "                                        <span\n" +
                 "                                            style=\"display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;\"></span>\n" +
-                "                                        <p style=\"color:#455056; font-size:15px;line-height:24px; margin:0;\">Hi Mr/Mme."+nom+" "+prenom+",<br>Your application for "+jobTitle+" has been confirmed, we wish good luck</p>\n" +
+                "                                        <p style=\"color:#455056; font-size:15px;line-height:24px; margin:0;\">Your application for "+jobTitle+" has been confirmed, we wish good luck</p>\n" +
                 "                                        <a href=\"http://localhost:8080/login\"\n" +
                 "                                            style=\"background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;\">Connextion</a>\n" +
                 "                                    </td>\n" +
@@ -329,10 +329,10 @@ public class Mail {
                     "                                </tr>\n" +
                     "                                <tr>\n" +
                     "                                    <td style=\"padding:0 35px;\">\n" +
-                    "                                        <h1 style=\"color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;\">Thank you for creating a JobBoard account</h1>\n" +
+                    "                                        <h1 style=\"color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;\">Hi Mr/Mme."+nomRec+" "+prenomRec+"</h1>\n" +
                     "                                        <span\n" +
                     "                                            style=\"display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;\"></span>\n" +
-                    "                                        <p style=\"color:#455056; font-size:15px;line-height:24px; margin:0;\">Hi Mr/Mme."+nomRec+" "+prenomRec+",<br>"+nom+" "+prenom+" someone has been applied to your job posting of "+jobTitle+"</p>\n" +
+                    "                                        <p style=\"color:#455056; font-size:15px;line-height:24px; margin:0;\">"+nom+" "+prenom+" has been applied to your job posting of "+jobTitle+"</p>\n" +
                     "                                        <a href=\"http://localhost:8080/login\"\n" +
                     "                                            style=\"background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;\">Connextion</a>\n" +
                     "                                    </td>\n" +
