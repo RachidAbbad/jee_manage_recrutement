@@ -41,19 +41,24 @@
                 </li>
             </ul>
 
-            <div class="row">
+            <div class="row my-3">
                 <div class="col-sm-12">
                     <!-- Success Message -->
                     <% if (successMessage != null) { %>
-                        <div class="alert alert-success" role="alert">
-                            ${successMessage}
-                        </div>
+                    <div class="app-alert alert alert-success alert-dismissible fade show" role="alert">
+                        ${successMessage}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                     <%}%>
-
                     <!-- Error Message -->
                     <% if (errorMessage != null) { %>
-                    <div class="alert alert-danger" role="alert">
+                    <div class="app-alert alert alert-danger alert-dismissible fade show" role="alert">
                         ${errorMessage}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <%}%>
                 </div>

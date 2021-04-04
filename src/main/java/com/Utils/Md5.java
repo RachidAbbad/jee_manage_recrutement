@@ -1,5 +1,9 @@
 package com.Utils;
 
+import com.Services.OffreService;
+import com.Services.RecruteurService;
+import com.models.Recruteur;
+
 import java.security.MessageDigest;
 
 public class Md5 {
@@ -17,5 +21,6 @@ public class Md5 {
         } catch (Exception ex) {
             return "";
         }
+
     }
 }

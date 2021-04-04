@@ -52,18 +52,12 @@ public class AjouterOffreServlet extends HttpServlet {
 
         try {
             OffreService.ajouterOffre(titre, desc, emplacement, typeContrat, metier, salairePrime, competences, departementId, compteId);
-
-            request.setAttribute("title", "Ajouter offre");
-            request.setAttribute("component", "ajouter-offre");
-            request.setAttribute("successMessage", "Your job is under review");
-            getServletContext().getRequestDispatcher("/App.jsp").forward(request, response);
+            request.setAttribute("successMessage", "Your job offer has been saved successfully");
+            doGet(request,response);
         } catch (Exception exception) {
             exception.printStackTrace();
-
-            request.setAttribute("title", "Ajouter offre");
-            request.setAttribute("component", "ajouter-offre");
-            request.setAttribute("errorMessage", exception.getMessage());
-            getServletContext().getRequestDispatcher("/App.jsp").forward(request, response);
+            request.setAttribute("errorMessage", "Your job has not been saved because an internal error");
+            doGet(request,response);
         }
     }
 }

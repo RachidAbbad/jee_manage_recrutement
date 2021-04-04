@@ -1,3 +1,8 @@
+<%
+    String successMessage = (String) request.getAttribute("successMessage");
+    String errorMessage = (String) request.getAttribute("errorMessage");
+%>
+
 <!-- Content -->
 <div class="page-content bg-white">
     <!-- inner page banner -->
@@ -29,8 +34,31 @@
 
             <div>
                 <div class="max-w500 m-auto m-b30">
+                    <div class="row my-3">
+                        <div class="col-sm-12">
+                            <!-- Success Message -->
+                            <% if (successMessage != null) { %>
+                            <div class="app-alert alert alert-success alert-dismissible fade show" role="alert">
+                                ${successMessage}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <%}%>
+                            <!-- Error Message -->
+                            <% if (errorMessage != null) { %>
+                            <div class="app-alert alert alert-danger alert-dismissible fade show" role="alert">
+                                ${errorMessage}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <%}%>
+                        </div>
+                    </div>
                     <div class="p-a30 border-1 seth">
                         <div class="tab-content nav">
+
                             <form id="login" action="/login" method="post" class="tab-pane active col-12 p-a0 ">
                                 <h4 class="font-weight-700">LOGIN</h4>
                                 <p class="font-weight-600">If you have an account with us, please log in.</p>

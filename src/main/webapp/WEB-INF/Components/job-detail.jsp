@@ -6,6 +6,7 @@
 
     String errorMessage = (String) request.getAttribute("errorMessage");
     String successMessage = (String) request.getAttribute("successMessage");
+    int etat = (int) request.getAttribute("etat");
 
     List<Postulation> listPostulations = (List<Postulation>) request.getAttribute("listPostulations");
 
@@ -125,10 +126,41 @@
                             <form action="/postulation" method="post">
                                 <input type="hidden" value="<%=offre.getId()%>" name="offreId">
                                 <textarea class="form-control mb-3" name="body" placeholder="Body"></textarea>
-                                <% if (userEmail == null) { %>
-                                    <button disabled="true" type="submit" class="site-button">Login or Sign Up to Apply</button>
+                                <% if (userEmail != null) { %>
+                                <% switch (etat){
+                                    case 0://delete%>
+                                        <a href="/postulation/delete=delete" type="submit" class="site-button">Delete</a>
+                                        <% break;
+                                    case 1://apply%>
+                                        <button type="submit" class="site-button">Apply Now</button>
+                                        <%break;
+                                    case 2://employee see an offre does'n for him%>
+                                        <div class="row my-3">
+                                            <div class="col-sm-12">
+                                                <div class="app-alert alert alert-success alert-dismissible fade show" role="alert">
+                                                    You haven't permission to apply to this offer
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <%break;
+                                    case 3://already applied%>
+                                        <button disabled="true" type="submit" class="site-button"><img src="../../Assets/images/checkMark.png" /></button>
+                                        <%break;
+                                }%>
                                 <%}else{%>
-                                    <button type="submit" class="site-button">Apply This Job</button>
+                                <div class="row my-3">
+                                    <div class="col-sm-12">
+                                        <div class="app-alert alert alert-success alert-dismissible fade show" role="alert">
+                                            Sign-Up or Login to apply to this offer
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                                 <%}%>
 
                             </form>

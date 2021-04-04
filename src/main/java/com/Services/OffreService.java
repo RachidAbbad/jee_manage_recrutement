@@ -76,4 +76,24 @@ public class OffreService {
             factory.close();
         }
     }
+    public static Offre getOffreById_IdRec(int idOffre,int idRecruteur) throws Exception {
+        SessionFactory factory = AppHibernate.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.beginTransaction();
+            Criteria criteria = session.createCriteria(Offre.class);
+            criteria.add(Restrictions.eq("id", idOffre));
+            criteria.add(Restrictions.eq("idRecruteur", idRecruteur));
+            Offre offre = (Offre) criteria.uniqueResult();
+            session.getTransaction().commit();
+            return offre;
+        } catch (Exception exception) {
+            session.getTransaction().rollback();
+            exception.printStackTrace();
+            return null;
+        } finally {
+            factory.close();
+        }
+    }
 }

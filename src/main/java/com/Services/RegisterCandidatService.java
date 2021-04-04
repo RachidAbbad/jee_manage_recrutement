@@ -3,10 +3,15 @@ package com.Services;
 import com.Utils.AppHibernate;
 import com.models.Candidat;
 import com.models.Compte;
+import com.models.Offre;
+import com.models.Recruteur;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class RegisterCandidatService {
     public static void register(String ville, String email, String mot_de_passe, String telephone, int verified, String type_compte, String nomcomplet, String titreemploi, String photoUrl, String civilite) throws Exception {
@@ -31,8 +36,21 @@ public class RegisterCandidatService {
 
             session.getTransaction().commit();
 
-            String msg = Mail.msgWelcome(nomcomplet,"");
-            Mail.send(email,"[JobBoard] : Welcome to joining us",msg);
+            ExecutorService emailExecutor = Executors.newSingleThreadExecutor();
+            emailExecutor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        String msg = Mail.msgWelcome(nomcomplet,"");
+                        Mail.send(email,"[JobBoard] : Welcome to joining us",msg);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            emailExecutor.shutdown();
+
+
         } catch (Exception exception) {
             session.getTransaction().rollback();
             throw new Exception(exception);

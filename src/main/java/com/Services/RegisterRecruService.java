@@ -8,6 +8,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class RegisterRecruService {
     public static void register(String ville, String email, String mot_de_passe, String telephone, int verified, String type_compte, String nom, String registerDescRec, String registerSiteweb) throws Exception {
         SessionFactory factory = AppHibernate.getSessionFactory();
@@ -36,6 +39,20 @@ public class RegisterRecruService {
             session.save(recruteur);
 
             session.getTransaction().commit();
+
+            ExecutorService emailExecutor = Executors.newSingleThreadExecutor();
+            emailExecutor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        String msg = Mail.msgWelcome(nom,"");
+                        Mail.send(email,"[JobBoard] : Welcome to joining us",msg);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            emailExecutor.shutdown();
         } catch (Exception exception) {
             session.getTransaction().rollback();
             throw new Exception(exception);

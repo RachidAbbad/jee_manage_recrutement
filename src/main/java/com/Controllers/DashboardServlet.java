@@ -172,4 +172,11 @@ public class DashboardServlet extends HttpServlet {
             }
         }
     }
+    public void hasExternalMsg(String msg,boolean msgType,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(msgType)
+            request.setAttribute("successMessage",msg);
+        else
+            request.setAttribute("errorMessage",msg);
+        this.doGet(request,response);
+    }
 }

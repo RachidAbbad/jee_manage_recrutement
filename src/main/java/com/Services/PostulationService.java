@@ -65,5 +65,29 @@ public class PostulationService {
             factory.close();
         }
     }
+    public static int getPostulation(int idCandidat,int idOffre){
+        SessionFactory factory = AppHibernate.getSessionFactory();
+        Session session = factory.getCurrentSession();
+        try {
+            session.beginTransaction();
+
+            Criteria criteria = session.createCriteria(Postulation.class);
+            criteria.add(Restrictions.eq("idCandidat", idCandidat));
+            criteria.add(Restrictions.eq("idOffre", idOffre));
+
+            List<Postulation> p = ( List<Postulation>) criteria.list();
+
+
+            session.getTransaction().commit();
+
+                return p.size();
+        }catch (Exception exception){
+            exception.printStackTrace();
+
+        }
+        return 0;
+    }
+
+
 
 }

@@ -1,6 +1,7 @@
 package com.Services;
 
 import com.Utils.AppHibernate;
+import com.models.Candidat;
 import com.models.Compte;
 import com.models.Offre;
 import com.models.Recruteur;
@@ -132,5 +133,27 @@ public class RecruteurService {
         } finally {
             factory.close();
         }
+    }
+    public static Recruteur getRecruteurByIdCompte(int idCompte) throws Exception {
+        SessionFactory factory = AppHibernate.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.beginTransaction();
+
+            Criteria criteria = session.createCriteria(Recruteur.class)
+                    .add(Restrictions.eq("idCompte", idCompte));
+            Recruteur recruteur = (Recruteur) criteria.uniqueResult();
+            session.getTransaction().commit();
+
+            return recruteur;
+        } catch (Exception exception) {
+            session.getTransaction().rollback();
+            exception.printStackTrace();
+
+        } finally {
+            factory.close();
+        }
+        return null;
     }
 }

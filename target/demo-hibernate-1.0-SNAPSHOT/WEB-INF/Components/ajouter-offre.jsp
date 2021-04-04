@@ -20,19 +20,28 @@
     <!-- inner page banner END -->
 
     <div class="container content-inner-2">
-        <!-- Success Message -->
-        <% if (successMessage != null) { %>
-        <div class="alert alert-success" role="alert">
-            ${successMessage}
+        <div class="row my-3">
+            <div class="col-sm-12 ">
+                <!-- Success Message -->
+                <% if (successMessage != null) { %>
+                <div class="app-alert alert alert-success alert-dismissible fade show" role="alert">
+                    ${successMessage}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <%}%>
+                <!-- Error Message -->
+                <% if (errorMessage != null) { %>
+                <div class="app-alert alert alert-danger alert-dismissible fade show" role="alert">
+                    ${errorMessage}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <%}%>
+            </div>
         </div>
-        <%}%>
-
-        <!-- Error Message -->
-        <% if (errorMessage != null) { %>
-        <div class="alert alert-danger" role="alert">
-            ${errorMessage}
-        </div>
-        <%}%>
 
         <form action="/ajouter-offre" method="post">
             <div class="form-group">
