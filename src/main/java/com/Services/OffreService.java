@@ -76,24 +76,66 @@ public class OffreService {
             factory.close();
         }
     }
-    public static Offre getOffreById_IdRec(int idOffre,int idRecruteur) throws Exception {
+    public static boolean deleteOffre(int idOffre) throws Exception {
         SessionFactory factory = AppHibernate.getSessionFactory();
         Session session = factory.getCurrentSession();
 
         try {
             session.beginTransaction();
-            Criteria criteria = session.createCriteria(Offre.class);
-            criteria.add(Restrictions.eq("id", idOffre));
-            criteria.add(Restrictions.eq("idRecruteur", idRecruteur));
-            Offre offre = (Offre) criteria.uniqueResult();
+            Query query1 = session.createQuery("delete from Postulation where id_offre = :oid");
+            query1.setParameter("oid",idOffre);
+            query1.executeUpdate();
+            Query query2 = session.createQuery("delete from Offre where id = :oid");
+            query2.setParameter("oid",idOffre);
+            query2.executeUpdate();
             session.getTransaction().commit();
-            return offre;
+            return true;
         } catch (Exception exception) {
             session.getTransaction().rollback();
+            exception.printStackTrace();
+            return false;
+        } finally {
+            factory.close();
+        }
+    }
+    public static List<Offre> searchOffer(String jobTitle,String cityName,int dep) throws Exception {
+        SessionFactory factory = AppHibernate.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("from Offre where titre='"+jobTitle+"' and emplacement='"+cityName+"' and id_departement="+dep);
+            List<Offre> offres = query.list();
+
+            session.getTransaction().commit();
+            return offres;
+        } catch (Exception exception) {
             exception.printStackTrace();
             return null;
         } finally {
             factory.close();
         }
+
     }
+    public static List<Offre> searchOfferByDep(int dep) throws Exception {
+        SessionFactory factory = AppHibernate.getSessionFactory();
+        Session session = factory.getCurrentSession();
+
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("from Offre where id_departement="+dep);
+            List<Offre> offres = query.list();
+
+            session.getTransaction().commit();
+            return offres;
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return null;
+        } finally {
+            factory.close();
+        }
+
+    }
+
+
 }

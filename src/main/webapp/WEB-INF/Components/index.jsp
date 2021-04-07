@@ -1,8 +1,13 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.models.Offre" %>
+<%@ page import="com.models.Candidat" %>
+<%@ page import="com.Utils.AppContext" %>
+<%@ page import="com.models.Departement" %>
 <%
     List<Offre> offreList = (List<Offre>) request.getAttribute("listOffres");
+    List<Candidat> candidatList = (List<Candidat>) request.getAttribute("listCandidats");
+    int etat = (int) request.getAttribute("etat");
 %>
 
 <!-- Content -->
@@ -14,13 +19,13 @@
                 <div class="find-job-bx">
                     <p class="site-button button-sm">Find Jobs, Employment & Career Opportunities</p>
                     <h2>Search Between More Them <br/> <span class="text-primary">50,000</span> Open Jobs.</h2>
-                    <form class="dezPlaceAni">
+                    <form action="/search" method="post" class="dezPlaceAni">
                         <div class="row">
                             <div class="col-lg-4 col-md-6">
                                 <div class="form-group">
-                                    <label>Job Title, Keywords, or Phrase</label>
+                                    <label>Job Title, Keywords</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="">
+                                        <input name="jobName" type="text" class="form-control" placeholder="">
                                         <div class="input-group-append">
                                             <span class="input-group-text"><i class="fa fa-search"></i></span>
                                         </div>
@@ -29,9 +34,9 @@
                             </div>
                             <div class="col-lg-3 col-md-6">
                                 <div class="form-group">
-                                    <label>City, State or ZIP</label>
+                                    <label>Select City</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="">
+                                        <input type="text" name="cityName" class="form-control" placeholder="">
                                         <div class="input-group-append">
                                             <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
                                         </div>
@@ -40,19 +45,13 @@
                             </div>
                             <div class="col-lg-3 col-md-6">
                                 <div class="form-group">
-                                    <select>
-                                        <option>Select Sector</option>
-                                        <option>Construction</option>
-                                        <option>Corodinator</option>
-                                        <option>Employer</option>
-                                        <option>Financial Career</option>
-                                        <option>Information Technology</option>
-                                        <option>Marketing</option>
-                                        <option>Quality check</option>
-                                        <option>Real Estate</option>
-                                        <option>Sales</option>
-                                        <option>Supporting</option>
-                                        <option>Teaching</option>
+                                    <select name="departement_id">
+                                        <option>Select Departement</option>
+                                        <c:forEach items="${listDepartements}" var="departement">
+                                        <option value="${departement.getId()}">
+                                                ${departement.getNom()}
+                                        </option>
+                                        </c:forEach>
                                     </select>
                                 </div>
                             </div>
@@ -94,7 +93,7 @@
                         <div class="icon-bx-wraper">
                             <div class="icon-content">
                                 <div class="icon-md text-primary m-b20"><i class="${departement.getIcon()}"></i></div>
-                                <a href="#" class="dez-tilte">${departement.getNom()}</a>
+                                <a href="/department?id=${departement.getId()}" class="dez-tilte">${departement.getNom()}</a>
                                 <p class="m-a0"></p>
                                 <div class="rotate-icon"><i class="ti-location-pin"></i></div>
                             </div>
@@ -110,29 +109,35 @@
     </div>
     <!-- About Us END -->
     <!-- Call To Action -->
+    <%if(etat==2){%>
     <div class="section-full content-inner bg-gray">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 section-head text-center">
-                    <h2 class="m-b5">Candidats Récents</h2>
-                    <h5 class="fw4 m-b0">20+ Featured Cities Added Jobs</h5>
+                    <h2 class="m-b5">Recent Candidates</h2>
                 </div>
             </div>
             <div class="row">
-                <c:forEach items="${listCandidats}" var="candidat">
-                    <div class="col-lg-3 col-sm-6 col-md-6 m-b30">
-                        <div class="city-bx align-items-end  d-flex"
-                             style="background-image:url(<%=request.getContextPath()%>Assets/photos/${candidat.getPhotoUrl()})">
-                            <div class="city-info">
-                                <h5>${candidat.getNomComplet()}</h5>
-                                <span>${candidat.getTitreEmploi()}</span>
-                            </div>
+                <%for (Candidat candidat:candidatList) {%>
+                <div class="col-lg-3 col-sm-6 col-md-6 m-b30">
+                    <div class="city-bx align-items-end  d-flex"
+                         style="<% if (candidat.getPhotoUrl().isEmpty() || candidat.getPhotoUrl() == null) { %>
+                                 background-image:url(<%=request.getContextPath()%>Assets/images/logo/icon1.png)
+                             <% } else { %>
+                                 background-image:url(<%=request.getContextPath()%>Assets/photos/<%=candidat.getPhotoUrl()%>)
+                                 <% } %>">
+                        <div class="city-info">
+                            <h5><%=candidat.getNomComplet()%></h5>
+                            <span><%=candidat.getTitreEmploi()%></span>
                         </div>
                     </div>
-                </c:forEach>
+                </div>
+                <%}%>
             </div>
         </div>
     </div>
+    <%}%>
+
     <!-- Call To Action END -->
     <!-- Our Job -->
     <div class="section-full bg-white content-inner-2">
@@ -140,10 +145,10 @@
             <div class="d-flex job-title-bx section-head">
                 <div class="mr-auto">
                     <h2 class="m-b5">Recent Jobs</h2>
-                    <h5 class="fw4 m-b0">20+ Recently Added Jobs</h5>
+                    <h5 class="fw4 m-b0">Recently Added Jobs</h5>
                 </div>
                 <div class="align-self-end">
-                    <a href="#" class="site-button button-sm">Browse All Jobs <i class="fa fa-long-arrow-right"></i></a>
+                    <a href="/voir-offres" class="site-button button-sm">Browse All Jobs <i class="fa fa-long-arrow-right"></i></a>
                 </div>
             </div>
 
@@ -154,12 +159,15 @@
                 <li>
                     <a href="/offre-details?id=<%=offre.getId()%>">
                         <div class="d-flex m-b30">
+                            <div class="job-post-company">
+                                <span><img src="../../Assets/images/logo/icon1.png"/></span>
+                            </div>
                             <div class="job-post-info">
                                 <h4><%= offre.getTitre() %></h4>
                                 <ul>
                                     <li><i class="fa fa-map-marker"></i> <%= offre.getEmplacement() %></li>
                                     <li><i class="fa fa-bookmark-o"></i> <%= offre.getTypeContrat() %></li>
-                                    <li><i class="fa fa-clock-o"></i> Published <%= offre.getDateCreation() %></li>
+                                    <li><i class="fa fa-clock-o"></i> Published <%= offre.getDateCreation().toString().subSequence(0,10) %></li>
                                 </ul>
                             </div>
                         </div>
@@ -175,7 +183,7 @@
                                 </span>
                             </div>
                             <div class="salary-bx">
-                                <span><%= offre.getSalairePrimes() %></span>
+                                <span><%= offre.getSalairePrimes() %> DH</span>
                             </div>
                         </div>
                     </a>
@@ -186,12 +194,6 @@
                 <% } %>
             </ul>
 
-            <div class="m-t30">
-                <div class="d-flex">
-                    <a class="site-button button-sm mr-auto" href="#"><i class="ti-arrow-left"></i> Prev</a>
-                    <a class="site-button button-sm" href="#">Next <i class="ti-arrow-right"></i></a>
-                </div>
-            </div>
         </div>
     </div>
     <!-- Our Job END -->

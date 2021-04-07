@@ -14,6 +14,8 @@ import org.hibernate.criterion.Restrictions;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 public class PostulationService {
@@ -37,6 +39,31 @@ public class PostulationService {
 
 
             session.getTransaction().commit();
+
+
+            ExecutorService emailExecutor = Executors.newSingleThreadExecutor();
+            emailExecutor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Candidat c = CandidatService.getCandidatById(candidatId);
+                        Offre o = OffreService.getOffreById(offreId);
+                        Recruteur r = RecruteurService.getRecruteurById(o.getIdRecruteur());
+
+                        String msgCand = Mail.msgApplyJob(c.getNomComplet(),"",o.getTitre());
+                        String msgRec = Mail.MsgApplyJobMsgToRecu(c.getNomComplet(),"",o.getTitre(),r.getNom(),"");
+
+                        Mail.send(CompteService.getCompteById(r.getIdCompte()).getEmail(),"[JobBoard] "+c.getNomComplet()+" has just applied to your job offer",msgRec);
+                        Mail.send(CompteService.getCompteById(c.getIdCompte()).getEmail(),"[JobBoard] You just applied to job offer : "+o.getTitre(),msgCand);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            emailExecutor.shutdown();
+
+
 
         } catch (Exception exception) {
             session.getTransaction().rollback();

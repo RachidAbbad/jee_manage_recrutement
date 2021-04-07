@@ -1,6 +1,7 @@
 package com.Utils;
 
 import com.Services.CandidatService;
+import com.Services.RecruteurService;
 import com.models.Candidat;
 import com.models.Compte;
 import org.hibernate.Criteria;
@@ -45,33 +46,12 @@ public class AppContext {
 
         return compteId;
     }
-    public static int getTypeCompte(HttpServletRequest request) {
-        SessionFactory factory = AppHibernate.getSessionFactory();
-        Session session = factory.getCurrentSession();
-        Cookie[] cookies = request.getCookies();
-
-        Cookie ourCookie = null;
-
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("user")) {
-                ourCookie = cookie;
-                break;
-            }
-            ;
-        }
-
-        if (ourCookie != null) {
-            try {
-                session.beginTransaction();
-                if (CandidatService.getCandidatByEmail(ourCookie.getValue()) != null) {
-                    session.getTransaction().commit();
-                    return 1;
-                }
-                return 2;
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-        }
+    public static int getTypeCompte(HttpServletRequest request) throws Exception {
+        int idCompte = isAthorized(request);
+        if(CandidatService.getCandidatByIdCompte(idCompte)!=null)
+            return 1;
+        else if(RecruteurService.getRecruteurByIdCompte(idCompte)!=null)
+            return 2;
         return 0;
     }
 }

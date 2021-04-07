@@ -129,7 +129,7 @@
                                 <% if (userEmail != null) { %>
                                 <% switch (etat){
                                     case 0://delete%>
-                                        <a href="/postulation/delete=delete" type="submit" class="site-button">Delete</a>
+                                        <a href="/offre-details/delete?id=<%=offre.getId()%>" class="site-button">Delete</a>
                                         <% break;
                                     case 1://apply%>
                                         <button type="submit" class="site-button">Apply Now</button>
@@ -147,7 +147,16 @@
                                         </div>
                                         <%break;
                                     case 3://already applied%>
-                                        <button disabled="true" type="submit" class="site-button"><img src="../../Assets/images/checkMark.png" /></button>
+                                        <div class="row my-3">
+                                            <div class="col-sm-12">
+                                                <div class="app-alert alert alert-success alert-dismissible fade show" role="alert">
+                                                    You already applied to this job offer
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <%break;
                                 }%>
                                 <%}else{%>

@@ -19,11 +19,40 @@ public class OffreDetailsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         if (request.getParameter("id") == null) {
-            response.sendRedirect("/");
+            response.sendRedirect("/error404");
             return;
         }
         int etat=5;
         Integer offreId = Integer.parseInt(request.getParameter("id"));
+
+
+        String action = request.getServletPath();
+
+        if(action.equals("/offre-details/delete")){
+            int id = Integer.parseInt(request.getParameter("id"));
+            try {
+                OffreService.deleteOffre(offreId);
+                request.setAttribute("successMessage","Your job offer has been deleted successfully");
+
+
+
+            } catch (Exception exception) {
+                exception.printStackTrace();
+                request.setAttribute("errorMessage","Error during deleting, Please try again");
+            }
+            List<Offre> offreList = null;
+            try {
+                offreList = OffreService.getListOffres();
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+            request.setAttribute("title", "Voir tous les offres");
+            request.setAttribute("component", "browse-job");
+            request.setAttribute("listOffres", offreList);
+            getServletContext().getRequestDispatcher("/App.jsp").forward(request, response);
+            return;
+        }
+
 
         try {
             // get offre
@@ -45,13 +74,13 @@ public class OffreDetailsServlet extends HttpServlet {
                     etat = 1;
                 else
                     etat = 3;
-            }//Privileges
-            else{
+            }
+            else if(AppContext.getTypeCompte(request)==2){
                 Recruteur r = RecruteurService.getRecruteurByIdCompte(AppContext.isAthorized(request));
                 if(OffreService.getOffreById(offreId).getIdRecruteur() == r.getId())
-                    etat = 2;
-                else
                     etat = 0;
+                else
+                    etat = 2;
             }
             request.setAttribute("etat",etat);
             getServletContext().getRequestDispatcher("/App.jsp").forward(request, response);

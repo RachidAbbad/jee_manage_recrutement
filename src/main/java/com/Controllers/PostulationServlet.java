@@ -20,8 +20,10 @@ public class PostulationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int compteId = AppContext.isAthorized(request);
         Integer offreId = Integer.parseInt(request.getParameter("offreId"));
+
+
+        int compteId = AppContext.isAthorized(request);
         int candidatId = CandidatService.isCandidat(compteId);
         String body = request.getParameter("body");
         if (compteId == -1 || candidatId == -1 || request.getParameter("offreId") == null) {
@@ -42,27 +44,7 @@ public class PostulationServlet extends HttpServlet {
             return;
         }
 
-        ExecutorService emailExecutor = Executors.newSingleThreadExecutor();
-        emailExecutor.execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Candidat c = CandidatService.getCandidatById(candidatId);
-                    Offre o = OffreService.getOffreById(offreId);
-                    Recruteur r = RecruteurService.getRecruteurById(o.getIdRecruteur());
 
-                    String msgCand = Mail.msgApplyJob(c.getNomComplet(),"",o.getTitre());
-                    String msgRec = Mail.MsgApplyJobMsgToRecu(c.getNomComplet(),"",o.getTitre(),r.getNom(),"");
-
-                    Mail.send(CompteService.getCompteById(r.getIdCompte()).getEmail(),"[JobBoard] "+c.getNomComplet()+" has just applied to your job offer",msgRec);
-                    Mail.send(CompteService.getCompteById(c.getIdCompte()).getEmail(),"[JobBoard] You just applied to job offer : "+o.getTitre(),msgCand);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        emailExecutor.shutdown();
 
 
     }
