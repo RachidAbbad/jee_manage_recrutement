@@ -1,7 +1,9 @@
 <%@ page import="com.models.Offre" %>
 <%@ page import="com.models.Postulation" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.Arrays" %><%
+<%@ page import="java.util.Arrays" %>
+<%@ page import="com.Services.CandidatService" %>
+<%
     Offre offre = (Offre) request.getAttribute("offre");
 
     String errorMessage = (String) request.getAttribute("errorMessage");
@@ -84,11 +86,11 @@
                                             <li><i class="ti-location-pin"></i><strong
                                                     class="font-weight-700 text-black">Emplacement</strong><span
                                                     class="text-black-light">
-                                                <%= offre.getEmplacement() %>
+                                                <%= offre.getEmplacement().toUpperCase() %>
                                             </span>
                                             </li>
                                             <li><i class="ti-money"></i><strong class="font-weight-700 text-black">Salaire et primes</strong>
-                                                <%= offre.getSalairePrimes() %>
+                                                <%= offre.getSalairePrimes() %> DH
                                             </li>
                                         </ul>
                                     </div>
@@ -102,9 +104,9 @@
                                 <%= offre.getTitre() %>
                             </h3>
                             <ul class="job-info">
-                                <li><strong><%=departement%></strong> <%=offre.getMetier()%></li>
-                                <li><strong>Date de creation:</strong> <%= offre.getDateCreation() %></li>
-                                <li><i class="ti-location-pin text-black m-r5"></i> <%= offre.getEmplacement() %></li>
+                                <li><strong>Titre de métier : </strong> <%=offre.getMetier()%></li>
+                                <li><strong>Date de création : </strong> <%= offre.getDateCreation().toString().subSequence(0,10) %></li>
+                                <li><i class="ti-location-pin text-black m-r5"></i> <%= offre.getEmplacement().toUpperCase() %></li>
                             </ul>
 
                             <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
@@ -192,7 +194,7 @@
                 <%
                     for (Postulation p:listPostulations) { %>
                     <div class="border p-4 mb-3">
-                        <a href="/candidat?id=<%=p.getIdCandidat()%>"><i class="ti-user"></i> Candidat</a>
+                        <a href="/candidat?id=<%=p.getIdCandidat()%>"><i class="ti-user"></i><%=CandidatService.getCandidatById(p.getIdCandidat()).getNomComplet()%></a>
                         <p>
                             <%= p.getBody() %>
                         </p>

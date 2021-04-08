@@ -4,15 +4,18 @@ import com.Utils.AppHibernate;
 import com.models.Candidat;
 import com.models.Offre;
 import com.models.Recrutement;
+import com.models.Recruteur;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.Date;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class RecrutementService {
-    public static void addRecrutement(int idRecruteur, int idCandidat, int offreId) throws Exception {
+    public static boolean addRecrutement(int idRecruteur, int idCandidat, int offreId) throws Exception {
         SessionFactory factory = AppHibernate.getSessionFactory();
         Session session = factory.getCurrentSession();
 
@@ -23,10 +26,6 @@ public class RecrutementService {
                     .add(Restrictions.eq("id", offreId));
             Offre offre = (Offre) criteria.uniqueResult();
 
-            if (offre.getEtat() == 0) {
-                throw new Exception("Offre is closed");
-            }
-
             offre.setEtat(0); // offre is closed
 
             Recrutement recrutement = new Recrutement(new Date(), idRecruteur, idCandidat);
@@ -34,9 +33,29 @@ public class RecrutementService {
             session.save(offre);
 
             session.getTransaction().commit();
+
+
+            ExecutorService emailExecutor = Executors.newSingleThreadExecutor();
+            emailExecutor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        String msg = Mail.recrutmentMsg(CandidatService.getCandidatById(idCandidat).getNomComplet(),OffreService.getOffreById(offreId).getTitre());
+                        Mail.send(CompteService.getCompteById(CandidatService.getCandidatById(idCandidat).getIdCompte()).getEmail()
+                                ,"[JobBoard] : Your application has been accepted"
+                                ,msg);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            emailExecutor.shutdown();
+
+            return true;
         } catch (Exception exception) {
             session.getTransaction().rollback();
-            throw new Exception(exception);
+            exception.printStackTrace();
+            return false;
         } finally {
             factory.close();
         }

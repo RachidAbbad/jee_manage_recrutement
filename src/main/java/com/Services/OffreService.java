@@ -137,5 +137,11 @@ public class OffreService {
 
     }
 
+    public static void main(String[] args) throws Exception {
+        for (Offre o : OffreService.searchOffer("Full Stack Developer","marrakech",1)) {
+            System.out.println(o.getTitre());
+        }
+    }
+
 
 }

@@ -44,6 +44,7 @@ public class DashboardServlet extends HttpServlet {
                     .add(Restrictions.eq("email", userEmail));
             compte = (Compte) criteria.uniqueResult();
 
+
             // CANDIDAT
             if (compte.getTypeCompte().equals("Candidat")) {
                 Criteria criteria2 = session.createCriteria(Candidat.class)

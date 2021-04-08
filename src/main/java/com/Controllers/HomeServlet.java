@@ -23,13 +23,14 @@ public class HomeServlet extends HttpServlet {
             int departementId = Integer.parseInt(request.getParameter("departement_id"));
             String city = request.getParameter("cityName");
             String job = request.getParameter("jobName");
+            System.out.println(city+job+departementId);
             try {
                 request.setAttribute("listOffres",OffreService.searchOffer(job,city,departementId));
                 request.setAttribute("title", "Results of search");
                 request.setAttribute("component", "browse-job");
                 getServletContext().getRequestDispatcher("/App.jsp").forward(request, response);
             } catch (Exception exception) {
-                exception.printStackTrace();
+                System.out.println(exception.toString());
             }
             return;
         }

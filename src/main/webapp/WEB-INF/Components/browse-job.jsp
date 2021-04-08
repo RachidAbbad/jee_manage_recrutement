@@ -45,7 +45,7 @@
                                                     <ul>
                                                         <li><i class="fa fa-map-marker"></i> <%= offre.getEmplacement() %></li>
                                                         <li><i class="fa fa-bookmark-o"></i> <%= offre.getTypeContrat() %></li>
-                                                        <li><i class="fa fa-clock-o"></i> Published <%= offre.getDateCreation() %></li>
+                                                        <li><i class="fa fa-clock-o"></i> Published <%= offre.getDateCreation().toString().subSequence(0,10) %></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -61,7 +61,7 @@
                                                     </span>
                                                 </div>
                                                 <div class="salary-bx">
-                                                    <span><%= offre.getSalairePrimes() %></span>
+                                                    <span><%= offre.getSalairePrimes() %> DH</span>
                                                 </div>
                                             </div>
                                         </a>

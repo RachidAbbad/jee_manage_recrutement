@@ -19,7 +19,7 @@
                 <div class="find-job-bx">
                     <p class="site-button button-sm">Find Jobs, Employment & Career Opportunities</p>
                     <h2>Search Between More Them <br/> <span class="text-primary">50,000</span> Open Jobs.</h2>
-                    <form action="/search" method="post" class="dezPlaceAni">
+                    <form action="/search" method="get" class="dezPlaceAni">
                         <div class="row">
                             <div class="col-lg-4 col-md-6">
                                 <div class="form-group">
