@@ -31,6 +31,7 @@ public class HomeServlet extends HttpServlet {
                 getServletContext().getRequestDispatcher("/App.jsp").forward(request, response);
             } catch (Exception exception) {
                 System.out.println(exception.toString());
+                response.sendRedirect("/");
             }
             return;
         }

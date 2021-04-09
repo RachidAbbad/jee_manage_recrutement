@@ -14,8 +14,7 @@
                 <div class="col-xl-5 col-lg-4 col-md-12 col-sm-12">
                     <div class="widget">
                         <img src="images/logo-white.png" width="180" class="m-b15" alt=""/>
-                        <p class="text-capitalize m-b20">Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry has been the industry's standard dummy text ever since the..</p>
+                        <p class="text-capitalize m-b20">JobBoard is a vertical job search engine that aggregates and displays job postings from thousands of job boards, companies, recruiting pages and newspapers.Created by Amine Ahmed Lamrhary & Rachid Abbad</p>
                         <div class="subscribe-form m-b20">
                             <form class="dzSubscribe"
                                   action="http://job-board.w3itexperts.com/xhtml/script/mailchamp.php" method="post">
@@ -48,7 +47,7 @@
                     <div class="widget border-0">
                         <h5 class="m-b30 text-white">Frequently Asked Questions</h5>
                         <ul class="list-2 list-line">
-                            <li><a href="#">Privacy & Seurty</a></li>
+                            <li><a href="#">Privacy & Security</a></li>
                             <li><a href="#">Terms of Serice</a></li>
                             <li><a href="#">Communications</a></li>
                             <li><a href="#">Referral Terms</a></li>
@@ -83,7 +82,7 @@
     <div class="footer-bottom">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 text-center"><span><a target="_blank" href="https://www.templateshub.net">Templates Hub</a></span>
+                <div class="col-lg-12 text-center"><span><a target="_blank" href="http://localhost:8080/">&copy; Copyright 2021 : JobBoard</a></span>
                 </div>
             </div>
         </div>

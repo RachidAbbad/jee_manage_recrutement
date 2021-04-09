@@ -1,7 +1,10 @@
 package com.Controllers;
 
 import com.Services.CandidatService;
+import com.Services.OffreService;
+import com.Services.PostulationService;
 import com.Services.RecruteurService;
+import com.Utils.AppContext;
 import com.models.Candidat;
 import com.models.Recruteur;
 
@@ -15,7 +18,15 @@ import java.util.List;
 public class CandidatsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
         try {
+
+            if(AppContext.getTypeCompte(request)==1){
+                response.sendRedirect("/permissionDenied");
+                return;
+            }
+
             List<Candidat> candidats = CandidatService.getListCandidat();
 
             request.setAttribute("title", "Voir tous les candidats");
@@ -33,4 +44,5 @@ public class CandidatsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
+
 }

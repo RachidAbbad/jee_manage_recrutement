@@ -19,7 +19,7 @@ import java.util.concurrent.Executors;
 
 
 public class PostulationService {
-    public static void ajouterPostulation(int candidatId, int offreId, String body) throws Exception {
+    public static boolean ajouterPostulation(int candidatId, int offreId, String body) throws Exception {
         SessionFactory factory = AppHibernate.getSessionFactory();
         Session session = factory.getCurrentSession();
 
@@ -31,7 +31,7 @@ public class PostulationService {
             Offre offre = (Offre) criteria.uniqueResult();
 
             if (offre.getEtat() == 0) {
-                throw new Exception("Offre is closed");
+                return false;
             }
 
             Postulation postulation = new Postulation(candidatId, offreId, new Date(), body);
@@ -39,7 +39,6 @@ public class PostulationService {
 
 
             session.getTransaction().commit();
-
 
             ExecutorService emailExecutor = Executors.newSingleThreadExecutor();
             emailExecutor.execute(new Runnable() {
@@ -63,11 +62,13 @@ public class PostulationService {
             });
             emailExecutor.shutdown();
 
+            return true;
 
 
         } catch (Exception exception) {
             session.getTransaction().rollback();
-            throw new Exception(exception);
+            exception.printStackTrace();
+            return false;
         } finally {
             factory.close();
         }

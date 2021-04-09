@@ -168,6 +168,25 @@
         <servlet-name>BrowseOffresServlet</servlet-name>
         <url-pattern>/voir-offres</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BrowseOffresServlet</servlet-name>
+        <url-pattern>/voir-offres/search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BrowseOffresServlet</servlet-name>
+        <url-pattern>/voir-offres/department</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PermissionDenied</servlet-name>
+        <servlet-class>com.Controllers.PermissionDenied</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PermissionDenied</servlet-name>
+        <url-pattern>/permissionDenied</url-pattern>
+    </servlet-mapping>
+
+
 
     <!-- FILTERS
     <filter>
@@ -193,6 +212,6 @@
     <!-- ERRORS -->
     <error-page>
         <error-code>404</error-code>
-        <location>/WEB-INF/Errors/error-404.html</location>
+        <location>/WEB-INF/Components/error-404.jsp</location>
     </error-page>
 </web-app>

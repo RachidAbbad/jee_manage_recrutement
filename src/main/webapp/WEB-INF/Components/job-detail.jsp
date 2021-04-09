@@ -38,8 +38,15 @@
         <div class="container">
             <div class="dez-bnr-inr-entry">
                 <h1 class="text-white">
-                    Offre
+                    Offer Details
                 </h1>
+                <div class="breadcrumb-row">
+                    <ul class="list-inline">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/voir-offres">Browse Jobs</a></li>
+                        <li><a href="/offre-details?id=<%=offre.getId()%>>">offre°<%=offre.getId()%></a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -104,8 +111,8 @@
                                 <%= offre.getTitre() %>
                             </h3>
                             <ul class="job-info">
-                                <li><strong>Titre de métier : </strong> <%=offre.getMetier()%></li>
-                                <li><strong>Date de création : </strong> <%= offre.getDateCreation().toString().subSequence(0,10) %></li>
+                                <li><strong>Job Title : </strong> <%=offre.getMetier()%></li>
+                                <li><strong>Creation Date : </strong> <%= offre.getDateCreation().toString().subSequence(0,10) %></li>
                                 <li><i class="ti-location-pin text-black m-r5"></i> <%= offre.getEmplacement().toUpperCase() %></li>
                             </ul>
 
@@ -113,7 +120,7 @@
 
                             <p><%=offre.getDescription()%></p>
 
-                            <h5 class="font-weight-600">Competences requises</h5>
+                            <h5 class="font-weight-600">Competences requires</h5>
                             <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
                             <ul class="list-num-count no-round">
                                 <%
@@ -134,13 +141,13 @@
                                         <a href="/offre-details/delete?id=<%=offre.getId()%>" class="site-button">Delete</a>
                                         <% break;
                                     case 1://apply%>
-                                        <button type="submit" class="site-button">Apply Now</button>
+                                        <button type="submit" class="site-button my-3">Apply Now</button>
                                         <%break;
-                                    case 2://employee see an offre does'n for him%>
+                                    case 2://employee see an offer doesn't belong to him%>
                                         <div class="row my-3">
                                             <div class="col-sm-12">
                                                 <div class="app-alert alert alert-success alert-dismissible fade show" role="alert">
-                                                    You haven't permission to apply to this offer
+                                                    You haven't permission to edit or delete this offer
                                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -152,7 +159,7 @@
                                         <div class="row my-3">
                                             <div class="col-sm-12">
                                                 <div class="app-alert alert alert-success alert-dismissible fade show" role="alert">
-                                                    You already applied to this job offer
+                                                    You already applied to edit or delete this job offer
                                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -183,130 +190,54 @@
         </div>
         <!-- Job Detail -->
 
-        <% if (userEmail == null) {%>
+        <% if (userEmail == null || etat==3 || etat==1) {%>
             <div hidden="true" class="section-full content-inner-1">
         <%}else{%>
             <div class="section-full content-inner-1">
         <%}%>
-        <!-- Postulations -->
-        <div class="section-full content-inner-1">
-            <div class="container">
-                <%
-                    for (Postulation p:listPostulations) { %>
-                    <div class="border p-4 mb-3">
-                        <a href="/candidat?id=<%=p.getIdCandidat()%>"><i class="ti-user"></i><%=CandidatService.getCandidatById(p.getIdCandidat()).getNomComplet()%></a>
-                        <p>
-                            <%= p.getBody() %>
-                        </p>
-                        <a href="/recrutement?idRecruteur=<%=offre.getIdRecruteur()%>&idCandidat=<%=p.getIdCandidat()%>&offreId=<%=p.getIdOffre()%>" class="site-button">Recruter ce candidat</a>
-                    </div>
-                <% } %>
-            </div>
-        </div>
-        <!-- Postulations -->
 
 
-        <!-- Our Jobs -->
+
+                <!-- Postulations -->
+                <!-- Our Jobs -->
         <div class="section-full content-inner">
             <div class="container">
                 <div class="row">
+                    <%for (Postulation p:listPostulations) { %>
                     <div class="col-xl-3 col-lg-6 col-md-6">
                         <div class="m-b30 blog-grid">
-                            <div class="dez-post-media dez-img-effect "><a href="#"><img src="images/blog/grid/pic1.jpg"
-                                                                                         alt=""></a></div>
+                            <div class="dez-post-media dez-img-effect ">
+                                <a href="/candidat?id=<%=p.getIdCandidat()%>">
+
+                                    <% try {
+                                        if (CandidatService.getCandidatById(p.getIdCandidat()).getPhotoUrl().isEmpty() || CandidatService.getCandidatById(p.getIdCandidat()).getPhotoUrl() == null) { %>
+                                        <img src="../../Assets/images/logo/icon1.png" alt="">
+                                        <% } else { %>
+
+                                    <img src="../../Assets/photos/<%=CandidatService.getCandidatById(p.getIdCandidat()).getPhotoUrl()%>">
+                                        <% }
+                                    } catch (Exception exception) {
+                                        exception.printStackTrace();
+                                    } %>
+
+
+                                </a>
+                            </div>
                             <div class="dez-info p-a20 border-1">
                                 <div class="dez-post-title ">
-                                    <h5 class="post-title"><a href="#">Title of blog post</a></h5>
-                                </div>
-                                <div class="dez-post-meta ">
-                                    <ul>
-                                        <li class="post-date"><i class="ti-location-pin"></i> London</li>
-                                        <li class="post-author"><i class="ti-user"></i>By <a href="#">Jone</a></li>
-                                    </ul>
+                                    <h5 class="post-title"><a href="/candidat?id=<%=p.getIdCandidat()%>"><%=CandidatService.getCandidatById(p.getIdCandidat()).getNomComplet()%></a></h5>
                                 </div>
                                 <div class="dez-post-text">
-                                    <p>All the Lorem Ipsum generators on the Internet tend to repeat predefined
-                                        chunks.</p>
+                                    <p><%=CandidatService.getCandidatById(p.getIdCandidat()).getCivilite()%></p>
                                 </div>
                                 <div class="dez-post-readmore">
-                                    <a href="#" class="site-button outline">Apply Now <i class="ti-arrow-right"></i></a>
+                                    <a href="/recrutement?idRecruteur=<%=offre.getIdRecruteur()%>&idCandidat=<%=p.getIdCandidat()%>&offreId=<%=p.getIdOffre()%>" class="site-button outline">Recruter ce candidat<i class="ti-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6">
-                        <div class="m-b30 blog-grid">
-                            <div class="dez-post-media dez-img-effect "><a href="#"><img src="images/blog/grid/pic2.jpg"
-                                                                                         alt=""></a></div>
-                            <div class="dez-info p-a20 border-1">
-                                <div class="dez-post-title ">
-                                    <h5 class="post-title"><a href="#">Title of blog post</a></h5>
-                                </div>
-                                <div class="dez-post-meta ">
-                                    <ul>
-                                        <li class="post-date"><i class="ti-location-pin"></i> London</li>
-                                        <li class="post-author"><i class="ti-user"></i>By <a href="#">Jone</a></li>
-                                    </ul>
-                                </div>
-                                <div class="dez-post-text">
-                                    <p>All the Lorem Ipsum generators on the Internet tend to repeat predefined
-                                        chunks.</p>
-                                </div>
-                                <div class="dez-post-readmore">
-                                    <a href="#" class="site-button outline">Apply Now <i class="ti-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6">
-                        <div class="m-b30 blog-grid">
-                            <div class="dez-post-media dez-img-effect "><a href="#"><img src="images/blog/grid/pic3.jpg"
-                                                                                         alt=""></a></div>
-                            <div class="dez-info p-a20 border-1">
-                                <div class="dez-post-title ">
-                                    <h5 class="post-title"><a href="#">Title of blog post</a></h5>
-                                </div>
-                                <div class="dez-post-meta ">
-                                    <ul>
-                                        <li class="post-date"><i class="ti-location-pin"></i> London</li>
-                                        <li class="post-author"><i class="ti-user"></i>By <a href="#">Jone</a></li>
-                                    </ul>
-                                </div>
-                                <div class="dez-post-text">
-                                    <p>All the Lorem Ipsum generators on the Internet tend to repeat predefined
-                                        chunks.</p>
-                                </div>
-                                <div class="dez-post-readmore">
-                                    <a href="#" class="site-button outline">Apply Now <i class="ti-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6">
-                        <div class="m-b30 blog-grid">
-                            <div class="dez-post-media dez-img-effect "><a href="#"><img src="images/blog/grid/pic4.jpg"
-                                                                                         alt=""></a></div>
-                            <div class="dez-info p-a20 border-1">
-                                <div class="dez-post-title ">
-                                    <h5 class="post-title"><a href="#">Title of blog post</a></h5>
-                                </div>
-                                <div class="dez-post-meta ">
-                                    <ul>
-                                        <li class="post-date"><i class="ti-location-pin"></i> London</li>
-                                        <li class="post-author"><i class="ti-user"></i>By <a href="#">Jone</a></li>
-                                    </ul>
-                                </div>
-                                <div class="dez-post-text">
-                                    <p>All the Lorem Ipsum generators on the Internet tend to repeat predefined
-                                        chunks.</p>
-                                </div>
-                                <div class="dez-post-readmore">
-                                    <a href="#" class="site-button outline">Apply Now <i class="ti-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <% } %>
+
             </div>
         </div>
         <!-- Our Jobs END -->

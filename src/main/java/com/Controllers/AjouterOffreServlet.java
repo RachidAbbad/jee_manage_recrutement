@@ -15,7 +15,13 @@ import java.util.List;
 public class AjouterOffreServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         try {
+            if(AppContext.getTypeCompte(request)==1){
+                response.sendRedirect("/permissionDenied");
+                return;
+            }
+
             List<Departement> departements = DepartementService.getListDepartement();
             request.setAttribute("title", "Ajouter offre");
             request.setAttribute("component", "ajouter-offre");

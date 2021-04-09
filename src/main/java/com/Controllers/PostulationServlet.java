@@ -33,14 +33,17 @@ public class PostulationServlet extends HttpServlet {
         }
 
         try {
-            PostulationService.ajouterPostulation(candidatId, offreId, body);
-                request.setAttribute("successMessage", "Your Postulation has added successfully");
-                rederection(request,response);
-            } catch (Exception exception) {
+            if (PostulationService.ajouterPostulation(candidatId, offreId, body))
+                rederection("Your Apply has been saved successfully",false,request,response);
+            else
+                rederection("You can't apply to this job beacause the offer is closed",true,request,response);
+
+
+
+
+        } catch (Exception exception) {
             exception.printStackTrace();
-            request.setAttribute("errorMessage", exception.getMessage());
-            request.setAttribute("etat", "2");
-            response.sendRedirect(request.getHeader("referer"));
+            rederection(exception.getMessage(),true,request,response);
             return;
         }
 
@@ -48,31 +51,20 @@ public class PostulationServlet extends HttpServlet {
 
 
     }
-    private void rederection(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        if (request.getParameter("id") == null) {
-            response.sendRedirect("/");
-            return;
-        }
-
-        Integer offreId = Integer.parseInt(request.getParameter("id"));
+    private void rederection(String msg,boolean iserror,HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         try {
-            // get offre
-            Offre offre = OffreService.getOffreById(offreId);
 
-            if (offre == null) {
-                // redirect to 404
-                response.sendRedirect("/");
-                return;
-            }
 
-            List<Postulation> mesPostulations = PostulationService.getPostulationsByOffreId(offre.getId());
+            if(iserror)
+                request.setAttribute("errorMessage",msg);
+            else
+                request.setAttribute("successMessage",msg);
+            List<Offre> offreList = OffreService.getListOffres();
 
-            request.setAttribute("title", "Offer Details");
-            request.setAttribute("component", "job-detail");
-            request.setAttribute("offre", offre);
-            request.setAttribute("listPostulations", mesPostulations);
-
+            request.setAttribute("title", "Voir tous les offres");
+            request.setAttribute("component", "browse-job");
+            request.setAttribute("listOffres", offreList);
             getServletContext().getRequestDispatcher("/App.jsp").forward(request, response);
         } catch (Exception exception) {
             exception.printStackTrace();
