@@ -1,4 +1,9 @@
+<%@ page import="com.models.Candidat" %>
+<%@ page import="java.util.List" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%
+    List<Candidat> candidatList = (List<Candidat>) request.getAttribute("candidats");
+%>
 <!-- Content -->
 <div class="page-content bg-white">
     <!-- inner page banner -->
@@ -28,23 +33,30 @@
                             <input type="text" class="form-control" placeholder="Search freelancer services">
                         </div>
                         <ul class="post-job-bx">
-                            <c:forEach items="${candidats}" var="candidat">
+                            <%for (Candidat candidat:candidatList) {%>
                                 <li>
-                                    <a href="/candidat?id=${candidat.getId()}">
+                                    <a href="/candidat?id=<%=candidat.getId()%>">
                                         <div class="d-flex m-b30">
                                             <div class="job-post-company">
-                                                <span><img src="images/testimonials/pic1.jpg"/></span>
+                                                <span>
+                                                    <% if (candidat.getPhotoUrl().isEmpty() || candidat.getPhotoUrl() == null) { %>
+                                                        <img src="../../Assets/images/logoPerson.png"/>
+                                                    <% } else { %>
+                                                        <img src="<%=request.getContextPath()%>Assets/photos/<%=candidat.getPhotoUrl()%>">
+                                                    <% } %>
+
+                                                </span>
                                             </div>
                                             <div class="job-post-info">
-                                                <h4>${candidat.getNomComplet()}</h4>
+                                                <h4><%=candidat.getNomComplet()%></h4>
                                                 <ul>
-                                                    <li>${candidat.getTitreEmploi()}</li>
+                                                    <li><%=candidat.getTitreEmploi()%></li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </a>
                                 </li>
-                            </c:forEach>
+                            <%}%>
                         </ul>
                         <div class="pagination-bx m-t30">
                             <ul class="pagination">

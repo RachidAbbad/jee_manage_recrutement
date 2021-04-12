@@ -198,63 +198,7 @@
     </div>
     <!-- Our Job END -->
     <!-- Call To Action -->
-    <div class="section-full p-tb70 overlay-black-dark text-white text-center bg-img-fix"
-         style="background-image: url(<%=request.getContextPath()%>/WEB-INF/Assets/images/background/bg4.jpg);">
-        <div class="container">
-            <div class="section-head text-center text-white">
-                <h2 class="m-b5">Testimonials</h2>
-                <h5 class="fw4">Few words from candidates</h5>
-            </div>
-            <div class="blog-carousel-center owl-carousel owl-none">
-                <div class="item">
-                    <div class="testimonial-5">
-                        <div class="testimonial-text">
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has been the industry...</p>
-                        </div>
-                        <div class="testimonial-detail clearfix">
-                            <div class="testimonial-pic radius shadow">
-                                <img src="images/testimonials/pic1.jpg" width="100" height="100" alt="">
-                            </div>
-                            <strong class="testimonial-name">David Matin</strong>
-                            <span class="testimonial-position">Student</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="testimonial-5">
-                        <div class="testimonial-text">
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has been the industry...</p>
-                        </div>
-                        <div class="testimonial-detail clearfix">
-                            <div class="testimonial-pic radius shadow">
-                                <img src="images/testimonials/pic2.jpg" width="100" height="100" alt="">
-                            </div>
-                            <strong class="testimonial-name">David Matin</strong>
-                            <span class="testimonial-position">Student</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="testimonial-5">
-                        <div class="testimonial-text">
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has been the industry...</p>
-                        </div>
-                        <div class="testimonial-detail clearfix">
-                            <div class="testimonial-pic radius shadow">
-                                <img src="images/testimonials/pic3.jpg" width="100" height="100" alt="">
-                            </div>
-                            <strong class="testimonial-name">David Matin</strong>
-                            <span class="testimonial-position">Student</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Call To Action END -->
+
 </div>
 
 <!-- scroll top button -->

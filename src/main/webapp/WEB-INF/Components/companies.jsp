@@ -33,7 +33,7 @@
                                     <a href="/recruteur?id=${recruteur.getId()}">
                                         <div class="d-flex m-b30">
                                             <div class="job-post-company">
-                                                <span><img src="images/testimonials/pic1.jpg"/></span>
+                                                <span><img src="../../Assets/images/logoPerson.png"/></span>
                                             </div>
                                             <div class="job-post-info">
                                                 <h4>${recruteur.getNom()}</h4>
