@@ -23,10 +23,10 @@
         <div class="section-full bg-white browse-job content-inner-2">
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-9 col-lg-8">
-                        <div class="m-b30">
+                    <div>
+                        <!-- <div class="m-b30">
                             <input type="text" class="form-control" placeholder="Search freelancer services">
-                        </div>
+                        </div> -->
                         <ul class="post-job-bx">
                             <c:forEach items="${recruteurs}" var="recruteur">
                                 <li>
@@ -49,17 +49,8 @@
                                 </li>
                             </c:forEach>
                         </ul>
-                        <div class="pagination-bx m-t30">
-                            <ul class="pagination">
-                                <li class="previous"><a href="#"><i class="ti-arrow-left"></i> Prev</a></li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li class="next"><a href="#">Next <i class="ti-arrow-right"></i></a></li>
-                            </ul>
-                        </div>
                     </div>
-                    <div class="col-xl-3 col-lg-4">
+                    <!-- <div class="col-xl-3 col-lg-4">
                         <div class="sticky-top">
                             <div class="clearfix m-b30">
                                 <h5 class="widget-title font-weight-700 text-uppercase">Keywords</h5>
@@ -152,7 +143,7 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

@@ -3,10 +3,12 @@ package com.Controllers;
 import com.Services.CandidatService;
 import com.Services.DepartementService;
 import com.Services.OffreService;
+import com.Services.RecruteurService;
 import com.Utils.AppContext;
 import com.models.Candidat;
 import com.models.Departement;
 import com.models.Offre;
+import com.models.Recruteur;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -52,12 +54,18 @@ public class HomeServlet extends HttpServlet {
         try {
             List<Departement> departementList = DepartementService.getListDepartement();
             List<Candidat> candidatList = CandidatService.getListCandidat();
+
+            List<Recruteur> entreList = RecruteurService.getListRecruteurs();
+
             List<Offre> offreList = OffreService.getListOffres();
             request.setAttribute("title", "Home");
             request.setAttribute("component", "index");
             request.setAttribute("listOffres", offreList);
             request.setAttribute("listDepartements", departementList);
             request.setAttribute("listCandidats", candidatList);
+
+            request.setAttribute("listEntreprises", entreList);
+
             request.setAttribute("etat", AppContext.getTypeCompte(request));
             getServletContext().getRequestDispatcher("/App.jsp").forward(request, response);
         } catch (Exception exception) {

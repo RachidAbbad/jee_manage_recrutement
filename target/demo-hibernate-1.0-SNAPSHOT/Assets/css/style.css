@@ -11771,6 +11771,10 @@ ul[class*="list-"] {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#192665', endColorstr='#222845', GradientType=1); /* IE6-9 fallback on horizontal gradient */
 }
 
+.at-expanding-share-button-toggle {
+    display: none!important;
+}
+
 .overlay-gradient-light:after,
 .overlay-gradient-middle:after,
 .overlay-gradient-dark:after {
@@ -15396,6 +15400,7 @@ ol.commentlist li .star-rating {
 
 /* Support and Buy Button */
 .theme-btn {
+    display: none!important;
     background-color: #ffffff;
     border-radius: 40px;
     bottom: 10px;

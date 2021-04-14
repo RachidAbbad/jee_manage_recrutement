@@ -4,9 +4,12 @@
 <%@ page import="com.models.Candidat" %>
 <%@ page import="com.Utils.AppContext" %>
 <%@ page import="com.models.Departement" %>
+<%@ page import="com.models.Recruteur" %>
 <%
     List<Offre> offreList = (List<Offre>) request.getAttribute("listOffres");
     List<Candidat> candidatList = (List<Candidat>) request.getAttribute("listCandidats");
+    List<Recruteur> entreList = (List<Recruteur>) request.getAttribute("listEntreprises");
+
     int etat = (int) request.getAttribute("etat");
 %>
 
@@ -23,9 +26,8 @@
                         <div class="row">
                             <div class="col-lg-4 col-md-6">
                                 <div class="form-group">
-                                    <label>Job Title, Keywords</label>
                                     <div class="input-group">
-                                        <input name="jobName" type="text" class="form-control" placeholder="">
+                                        <input name="jobName" type="text" class="form-control" placeholder="Titre d'offre">
                                         <div class="input-group-append">
                                             <span class="input-group-text"><i class="fa fa-search"></i></span>
                                         </div>
@@ -34,9 +36,8 @@
                             </div>
                             <div class="col-lg-3 col-md-6">
                                 <div class="form-group">
-                                    <label>Select City</label>
                                     <div class="input-group">
-                                        <input type="text" name="cityName" class="form-control" placeholder="">
+                                        <input type="text" name="cityName" class="form-control" placeholder="La ville">
                                         <div class="input-group-append">
                                             <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
                                         </div>
@@ -46,7 +47,7 @@
                             <div class="col-lg-3 col-md-6">
                                 <div class="form-group">
                                     <select name="departement_id">
-                                        <option>Select Departement</option>
+                                        <option>Categorie</option>
                                         <c:forEach items="${listDepartements}" var="departement">
                                         <option value="${departement.getId()}">
                                                 ${departement.getNom()}
@@ -56,7 +57,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-6">
-                                <button type="submit" class="site-button btn-block">Find Job</button>
+                                <button type="submit" class="site-button btn-block">Trouver un offre</button>
                             </div>
                         </div>
                     </form>
@@ -79,11 +80,11 @@
                     <h6 class="fw3">Offre publies</h6>
                 </div>
                 <div class="head-counter-bx">
-                    <h2 class="m-b5 counter">4500</h2>
+                    <h2 class="m-b5 counter"><%=entreList.size()%></h2>
                     <h6 class="fw3">Entreprises</h6>
                 </div>
                 <div class="head-counter-bx">
-                    <h2 class="m-b5 counter">1500</h2>
+                    <h2 class="m-b5 counter"><%=candidatList.size()%></h2>
                     <h6 class="fw3">Candidats</h6>
                 </div>
             </div>
@@ -100,10 +101,6 @@
                         </div>
                     </div>
                 </c:forEach>
-
-                <div class="col-lg-12 text-center m-t30">
-                    <button class="site-button radius-xl">All Categories</button>
-                </div>
             </div>
         </div>
     </div>

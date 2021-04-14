@@ -33,11 +33,11 @@
                 <div class="extra-nav">
                     <div class="extra-cell">
                         <% if (userEmail == null) { %>
-                            <a href="/register" class="site-button"><i class="fa fa-user"></i> Sign Up</a>
-                            <a href="/login" class="site-button"><i class="fa fa-lock"></i> Login</a>
+                            <a href="/register" class="site-button"><i class="fa fa-user"></i> S'inscrire</a>
+                            <a href="/login" class="site-button"><i class="fa fa-lock"></i> Se connecter</a>
                         <% } else { %>
-                            <a href="/dashboard" class="site-button"><i class="fa fa-tachometer"></i> Dashboard</a>
-                        <a href="/logout" class="site-button"><i class="fa fa-sign-out"></i> Logout</a>
+                            <a href="/dashboard" class="site-button"><i class="fa fa-tachometer"></i> Profile</a>
+                        <a href="/logout" class="site-button"><i class="fa fa-sign-out"></i> Se déconnecter</a>
                         <% } %>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                 <!-- main nav -->
                 <div class="header-nav navbar-collapse collapse justify-content-start" id="navbarNavDropdown">
                     <ul class="nav navbar-nav">
-                        <li class="active">
+                        <li>
                             <a href="/">Home</a>
                         </li>
                         <li>

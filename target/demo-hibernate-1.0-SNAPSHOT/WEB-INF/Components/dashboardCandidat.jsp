@@ -49,7 +49,7 @@
 
                     <div class="photo-profile-box mb-3">
                         <% if (candidat.getPhotoUrl().isEmpty() || candidat.getPhotoUrl() == null) { %>
-                        <img class="img-fluid d-block mx-auto mb-4" src="https://via.placeholder.com/250x250" />
+                        <img class="img-fluid d-block mx-auto mb-4" src="https://manskkp.lv/assets/images/users/default-user.png" />
                         <% } else { %>
                         <img class="img-fluid d-block mx-auto mb-4" src="<%=request.getContextPath()%>Assets/photos/<%=candidat.getPhotoUrl()%>" />
                         <% } %>
